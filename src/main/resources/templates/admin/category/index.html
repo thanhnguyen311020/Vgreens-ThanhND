@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/admin/index::dynamic(~{::title},~{::main})}">
+
+<head>
+<title>VGreens - Category Management</title>
+
+
+
+</head>
+
+<body>
+ <main ng-controller="category-ctrl">
+	<input type="hidden" value="2" id="checkActive">
+	<!-- <header class="nav-main">
+		<h2>Dashboard > Quản lý Danh mục</h2>
+		<div class="admin_info">
+			<img src="../images/pic-1.png" alt="">
+			<a onclick="drop_menu_header()" class="dropbtn">ThanhND <i class='bx bx-cog'></i></a>
+			<div id="myDropdown" class="dropdown-content">
+				<a href="#">Profile</a>
+				<a href="#">Đăng xuất</a>
+				<a href="#">Link 3</a>
+			</div>
+		</div>
+	</header> -->
+
+
+
+
+	<section class="box-container content-main">
+	  
+
+		<div class="tab-container">
+
+
+			<ul style="display: none;" class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+						aria-controls="home" aria-selected="true">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+						aria-controls="profile" aria-selected="false">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+						aria-controls="contact" aria-selected="false">Contact</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active tab-list" id="home" role="tabpanel"
+					aria-labelledby="home-tab">
+
+					<th:block th:replace="@{/admin/category/_list}">
+
+						</th:block>
+				</div>
+				<div class="tab-pane fade tab-form" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+					<th:block th:replace="@{/admin/category/_form}">
+						</th:block>
+
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+			</div>
+		</div>
+
+	</section>
+	<div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa Danh mục</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="delete(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+ </main>
+</body>
+</html>

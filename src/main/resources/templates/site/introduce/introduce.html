@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | [[#{introduce.titleWeb}]]</title>
+
+<body>
+
+    <main>
+        <style>
+            p {
+                font-size: 1.5rem;
+            }
+        </style>
+        <div class="jumbotron p-4 p-md-5 text-white rounded text-center">
+            <div class="col-md-12 px-0 ">
+
+                <h1 class="display-4 font-italic" style="  margin: 30px auto;">[[#{introduce.title}]]</h1>
+                <p>___<br>
+                </p>
+            </div>
+            <div>
+                <div class="social">
+
+                    <a class="social-icon" data-tooltip="email@gmail.com" href="mailto:email@gmail.com">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="social-icon" data-tooltip="GitHub" href="https://github.com/puikinsh">
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="social-icon" data-tooltip="LinkedIn" href="https://www.linkedin.com/company/colorlib">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="social-icon" data-tooltip="Twitter" href="https://twitter.com/colorlib">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="social-icon" data-tooltip="Facebook" href="https://www.facebook.com/vgreens.fpolydn">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="social-icon" data-tooltip="YouTube" href="https://www.youtube.com/c/Colorlib">
+                        <i class="fa fa-youtube" aria-hidden="true"></i>
+                    </a>
+                    <a class="social-icon" data-tooltip="YouTube" href="https://instagram.com/Colorlib">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container mb-5 pb-5">
+            <div class="content-page rte margin-bottom-60">
+
+                <p>[[#{introduce.p1}]]</p>
+                <p>[[#{introduce.p2}]]</p>
+                <p>[[#{introduce.p3}]]</p>
+                <p>[[#{introduce.p4}]]</p>
+                <p>[[#{introduce.p5}]]</p>
+                <p>[[#{introduce.p6}]]</p>
+            </div>
+            <br>
+            <hr>
+        </div>
+
+        <div class="container marketing">
+            <div class="card-deck">
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin2.jpg" class="rounded-circle " alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin1}]]</h3>
+
+                        <p>DIRECTOR</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin1.jpg" class="rounded-circle" alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin2}]]</h3>
+                        <p>DIRECTOR</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin3.jpg" class="rounded-circle" alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin3}]]</h3>
+                        <p>MANAGER</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Three columns of text below the carousel -->
+
+            <p class="mb-5"></p>
+            <div class="card-deck">
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin1.jpg" class="rounded-circle " alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin4}]]</h3>
+
+                        <p>MANAGER</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin4.jpg" class="rounded-circle" alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin5}]]</h3>
+                        <p>DIRECTOR</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+                <div class="card text-center p-2 d-block">
+                    <img src="/images/admin3.jpg" class="rounded-circle" alt="...">
+                    <div class="card-body">
+                        <h3>[[#{introduce.admin6}]]</h3>
+                        <p>MANAGER</p>
+                        <div>
+                            <a class="social-icon rounded-circle" data-tooltip="email@gmail.com"
+                                href="mailto:email@gmail.com">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Twitter"
+                                href="https://twitter.com/colorlib">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            </a>
+
+                            <a class="social-icon rounded-circle" data-tooltip="Facebook"
+                                href="https://www.facebook.com/colorlib">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <p class="card-text"><small class="text-muted">[[#{introduce.slogan}]]</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+    </main>
+</body>
+
+</html>

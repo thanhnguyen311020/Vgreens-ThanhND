@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-12 title-control">
+    <h3>Danh mục</h3>
+    <button id="_form">Thêm Mới</button>
+  </div>
+</div>
+<div class="row" >
+  <div class="col-md-12">
+    <div class="control-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Tìm kiếm</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="search" id="namec" ng-model="search" placeholder="Tìm...." />
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-12 mt-4">
+    <div class="card">
+      <!-- <div class="card-header">
+        <h5>Thông tin Danh mục</h5>
+
+     
+      </div> -->
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <!-- <th>
+                <input type="checkbox" ng-model="item.selected" ng-click="selectAll()" />
+              </th> -->
+              <th>Mã</th>
+              <th ng-click="sort('created_time')">
+                Tên Danh Mục
+                <i style="display: inline !important" class="" ng-show="sortKey=='created_time'"
+                  ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+              </th>
+              <th>Hình ảnh</th>
+              <th>Cập Nhập</th>
+              <th th:if="${#request.isUserInRole('DIRE')}">Xóa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+              <!-- <td scope="row">
+                <input type="checkbox" ng-model="item.checked" name="all" />
+              </td> -->
+              <td>{{item.id}}</td>
+              <td ng-click="edit(item)"><strong>{{item.name}}</strong></td>
+              <td class="td-product">
+                <img ng-show="{{item.image == null}}" src="/images/pic-1.png" alt="" />
+                <img ng-src="{{item.image}}" alt="" ng-click="edit(item)" />
+              </td>
+
+              <td ng-click="edit(item)"><i class="far fa-edit"></i></td>
+              <td th:if="${#request.isUserInRole('DIRE')}" ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem">
+                <i class="far fa-trash-alt"></i>
+              </td>
+            </tr>
+            <tr ng-show="items.length === 0">
+              <td class="text-center" colspan="5">Không có dữ liệu</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-header">
+        <h5></h5>
+        <div class="pagination">
+          <div class="form-group ml-5">
+            <label for="staticEmail" class="col-form-label">Hiển thị: </label>
+            <div class="">
+              <div>
+                <select ng-model="pageSize" ng-options="num for num in [10,20,50,100]"></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-box">
+            <dir-pagination-controls max-size="5" direction-links="true" boundary-links-numbers="true">
+            </dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- |orderBy:sortKey:reverse|filter:search| itemsPerPage:pageSize -->
+</div>

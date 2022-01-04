@@ -1,0 +1,163 @@
+<div class="row">
+<!-- 
+    <div class="col-md-7">
+
+        <div class="row">
+
+          
+          
+
+        </div>
+
+    </div> -->
+    <div class="col-md-12 "> <!--ven-->
+        <div class="card">
+            <div class="card-header">
+                <!-- <h5></h5> -->
+                <div class="_date">
+                    <input type="month"  style="width: 25%;" id="startDateRevenue" value="2021-02">
+                    <input type="month" style="width: 25%;" id="endDateRevenue" >
+                    <button class="btn_filter" ng-click="getChart()">
+                        <i class="fas fa-chart-line"></i>
+                    </button>
+                    <button class="btn_filter" ng-click="exportExcelTurnover()">
+                        <i class="fas fa-chart-line"> Excel</i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- <img src="../images/Tim-hieu-ve-Chart-js.png" alt=""> -->
+                <div id="chartContainer" class="chart-canvas" style="height: 300px; width: 100%;"></div>
+            </div>
+            <div class="card-footer text-muted"></div>
+        </div>
+    </div>
+    <!-- <div class="col-md-5">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <div class="_date">
+                            <input type="month" name="" id="txtPieChart">
+                            <button class="btn_filter" ng-click="getPieChart()" id=""><i class="fas fa-chart-pie"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="pieChartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+                    <div class="card-footer text-muted">Footer</div>
+                </div>
+            </div>
+         
+
+        </div>
+
+    </div> -->
+
+    <div class="col-md-12 " style="padding-top: 0px !important;">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div style="justify-content: end;" class="card-header">
+                       
+                        <div class="_date">
+                            <input type="month" name="" id="dateBarChart">
+                            <button class="btn_filter" ng-click="getBarChart()" id="btn-month"><i class="fas fa-chart-bar"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="barChartContainer" class="chart-canvas" style="height: 300px; width: 100%; padding: 20px 5px; background-color: #fff;"></div>
+                    </div>
+                    <div class="card-footer text-muted"></div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <div class="_date">
+                            <input type="month" name="" id="txtPieChart">
+                            <button class="btn_filter" ng-click="getPieChart()" id=""><i class="fas fa-chart-pie"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="pieChartContainer" class="chart-canvas" style="height: 300px; width: 100%;"></div>
+                    </div>
+                    <div class="card-footer text-muted"></div>
+                </div>
+            </div>
+        </div>
+
+        
+        
+    </div>
+    <div class="col-md-12 "> <!--ven-->
+        <div class="card">
+            <div class="card-header closeCustomerChart">
+                <ul class="nav nav-tabs tab-chart" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="table-tab" data-toggle="tab" href="#table" role="tab" aria-controls="table" aria-selected="true" ng-click="getCloseCustomerChart()">Biểu Đồ</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="chart-tab" data-toggle="tab" href="#chart" role="tab" aria-controls="chart" aria-selected="false" ng-click="getCloseCustomerChart()">Chi Tiết</a>
+                    </li>
+                    
+                  </ul>
+                
+                <!-- <h5></h5> -->
+                <div class="_date">
+                    <input type="month"  style="width: 25%;" id="topCloseCustomerDate" value="2021-02">
+                    
+                    <button class="btn_filter" ng-click="getCloseCustomerChart()">
+                        <i class="fas fa-chart-line"></i>
+                    </button>
+                    <!-- <button class="btn_filter" ng-click="exportExcelTurnover()">
+                        <i class="fas fa-chart-line"> Excel</i>
+                    </button> -->
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="table" role="tabpanel" aria-labelledby="table-tab">
+                        <div id="chartTopCloseCustomer" class="chart-canvas" style="height: 300px; width: 100%;"></div>
+                    </div>
+                    <div class="tab-pane fade" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+                        <table class="table-chart">
+                            <thead>
+                                <tr>
+                                    <th>#.</th>
+                                    <th>Tài khoảng</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Điện thoại</th>
+                                    <th class="text-right">Tổng doanh số</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in closeCustomers">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.username}}</td>
+                                    <td>{{item.account.first_name}} {{item.account.last_name}}</td>
+                                    <td>{{item.account.email}}</td>
+                                    <td>{{item.account.phone_number}}</td>
+                                    <td class="text-right">{{item.sumAmount | number}} .VND</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                  </div>
+                <!-- <img src="../images/Tim-hieu-ve-Chart-js.png" alt=""> -->
+              
+            </div>
+            <div class="card-footer text-muted"></div>
+        </div>
+    </div>
+
+    
+
+</div>

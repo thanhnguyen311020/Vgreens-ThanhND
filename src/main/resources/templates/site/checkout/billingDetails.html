@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Checkout</title>
+
+<body>
+
+    <main ng-controller="shopping-cart-ctrl">
+
+
+
+        <div class="titlePage">
+            <h1>Chi tiết thanh toán</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Thanh toán</a>
+            </div>
+        </div>
+        <section class="titlePage-cart">
+            <div class="box-text">
+                <a style=" color: #ccc" href="#">Giỏ hàng</a> <span> </span> <a href="">Chi tiết thanh toán</a> <span>
+                </span> <a style=" color: #ccc" href="#">Đặt hàng thành công</a>
+            </div>
+        </section>
+
+
+
+        <section class="bill">
+
+            <div class="row bill-container">
+
+                <div class="col-7 box-info ">
+                    <h3>Thông tin đặt hàng 
+                    </h3>
+                    <form action="#" method="post" name="BlingdetailForm"  >
+                        <input type="text" class="form-control" name="username" id="username"
+                            th:value="${account.username}" readonly hidden>
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- <div class="col-sm-6">
+                                    <label for="fullname">Họ khách hàng</label>
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                        th:value="${account.first_name}" required>
+                                </div> -->
+                                <div class="col-sm-6">
+                                    <label for="fullname">Họ khách hàng 
+
+                                        <small id="helpId" ng-show="BlingdetailForm.first_name.$invalid"
+                                       >*</small>
+                                    </label>
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                        ng-model="formOrder.first_name" required>
+                                       
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <label for="fullname">Tên khách hàng</label>
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                        th:value="${account.last_name}" required>
+                                </div> -->
+                                <div class="col-sm-6">
+                                    <label for="fullname">Tên khách hàng
+                                        <small id="helpId" ng-show="BlingdetailForm.last_name.$invalid"
+                                        >*</small>
+
+                                    </label>
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                    ng-model="formOrder.last_name" required>
+                                </div>
+                            </div>
+                           
+
+
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" th:value="${account.email}"
+                                required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="email">Email
+                                <small id="helpId" ng-show="BlingdetailForm.email.$invalid"
+                                >*</small>
+                              
+
+                            </label>
+                            <input type="email" class="form-control" name="email" id="email" ng-model="formOrder.email" disabled
+                            
+                            
+                            
+                            required>
+                          
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại
+                                <small id="helpId" ng-show="BlingdetailForm.phone_number.$invalid"
+                                >*</small>
+                                <small id="helpId" ng-show="BlingdetailForm.phone_number.$error.pattern">*</small>
+
+                            </label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number"
+                            ng-model="formOrder.phone_number" 
+                            ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+                            
+                            required>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label for="address">Địa chỉ
+                                        <small id="helpId" ng-show="BlingdetailForm.address_line.$invalid"
+                                        >*</small>
+                                    </label>
+                                    <input type="text" class="form-control" name="address_line" id="address_line" rows="3"
+                                    ng-model="formOrder.address_line" required></input>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="address">Quận/Huyện
+                                        <small id="helpId" ng-show="BlingdetailForm.state.$invalid"
+                                        >*</small>
+                                    </label>
+                                  
+                                    <select class="form-control" ng-change="showShippingRateWhenChooseSate()" ng-model="formOrder.state" id="state" name="state" required>
+                                        <option value="" selected>Chọn quận huyện...</option>
+                                        <option  ng-repeat="p in states" ng-value="p.name">{{p.name}}</option>
+                        
+                        
+                                      </select>
+                                 
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="address">Tỉnh/Thành Phố
+                                        <small id="helpId" ng-show="BlingdetailForm.country.$invalid"
+                                        >*</small>
+                                    </label>
+                                 
+                                    <select class="form-control" ng-change="chooseCountry()" ng-model="formOrder.country.id" id="country" name="country" required>
+                                        <option value="" selected>Chọn tỉnh thành...</option>
+                                        <option ng-repeat="p in countryall" ng-value="p.id"   ng-click="showStateWhenChooseCountry(p)">{{p.name}}</option>
+                        
+                        
+                                      </select>
+                                  
+                                   
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="address">Mã bưu điện</label>
+                                    <input type="text" class="form-control" name="postal_code" id="postal_code" rows="3"
+                                    ng-model="formOrder.postal_code" required></input>
+                                </div>
+                                
+                              
+                               
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Ghi chú</label>
+                            <textarea class="form-control" ng-model="formOrder.description" name="description" id="description" rows="3"
+                                style="resize: none;"></textarea>
+                        </div>
+                    </form>
+                    <small>(*)Lưu ý: Kiếm tra kĩ thông tin trước khi đặt hàng</small>
+                </div>
+
+                <div ng-if="codSupport.codSupported==true" class="col-5 box-bill">
+                    <h3>Hóa đơn chi tiết</h3>
+                    <div class="deliver">
+                        <h5 class="row ml-0">Số ngày giao hàng: <div class="ml-2 mr-2" id="deliverdays" name="deliverdays">{{codSupport.deliverDays}}</div>  ngày</h5>
+                        <h5 class="row ml-0">Ngày giao hàng dự kiến: <div class="ml-2 mr-2" id="deliverdates"  name="deliverdates">{{codSupport.deliverDate | date:'EEE, dd-MM-yyyy'}}</div></h5>
+                        <!-- <h5>Ngày giao hàng dự kiến: [[${#calendars.format(checkoutinfo.deliverDate,'EEE , dd MMMM yyyy')}]]</h5> -->
+                        <!-- <h5 class="row ml-0">Ngày giao hàng dự kiến: <div class="ml-2 mr-2" id="deliverdates" name="deliverdates">[[${#dates.format(checkoutinfo.deliverDate,'EEE , dd-MMMM-yyyy')}]]</div></h5> -->
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá tiền</th>
+                        </tr>
+                        <tr ng-repeat ="item in cart.items">
+                            <td>{{item.name}}: {{item.qty}} {{item.unit.name}}</td>
+                            <td ng-if="item.discount!=null" class="_amount">
+                                {{item.qty*item.consignment.selling_price-item.qty*item.consignment.selling_price*item.discount.percent_discount/100 | number }}.đ
+                            </td>
+                            <td ng-if="item.discount==null" class="_amount">
+                                {{item.qty*item.consignment.selling_price | number }}.đ
+                            </td>
+                        </tr>
+                     
+                        <tr>
+                            <th>Thành tiền</th>
+                            <th>{{cart.total |number}}.đ</th>
+                        </tr>
+                        <tr>
+                            <td>Giảm giá(voucher)</td>
+                            <td>{{cart.coupon}} % </td>
+                        </tr>
+                        <tr>
+                            <td>Phí giao hàng</td>
+                            <td  >{{cart.shipping| number}}.đ</td>
+                        </tr>
+                        <tr>
+                            <th style="font-size: 2.2rem;">Tổng tiền</th>
+                            <th style="color: var(--main); font-size: 2.2rem;">{{cart.TotalAll |number}}.đ</th>
+                        </tr>
+
+                    </table>
+                    <div class="checkout-payment text-center">
+                       
+
+                            <button class="_btn" style="border-radius: 0;" ng-disabled="BlingdetailForm.$invalid" ng-click='selectMe($event)' value="đặt hàng">Đặt hàng </button>
+                        
+                    </div>
+
+
+                </div>
+                <div ng-if="codSupport.codSupported==false" class="col-5 box-bill">
+                    <h3>Hóa đơn chi tiết</h3>
+                  
+                    <table>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Giá tiền</th>
+                        </tr>
+                        <tr ng-repeat ="item in cart.items">
+                            <td>{{item.name}}: {{item.qty}} {{item.unit.name}}</td>
+                            <td ng-if="item.discount!=null" class="_amount">
+                                {{item.qty*item.consignment.selling_price-item.qty*item.consignment.selling_price*item.discount.percent_discount/100 | number }}.đ
+                            </td>
+                            <td ng-if="item.discount==null" class="_amount">
+                                {{item.qty*item.consignment.selling_price | number }}.đ
+                            </td>
+                        </tr>
+                     
+                        <tr>
+                            <th>Thành tiền</th>
+                            <th>{{cart.total |number}}.đ</th>
+                        </tr>
+                        <tr>
+                            <td>Giảm giá(voucher)</td>
+                            <td>{{cart.coupon}} % </td>
+                        </tr>
+                        <tr>
+                            <th style="font-size: 2.2rem;">Tổng tiền</th>
+                            <th style="color: var(--main); font-size: 2.2rem;">{{cart.total |number}}.đ</th>
+                        </tr>
+
+                    </table>
+                    <div class="checkout-payment">
+                        <div class="deliver text-center">
+                            <h3>ĐỊA CHỈ NÀY KHÔNG HỖ TRỢ GIAO HÀNG</h3>
+                          <a th:href="@{/vgreens/account/address}"> <h3>[THAY ĐỔI ĐỊA CHỈ KHÁC]</h3></a>
+                           
+                            <!-- <h5>Ngày giao hàng dự kiến: [[${#calendars.format(checkoutinfo.deliverDate,'EEE , dd MMMM yyyy')}]]</h5> -->
+    
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+
+
+
+</body>
+
+</html>

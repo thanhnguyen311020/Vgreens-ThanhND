@@ -1,0 +1,109 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới giá cước</h5>
+
+                <button id="_list">Danh sách giá cước vận chuyển</button>
+            </div>
+            <form method="POST" name="shippingForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <div class="form-group">
+                                <label for="productId">ID</label>
+                                <input  readonly type="text" ng-value="form.id" value="Tự động nhập" class="form-control" name="productId"
+                                    id="productId" aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted">Help
+                                    text</small>
+                            </div> -->
+                            <div class="form-group ml-3"> <label for="">Phần trăm giá cước</label>
+                            <div class="input-group mb-3">
+                               
+                                <input type="number" class="form-control" name="rate" id="rate"  aria-label="Amount (to the nearest dollar)" aria-describedby="helpId"  ng-required=true postive  
+                                    ng-model="form.rate" placeholder="Giá cước--" min="0">
+                                <div class="input-group-append">
+                                        <span class="input-group-text">&#37;</span>
+                                </div>
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="shippingForm.rate.$error.required" class="form-text text-muted">Vui lòng nhập giá cước</small>
+                                        <small id="helpId" ng-show="!shippingForm.rate.$error.required && shippingForm.rate.$error.min" class="form-text text-muted">Giá cước phải là số dương</small>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-group ml-3"> <label for="">Giao hàng dự kiến</label>
+                            <div class="input-group mb-3">
+                                
+                                <input type="number" class="form-control" name="days" id="days"  aria-label="Amount (to the nearest dollar)" ng-required=true postive  aria-describedby="helpId"
+                                    ng-model="form.days" placeholder="số ngày dự kiến"  min="0" max="15">
+                                <div class="input-group-append">
+                                        <span class="input-group-text">Ngày</span>
+                                </div>
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="shippingForm.days.$error.required" class="form-text text-muted">Vui lòng nhập ngày dự kiến (1-15)</small>
+                                        <small id="helpId" ng-show="!shippingForm.days.$error.required && shippingForm.days.$error.min" class="form-text text-muted">Phải là số dương</small>
+                                        <small id="helpId" ng-show="shippingForm.days.$error.max" class="form-text text-muted">Dự kiến giao dưới 15 ngày</small>
+                                    </div>
+                            </div>
+</div>
+                            <div class="form-group ml-3">
+                                <label for="">Hỗ trợ<span ng-show="shippingForm.codSupported.$invalid" class="has-error font-italic">*
+                                </span></label>
+                                <div class="">
+                                <div class="form-check form-check-inline ml-5">
+                                    <input class="form-check-input" required ng-model="form.codSupported" type="radio"
+                                        name="codSupported" ng-value="true">
+                                    <label class="form-check-label">Có</label>
+                                </div>
+                                <div class="form-check form-check-inline ml-4">
+                                    <input class="form-check-input" required ng-model="form.codSupported" type="radio"
+                                        name="codSupported" ng-value="false">
+                                    <label class="form-check-label">Không</label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for="">Thành phố</label>
+                                <select class="form-control" ng-model="form.country.id" 
+                                 name="country" id="country" ng-change="chooseCountry()" required
+                               >
+                                  <option value="" disabled selected>--Chọn địa chỉ--</option>
+                                  <option ng-repeat="country in countries" ng-value="country.id" 
+                                  ng-click="showStateWhenChooseCountry(s)" >{{country.name}}</option>
+                                </select>
+                              </div>
+                              <small class="error form-text text-muted" ng-show="shippingForm.country.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn thành phố</small>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Quận/ huyện</label>
+                                    <select class="form-control" required  ng-model="form.state"
+                                     name="state"  id="state"
+                                     >
+                                      <option value="" disabled selected>--Quận/huyện--</option>
+                                      <option ng-repeat="s in states" ng-value="s.name">{{s.name}}</option>
+                                    </select>
+                                  </div>
+                                  <small class="error form-text text-muted" ng-show="shippingForm.state.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn quận/ huyện</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-show="!isShow" ng-disabled="shippingForm.$invalid" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success"  ng-click="reset()">Làm mới</button>
+                    <deleten th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</deleten>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,147 @@
+/* ********************** Address Page CSS *********************** */
+
+._address .alert {
+    width: 50%;
+    margin: auto;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.box-address {
+    margin-bottom: 3rem;
+
+}
+
+
+
+.box-address .card {
+    max-height: 30rem;
+    height: 25rem;
+}
+
+.modal input {
+    padding: 2rem 1rem !important;
+    border: .1rem solid #ececec;
+    font-size: 1.5rem;
+}
+
+.modal .modalconfirm {
+    padding: .5rem 1rem !important;
+    border: .1rem solid #ececec;
+    font-size: 2rem;
+}
+
+.custom-select-country {
+    padding: 2rem 1rem !important;
+    border: .1rem solid #ececec;
+    font-size: 1.5rem;
+    width: 375.2px;
+    height: fit-content;
+    color: #495057;
+}
+/* select .custom-select-country2 {
+    padding: 2rem 1rem !important;
+    border: .1rem solid #ececec;
+    font-size: 1.5rem;
+    width: 349px;
+    height: 34px;
+    height: fit-content;
+    color: #495057;
+} */
+
+
+body .modal .modal-content .modal-header h5 {
+    font-size: 2.5rem;
+
+}
+
+body .modal .modal-content button {
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    padding: .7rem 1.5rem;
+    border: none !important;
+}
+
+.btn-modal{
+    background-color: var(--main) !important;
+    border: none !important;
+}
+
+
+.box-address:first-child .card {
+    /* background-color: rgb(255, 187, 0); */
+
+}
+
+.box-address .card-header {
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--black);
+    padding: 1rem .5rem;
+
+}
+
+.box-address .card-header h3 {
+    font-size: 2.2rem;
+}
+
+.box-address a {
+    color: var(--black);
+
+}
+
+.box-address a i {
+    color: var(--black);
+}
+
+.box-address .card-body h4 {
+    font-size: 2rem;
+    color: #333;
+    line-height: 2;
+    text-transform: none;
+}
+
+.box-address .card-body {
+    padding-bottom: 3rem;
+    min-height: 15rem;
+}
+
+.box-address .card-body p {
+    font-size: 1.5rem;
+    color: grey;
+    padding-bottom: 2rem;
+    text-transform: none;
+}
+
+.box-address .card-body a {
+    background-color: var(--main);
+    color: #fff;
+    padding: 1rem 1.5rem;
+    font-size: 1.8rem;
+
+}
+
+
+.box-address .button-container {
+    display: flex;
+    height: 25rem;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.box-address .button-container button {
+    background-color: rgba(40, 167, 69, .2);
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    color: var(--black);
+}
+
+.box-address .button-container:hover button {
+    transform: rotate(360deg);
+    background-color: var(--main);
+
+}

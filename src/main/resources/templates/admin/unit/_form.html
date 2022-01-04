@@ -1,0 +1,69 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới đơn vị</h5>
+
+                <button id="_list" ng-click="initialize()">Danh các đơn vị</button>
+            </div>
+
+            <form method="POST" name="unitForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <div class="form-group">
+                                <label for="productId">ID</label>
+                                <input  readonly type="text" ng-value="form.id" value="Tự động nhập" class="form-control" name="productId"
+                                    id="productId" aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted">Help
+                                    text</small>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="name">Đơn vị</label>
+                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId" ng-required=true postive
+                                    ng-model="form.name" placeholder="đơn vị tính----">
+                                    <small id="helpId" ng-show="unitForm.name.$error.required" class="form-text text-muted">Vui lòng nhập đơn vị tính</small>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                         
+                            <div class="form-group">
+                                <label for="">Mô tả</label>
+                                <textarea ng-model="form.description" class="form-control" name="" id="" rows="3" cols="5"></textarea>
+                            </div>
+                            
+
+                         
+
+                        </div>
+
+                        <!-- <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="">Mô tả</label>
+                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-show="!isShow" ng-disabled="unitForm.$invalid" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success"  ng-click="reset()">Làm mới</button>
+                    <button th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</button>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

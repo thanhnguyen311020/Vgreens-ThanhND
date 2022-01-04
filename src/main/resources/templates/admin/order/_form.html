@@ -1,0 +1,186 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới người dùng</h5>
+
+                <button id="_list">Danh sách sản phẩm</button>
+            </div>
+
+            <form method="POST" name="accountForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="productId">Tên tài khoản</label>
+                                <input ng-disabled="isShow" type="text" ng-model="form.username" class="form-control" name="username"
+                                    id="username" aria-describedby="helpId" placeholder=""
+                                    ng-minlength="4" ng-maxlength="20" ng-required=true>
+                                <small id="helpId" ng-show="accountForm.username.$error.required" class="form-text text-muted">Vui lòng nhập username</small>
+                                <small id="helpId" ng-show="accountForm.username.$error.maxlength" class="form-text text-muted">Username tối đa 20 kí tự</small>
+                                <small id="helpId" ng-show="accountForm.username.$error.minlength" class="form-text text-muted">Username tối thiểu 4 kí tự</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Mật Khẩu</label>
+                                <input type="text" class="form-control" name="password" id="password" aria-describedby="helpId"
+                                    ng-model="form.password" placeholder=""
+                                    ng-minlength="4" ng-maxlength="20" ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.password.$error.required" class="form-text text-muted">Vui lòng nhập mật khẩu</small>
+                                    <small id="helpId" ng-show="accountForm.password.$error.maxlength" class="form-text text-muted">Mật khẩu tối đa 20 kí tự</small>
+                                    <small id="helpId" ng-show="accountForm.password.$error.minlength" class="form-text text-muted">Mật khẩu tối thiểu 6 kí tự</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" ng-model="form.email" class="form-control" name="email" id="email"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-pattern="/^.+@gmail\.com$/" ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.email.$error.required" class="form-text text-muted">Vui lòng nhập Email</small>
+                                    <small id="helpId" ng-show="!accountForm.email.$error.required&&accountForm.email.$error.pattern" class="form-text text-muted">Sai định dạng Email</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Họ</label>
+                                <input type="text" class="form-control" ng-model="form.first_name" name="firstName" id="firstName"
+                                    aria-describedby="helpId" placeholder=""
+                                   ng-maxlength="20" ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.firstName.$error.required" class="form-text text-muted">Vui lòng nhập Họ</small>
+                                    <small id="helpId" ng-show="accountForm.firstName.$error.maxlength" class="form-text text-muted">Họ tối đa 20 kí tự</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tên</label>
+                                <input type="text" class="form-control" ng-model="form.last_name" name="lastName" id="lastName"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-maxlength="20" ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.lastName.$error.required" class="form-text text-muted">Vui lòng nhập username</small>
+                                    <small id="helpId" ng-show="accountForm.lastName.$error.maxlength" class="form-text text-muted">Username tối đa 20 kí tự</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                <input type="text" class="form-control" ng-model="form.phone_number" name="phone" id="phone"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-minlength="10" ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.phone.$error.required" class="form-text text-muted">Vui lòng nhập username</small>
+                                    <small id="helpId" ng-show="accountForm.phone.$error.minlength" class="form-text text-muted">Số điện thoại tối thiểu 10 kí tự</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <input type="text" class="form-control" ng-model="form.address_line" name="address_line" id="address_line"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.postal_code.$error.required" class="form-text text-muted">Vui lòng nhập địa chỉ</small>
+                            </div>
+                            
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label class="image_select" for="photo">
+                                    <!-- <img  ng-src="../upload/images/{{form.photo}}" src="images/logo.png"  alt=""> -->
+                                    <img ng-show="form.photo == null" src="/images/pic-1.png" alt="">
+                                    <img ng-show="form.photo != null"  ng-src="/upload/images/{{form.photo}}" alt="">
+                                </label>
+                                <input type="file" class="form-control-file" name="photo" id="photo" placeholder=""
+                                onchange="angular.element(this).scope().imageChanged(this.files)"
+                                    aria-describedby="fileHelpId">
+                                <small id="fileHelpId" class="form-text text-muted">Help
+                                    text</small>
+                            </div>
+
+                            
+
+                            <div class="form-group">
+                                <label for="">Postal code</label>
+                                <input type="text" class="form-control" name="postal_code" ng-model="form.postal_code" id="postal_code"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.postal_code.$error.required" class="form-text text-muted">Vui lòng nhập postal code</small>
+                            </div>
+
+                            
+                           
+
+                            <!-- <div class="form-group">
+                                <label for="">Thành Phố</label>
+                                <input type="text" class="form-control" ng-model="form.country.id" name="" id=""
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.postal_code.$error.required" class="form-text text-muted">Vui lòng nhập thành phố</small>
+                            </div> -->
+
+                            <div class="form-group">
+                                <label for="product"> Tỉnh thành</label>
+                                <select class="form-control" ng-change="chooseCountry()" ng-model="form.country.id" id="country" name="country" required>
+                                  <option value="" selected>Chọn tỉnh thành...</option>
+                                  <option ng-repeat="p in countries" ng-value="p.id"  ng-click="showStateWhenChooseCountry(p)">{{p.name}}</option>
+                  
+                  
+                                </select>
+                             
+                                  <small class="error form-text text-muted" ng-show="accountForm.country.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn tỉnh</small>
+                             
+                              </div>
+                            <div class="form-group">
+                                <label for="product"> Quận - huyện</label>
+                                <select class="form-control" ng-model="form.state.id" id="state" name="state" required>
+                                  <option value="" selected>Chọn quận huyện...</option>
+                                  <option  ng-repeat="p in states" ng-value="p.id">{{p.name}}</option>
+                  
+                  
+                                </select>
+                             
+                                  <small class="error form-text text-muted" ng-show="accountForm.state.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng quận huyện</small>
+                             
+                              </div>
+<!-- 
+                            <div class="form-group">
+                                <label for="">Quận huyện</label>
+                                <input type="text" class="form-control" ng-model="form.state" name="state" id="state"
+                                    aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="accountForm.state.$error.required" class="form-text text-muted">Vui lòng nhập State</small>
+                            </div> -->
+
+                            <label for="">Trạng thái</label>
+                            <span style="color: red;">*</span>
+                            <div class="card">
+
+                                <div class="form-check form-check-inline">
+                                    <input ng-model="form.enable" name="enable" id="enable1" class="form-check-input" type="radio" ng-value="true" >
+                                    <label class="form-check-label" for="enable1">Đã kích hoạt</label>
+                                    <input ng-model="form.enable" name="enable" id="disable" class="form-check-input ml-5" type="radio"
+                                        ng-value="false">
+                                    <label class="form-check-label" for="disable">Chưa kích hoạt</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="">Mô tả</label>
+                                <textarea class="form-control" name="" id="" rows="3"></textarea>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-disabled="accountForm.$invalid" ng-show="!isShow" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-disabled="accountForm.$invalid" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success"  ng-click="reset()">Làm mới</button>
+                    <deleten type="button" class="btn btn-danger" ng-show="isShow" ng-click="delete(form)">Xóa</deleten>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

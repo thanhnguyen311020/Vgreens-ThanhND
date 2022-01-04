@@ -1,0 +1,126 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới quảng cáo</h5>
+
+                <button id="_list" ng-click="initialize()">Danh sách người dùng</button>
+            </div>
+
+            <form method="POST" name="advertisementForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id">Mã quảng cáo</label>
+                                <input ng-disabled="isShow" type="text" ng-model="form.id" class="form-control"
+                                    name="id" id="id" aria-describedby="helpId" placeholder="" ng-required=true>
+                                <small id="helpId" ng-show="advertisementForm.id.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập mã quảng cáo</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Tiêu đề</label>
+                                <input type="text" ng-model="form.title" class="form-control" name="title" id="title"
+                                    aria-describedby="helpId" ng-required=true>
+                                <small id="helpId" ng-show="advertisementForm.title.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập tiêu đề quảng cáo</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Tiêu đề bổ sung</label>
+                                <input style="color: #28a745" type="text" ng-model="form.title1" class="form-control"
+                                    name="title1" id="title1" aria-describedby="helpId" >
+                                <!-- <small id="helpId" ng-show="advertisementForm.title.$error.required" class="form-text text-muted">Vui lòng nhập tiêu đề quảng cáo</small> -->
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="startDate">Ngày bắt đầu</label>
+                                <input type="datetime-local" class="form-control" ng-model="form.startDate"
+                                    name="startDate" id="startDate" aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                <small id="helpId" ng-show="advertisementForm.startDate.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập ngày bắt đầu</small>
+                            </div> -->
+                            <div class="form-group">
+                                <label for="endDate">Thời gian</label>
+                                <input type="datetime-local" class="form-control" ng-model="form.endDate" name="endDate"
+                                    id="endDate" aria-describedby="helpId" placeholder="" ng-required=true>
+                                <small id="helpId" ng-show="advertisementForm.endDate.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập ngày kết thúc</small>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group input-image">
+
+                                <label for="image" ng-if="!form.image.startsWith('https')">
+                                    <img ng-if="form.img == null" src="/images/no_image.png" alt="">
+                                    <img ng-if="form.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+
+                                </label>
+                                <label for="image" ng-if="form.image.startsWith('https')">
+                                    <img ng-if="form.img == null" ng-src="{{form.image}}" alt="">
+                                    <img ng-if="form.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+                                </label>
+                                <input type="file" class="form-control-file" name="photo" id="photo" placeholder=""
+                                    onchange="angular.element(this).scope().imageChanged(this.files)">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="titleBtn">Tiêu đề button</label>
+                                <input type="text" ng-model="form.titleBtn" class="form-control" name="titleBtn"
+                                    id="titleBtn" aria-describedby="helpId" placeholder="" ng-required=true>
+                                <small id="helpId" ng-show="advertisementForm.titleBtn.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập tiêu đề quảng cáo</small>
+                            </div>
+
+                            <!-- <div class="form-row">
+                                <div class="col-md-12">
+                                    <label for=""><strong>Loại giảm giá:</strong></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" readonly id="consignmentName" class="form-control"
+                                        placeholder="Lô hàng...">
+                                    <input type="hidden" id="consignmentId" class="form-control"
+                                        placeholder="Lô hàng...">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <button type="button" data-toggle="modal" data-target="#loadDiscount" name="" id=""
+                                        class="btn btn_" btn-lg btn-block>Chọn lô hàng</button>
+                                </div>
+
+                            </div> -->
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="descreption">Mô tả</label>
+                                <textarea class="form-control" ng-model="form.decrepsiton" name="descreption"
+                                    id="descreption" rows="3" ng-required=true></textarea>
+                                <small id="helpId" ng-show="advertisementForm.decrepsiton.$error.required"
+                                    class="form-text text-muted">Vui lòng nhập mô tả</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-disabled="advertisementForm.$invalid"
+                        ng-show="!isShow" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-disabled="advertisementForm.$invalid"
+                        ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success" ng-click="reset()">Làm mới</button>
+                    <!-- <deleten type="button" class="btn btn-danger" ng-show="isShow" ng-click="delete(form)">Xóa</deleten> -->
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index::dynamic(~{::title},~{::main})}">
+
+<head>
+	<title>VGreens - Shipping Rate Management</title>
+
+
+
+</head>
+
+<body>
+
+	<main ng-controller="shippingrate-ctrl">
+		<!-- <header class="nav-main">
+			<h2>Dashboard > Quản lý đơn vị</h2>
+			<div class="admin_info">
+				<img src="../images/pic-1.png" alt=""> <a onclick="drop_menu_header()" class="dropbtn">ThanhND <i
+						class='bx bx-cog'></i></a>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#">Profile</a> <a href="#">Đăng xuất</a> <a href="#">Link
+						3</a>
+				</div>
+			</div>
+		</header> -->
+		<input type="hidden" value="5" id="checkActive">
+
+		<section class="box-container content-main">
+
+
+			<div class="tab-container">
+
+
+				<ul style="display: none;" class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+							role="tab" aria-controls="home" aria-selected="true">Home</a></li>
+					<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+							role="tab" aria-controls="profile" aria-selected="false">Profile</a></li>
+					<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+							role="tab" aria-controls="contact" aria-selected="false">Contact</a></li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+
+					<!-- List -->
+					<div class="tab-pane fade show active tab-list" id="home" role="tabpanel"
+						aria-labelledby="home-tab">
+						<th:block th:replace="@{/admin/shipping_rates/_list}">
+
+						</th:block>
+					</div>
+
+					<!-- Form -->
+					<div class="tab-pane fade tab-form" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						<th:block th:replace="@{/admin/shipping_rates/_form}">
+
+						</th:block>
+					</div>
+
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+				</div>
+			</div>
+
+		</section>
+
+
+		<!-- Modal -->
+		<!-- Button trigger modal -->
+		<th:block th:replace="@{/admin/shipping_rates/_modal}">
+
+		</th:block>
+	</main>
+    </script>
+
+
+</body>
+
+</html>

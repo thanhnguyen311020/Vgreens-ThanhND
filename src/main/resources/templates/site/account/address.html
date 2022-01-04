@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Account</title>
+
+<body>
+    <main ng-controller="address-ctrl">
+
+
+
+
+        <div class="titlePage">
+            <h1>Quản lý địa chỉ</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Trang cá nhân</a> - <a href="#">trang cá nhân</a>
+            </div>
+        </div>
+
+
+
+        <section class="_address">
+            <div th:if="${success!=null}" class="alert alert-success" role="alert">
+                <i class="fas fa-check-circle"></i> [[${success}]]
+            </div>
+            <div th:if="${error!=null}" class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-circle"></i> [[${error}]]
+            </div>
+
+
+            <div class="row">
+                <div class="col-6 box-address">
+                    <div class="card" th:classappend="${usePrimaryAddressAsDefault ? 'bg-warning':''}">
+                        <div class="card-header">
+                            <h3>Địa chỉ chính</h3>
+                            <!-- <th:block th:if="${usePrimaryAddressAsDefault}"> -->
+                            <span class="text-danger">[Mặc định]</span>
+                            <!-- </th:block> -->
+                        </div>
+                        <div class="card-body">
+                            <h4>[[${account.email}]]</h4>
+                            <p class="card-text">[[${account.first_name}]] [[${account.last_name}]],
+                                Địa chỉ :
+                                [[${account.address_line}]],
+
+                                Quận/Huyện:
+                                [[${account.state}]],
+                                Thành phố/Tỉnh: [[${account.country.name}]],
+
+                                Mã vùng: [[${account.postal_code}]],
+                                Số điện thoại: [[${account.phone_number}]] </p>
+                            <th:block th:unless="${usePrimaryAddressAsDefault}">
+                                <a th:href="@{'/vgreens/account/address/setdefault/0'}"
+                                    class="btn btn-outline-light">Đặt làm địa chỉ giao
+                                    hàng</a>
+                            </th:block>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-6 box-address" th:each="ad,status : ${listaddress}">
+                    <div class="card" th:classappend="${ad.address_default ? 'bg-warning':''}">
+                        <div class="card-header">
+                            <h3>Địa chỉ giao hàng [[${status.count+1}]]</h3>
+                            <div class="link">
+                                <!-- <a class="fas fa-edit " th:href="@{'/vgreens/account/address/edit/'+${ad.id}}"
+                                title="Chỉnh sửa địa chỉ giao hàng"></a> -->
+
+                                <button data-toggle="modal" data-target=".bd-example-modal-lg" class="fas fa-edit "
+                                    th:attr="ng-click=@{|getAddressById(${ad.id})|}"
+                                    title="Chỉnh sửa địa chỉ giao hàng"></button>
+
+                                <button th:data-id="${ad.id}"
+                                    onclick="showConfirmModalDialog(this.getAttribute('data-id'))"
+                                    style="color: rgb(3, 3, 3);" th:if="${ad.address_default==false}"><i
+                                        class="fas fa-trash" title="Xóa địa chỉ giao hàng"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <h4>[[${ad.account.email}]]</h4>
+                            <p class="card-text">[[${ad.first_name}]] [[${ad.last_name}]],
+                                Địa chỉ :
+                                [[${ad.address_line}]],
+
+                                Quận/Huyện:
+                                [[${ad.state}]],
+                                Thành phố/Tỉnh: [[${ad.country.name}]],
+
+                                Mã vùng: [[${ad.postal_code}]],
+                                Số điện thoại: [[${ad.phone_number}]]</p>
+                            <th:block th:unless="${ad.address_default==true}">
+                                <a th:href="@{'/vgreens/account/address/setdefault/'+${ad.id}}"
+                                    class="btn btn-outline-light">Đặt làm địa chỉ giao
+                                    hàng</a>
+                            </th:block>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-6 box-address">
+                    <div class="card button-container">
+
+                        <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-lg">Thêm
+                            địa chỉ mới...</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+        <!-- Modal form create address -->
+
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông tin địa chỉ</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="reset()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <form action="" method="post" name="frmAddAddress" novalidate>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="first_name" id="first_name"
+                                            ng-model="form.first_name" aria-describedby="helpId" placeholder="Tên" required>
+                                        <span ng-show="frmAddAddress.first_name.$invalid" class="has-error">Phải nhập
+                                            tên
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="last_name" id="last_name"
+                                            ng-model="form.last_name" aria-describedby="helpId" placeholder="Họ" required>
+                                        <span ng-show="frmAddAddress.last_name.$invalid" class="has-error">Phải nhập họ
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="phone_number" id="phone_number"
+                                            ng-model="form.phone_number" aria-describedby="helpId"
+                                            placeholder="0123456789"  required>
+                                        <span ng-show="frmAddAddress.phone_number.$invalid" class="has-error">Phải nhập
+                                            số điện thoại
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="postal_code" id="postal_code"
+                                            ng-model="form.postal_code" aria-describedby="helpId"
+                                            placeholder="Mã bưu điện" required>
+                                        <span ng-show="frmAddAddress.postal_code.$invalid" class="has-error">Phải nhập
+                                            mã bưu điện
+                                        </span>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="state" id="state"
+                                            ng-model="form.state" aria-describedby="helpId" placeholder="Quận/Huyện"
+                                            list="listStates" required>
+
+
+
+                                        <datalist id="listStates"></datalist>
+                                        <span ng-show="frmAddAddress.state.$invalid" class="has-error">Phải chọn
+                                            Quận/Huyện
+                                        </span>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+
+
+                                        <select class="custom-select custom-select-lg mb-3" name="country" id="country"
+                                            ng-model="form.country.id" required>
+                                            <!-- <option ng-value="0" selected>Chọn Tỉnh/Thành Phố</option> -->
+                                            <option value="" selected>Chọn tỉnh/thành phố</option>
+                                            <option ng-repeat="c in countries" value="{{c.id}}">{{c.name}}</option>
+
+
+
+                                        </select>
+                                        <span ng-show="frmAddAddress.country.$invalid" class="has-error">Phải tỉnh/thành phố
+                                        </span>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- <label for="password">Password</label> -->
+                                        <input type="text" class="form-control" name="address_line" id="address_line"
+                                            ng-model="form.address_line" aria-describedby="helpId"
+                                            placeholder="Địa chỉ" required>
+                                        <span ng-show="frmAddAddress.address_line.$invalid" class="has-error">Phải nhập
+                                            địa chỉ
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                ng-click="reset()">Đóng</button>
+                            <button type="button" class="btn btn-primary btn-modal" ng-click="create()"
+                                data-dismiss="modal" ng-disabled="frmAddAddress.$invalid">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal delete address -->
+        <div class="modal fade text-center" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xóa địa chỉ giao hàng</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- khong close duoc modal -->
+                    </div>
+                    <div class="modal-body">
+                        <h3>Bạn có muốn xóa địa chỉ giao hàng này?</h3>
+                    </div>
+                    <div class="modal-footer modalconfirm">
+                        <a id="yesOption" type="button" class="btn btn-success">
+                            <h4>Có, tôi muốn</h4>
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <h4>Không</h4>
+                        </button>
+                        <!-- khong close duoc modal -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal delete address -->
+
+
+
+        <script>
+            contextPath = "[[@{/}]]";
+            var dropDownCountry;
+            var dataListState;
+            var fieldState;
+            $(document).ready(function () {
+                dropDownCountry = $("#country");
+                dataListState = $("#listStates");
+                fieldState = $("#state");
+
+                dropDownCountry.on("change", function () {
+                    loadStateForCountry();
+                    fieldState.val("").focus();
+                })
+            });
+
+            function loadStateForCountry() {
+                slectedCountry = $("#country option:selected");
+
+                countryId = slectedCountry.val();
+
+
+
+                url = contextPath + "states/list_state_by_country/" + countryId;
+
+                $.get(url, function (responseJSON) {
+                    dataListState.empty();
+
+                    $.each(responseJSON, function (index, state) {
+                        $("<option>").val(state.name).text(state.name).appendTo(dataListState);
+                    });
+                });
+            }
+        </script>
+        <script>
+            function showConfirmModalDialog(id) {
+                $('#yesOption').attr('href', '/vgreens/account/address/delete/' + id);
+                $('#modelId').modal('show');
+
+            }
+        </script>
+
+    </main>
+
+
+</body>
+
+</html>

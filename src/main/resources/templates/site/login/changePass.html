@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Đổi mật khẩu | VGreens Market</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="/css/siteStyle/forgotPassStyle.css">
+</head>
+
+<body>
+    <div class="forgot-pass-container">
+        <a href="/vgreens/index">
+            <img src="/images/logoWeb.png" alt="logo">
+        </a>
+        <div class="fogot-pass-box">
+            <div class="box">
+                <div class="form">
+                    <div class="text-center">
+                        <h2>Thay đổi mật khẩu của bạn</h2>
+                    </div>
+                    <form th:action="@{/vgreens/account/change_password}" method="post">
+                        <div th:if="${message != null}" class="m-3">
+                            <p class="text-danger">[[${message}]]</p>
+                        </div>
+                        <div>
+                            <p>
+                                <input type="password" name="oldPassword" class="form-control" placeholder="Mật khẩu cũ"
+                                    required />
+                            </p>
+                            <p>
+                                <input type="password" name="newPassword" id="password" class="form-control"
+                                    placeholder="Mật khẩu mới" required autofocus />
+                            </p>
+                            <p>
+                                <input type="password" name="confirmPassword" class="form-control"
+                                    placeholder="Xác nhận mật khẩu mới" required />
+                            </p>
+
+                            <p class="text-center">
+                                <input type="submit" value="Xác nhận" id="reset" />
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <a href="/vgreens/index">Về lại trang chủ</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkPasswordMatch(fieldConfirmPassword) {
+            if (fieldConfirmPassword.value != $("#password").val()) {
+                fieldConfirmPassword.setCustomValidity("Passwords do not match!");
+            } else {
+                fieldConfirmPassword.setCustomValidity("");
+            }
+        }
+    </script>
+</body>
+
+</html>

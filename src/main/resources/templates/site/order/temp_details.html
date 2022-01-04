@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>Greens | Order Detail</title>
+
+<body>
+
+
+    <main ng-controller="review-ctrl">
+
+
+
+
+
+
+        <div class="titlePage">
+            <h1>Chi tiết đơn hàng</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Đơn hàng</a>
+            </div>
+        </div>
+          
+    <div class="container status-container px-1 px-md-4  mx-auto">
+        <!-- <h1 class="text-center">Thông tin vận chuyển</h1> -->
+        <div class="card pt-5">
+            <div class="row d-flex justify-content-between top">
+                <div class="d-flex">
+                    <h5>Mã Đơn Hàng <span class="text-success font-weight-bold">#[[${inforOrder.id}]]</span></h5>
+                </div>
+                <div class="d-flex flex-column text-sm-right">
+                    <p class="mb-0"><h5>Ngày Giao Hàng: <span class="text-success">[[${#calendars.format(inforOrder.deliver_date, 'EEE ,dd-MM-yyyy')}]]</span></h5></p>
+                    <!-- <p>Grasshoppers <span class="font-weight-bold"><a href="https://www.grasshoppers.lk/customers/action/track/V534HB">V534HB</a></span></p> -->
+                </div>
+            </div> <!-- Add class 'active' to progress -->
+            <div class="row d-flex justify-content-center">
+                <div class="col-12">
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==0}">
+                        <li class="active step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                    </ul>
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==1}">
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                    </ul>
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==2}">
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                    </ul>
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==3}">
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class=" step0"></li>
+                    </ul>
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==4}">
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                        <li class="active step0"></li>
+                    </ul>
+                    <ul id="progressbar" class="text-center" th:if="${inforOrder.status ==5}">
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                        <li class=" step0"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row  top img-status">
+                <div class="row status-item icon-content"> <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                    <div class=" flex-column">
+                        <p class="">Chờ Xác Nhận</p>
+                    </div>
+                </div>
+                <div class="row status-item  icon-content"> <img class="icon" src="https://i.imgur.com/GiWFtVu.png">
+                    <div class=" flex-column">
+                        <p class="">Đã Xác Nhận</p>
+                    </div>
+                </div>
+                <div class="row status-item icon-content"> <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                    <div class=" flex-column">
+                        <p class="">Đang Lấy Hàng</p>
+                    </div>
+                </div>
+                <div class="row status-item icon-content"> <img class="icon" src="https://i.imgur.com/TkPm63y.png">
+                    <div class=" flex-column">
+                        <p class="">Đang Vận Chuyển</p>
+                    </div>
+                </div>
+                <div class="row status-item icon-content"> <img class="icon" src="https://i.imgur.com/HdsziHP.png">
+                    <div class=" flex-column">
+                        <p class="">Đã Giao Hàng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" class="card display-none">
+            <div class="row d-flex justify-content-between px top" th:each="tracklist : ${tracklist}">
+                <div class="d-flex">
+                    <h5><span class="text-success font-weight-bold">[[${#calendars.format(tracklist.created_time, 'dd/MM/yyyy HH:mm:ss')}]] </span>
+                        
+                        
+                        
+                        <span  class="font-weight-bold ml-3">[[${tracklist.title}]]:</span>
+                    
+                        <span  class="font-weight-bold ml-3">[[${tracklist.description}]]</span>
+                    </h5>
+                </div>
+            </div>
+            <!-- <div class="row d-flex justify-content-between px top">
+                <div class="d-flex">
+                    <h5><span class="text-primary font-weight-bold">2020-06-04 06:59:48 AM </span>ATTEMPT 1 COMPLETED. ~ ***[AUTO GENERATED BY GRASSHOPPERS]***</h5>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-between px top">
+                <div class="d-flex">
+                    <h5><span class="text-primary font-weight-bold">2020-06-04 06:59:48 AM </span>RETURN TO VENDOR RECORD CREATED ~ RC806_118 </h5>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+        <section class="_orderDetail">
+            
+
+            <div  class="row orderDetail-container m-2">
+
+                <form  class=" m-auto ">
+                    <h1 class="text-center">Thông tin người mua</h1>
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="hidden" name="" th:value="${inforOrder.id}" id="orderDetailId">
+                            <div class="form-group">
+                                <label for="fullname">Họ</label>
+                                <input type="text" th:value="${inforOrder.last_name}" readonly class="form-control"
+                                    name="last_name" id="last_name" aria-describedby="helpId" placeholder="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                <input type="text" th:value="${inforOrder.phone_number}" readonly class="form-control"
+                                    name="phone_number" id="phone_number" aria-describedby="helpId" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Phương thức thanh thoán</label>
+                                <input type="text" th:value="${inforOrder.payment_method}+' , '+ ${inforOrder.payment_status}" readonly class="form-control" name="phone_number" id="phone_number" aria-describedby="helpId"
+                                    placeholder="">
+                            </div>
+
+
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="fullname">Tên</label>
+                                <input type="text" th:value="${inforOrder.first_name}" readonly class="form-control"
+                                    name="first_name" id="first_name" aria-describedby="helpId" placeholder="">
+                            </div>
+                            <div class="form-group">
+
+                                <label for="createDate">Ngày mua hàng</label>
+                                <input type="text"  th:value="${#calendars.format(inforOrder.createDate, 'HH:mm:ss - dd/MM/yyyy')}" readonly class="form-control" name="createDate" id="createDate"
+                                    aria-describedby="helpId" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Tổng tiền</label>
+                                <input type="text" style="color: var(--main)" readonly th:value="${#numbers.formatDecimal(inforOrder.amount,0,'COMMA',0,'POINT')}" class="form-control" name="amount"
+                                    id="amount" aria-describedby="helpId" placeholder="">
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <input style="height: 60px;" readonly th:value="${inforOrder.address_line} +', '+ ${inforOrder.state} +', '+ ${inforOrder.country}" class="form-control" name="" id="" rows="3"></input>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+<<<<<<< HEAD
+                <div style="overflow-x: auto;" class="col-12 p-0">
+                    <table  class="list-detail m-auto">
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th class="text-center">Hình ảnh</th>
+                            <th class="name">Tên sản phẩm</th>
+                            <th class="text-center name">Giá bán</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center name">Tổng tiền</th>
+                            <th class="name"></th>
+                            <!-- <th class="ratting-btn"> Đánh giá</th> -->
+                        </tr>
+                        <tr th:each="detailList,state : ${detailList}">
+                            <td class="text-center">[[${state.index+1}]]</td>
+                            <td style="text-align: center;"> <img th:src="@{${detailList.product.image}}" alt=""></td>
+                            <td>
+    
+                                <h4>[[${detailList.product.name}]]</h4>
+                            </td>
+                            <td class="text-center">[[${#numbers.formatDecimal(detailList.unit_price,0,'COMMA',0,'POINT')}]] .đ</td>
+                            <td class="text-center">[[${detailList.quantity}]]</td>
+                            <td class="text-center" th:if="${detailList.product.discount}==null" style="color:var(--main); font-weight: 500;">[[${#numbers.formatDecimal(detailList.product.consignment.selling_price*detailList.quantity,0,'COMMA',0,'POINT')}]]</td>
+                            <td class="text-center" th:if="${detailList.product.discount}!=null" style="color:var(--main); font-weight: 500;">[[${#numbers.formatDecimal((detailList.product.consignment.selling_price-detailList.product.consignment.selling_price*detailList.product.discount.percent_discount/100)*detailList.quantity,0,'COMMA',0,'POINT')}]]</td>
+                            <td class="ratting-btn"> <button th:if="${inforOrder.status}==4" class="fas fa-star" data-toggle="modal"
+                                    data-target="#exampleModal">Đánh giá</button> </td>
+    
+                        </tr>
+                        <!-- <tr>
+                            <td>104747</td>
+                            <td style="text-align: center;"> <img src="images/product-1.png" alt=""></td>
+                            <td>
+    
+                                <h4>Chuối 0.5kg</h4>
+                            </td>
+                            <td>20.000.đ</td>
+                            <td>2</td>
+                            <td style="color:var(--main); font-weight: 500;">40.000.đ</td>
+                        </tr>
+                        <tr>
+                            <td>104747</td>
+                            <td style="text-align: center;"> <img src="images/product-9.png" alt=""></td>
+                            <td>
+    
+                                <h4>Chuối 0.5kg</h4>
+                            </td>
+                            <td>20.000.đ</td>
+                            <td>2</td>
+                            <td style="color:var(--main); font-weight: 500;">40.000.đ</td>
+                        </tr> -->
+                    </table>
+                </div>
+
+
+=======
+                <table class="col-10 list-detail m-auto">
+                    <tr>
+                        <th class="text-center">No.</th>
+                        <th class="text-center">Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th class="text-center">Giá bán</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Tổng tiền</th>
+                        <th></th>
+                        <!-- <th class="ratting-btn"> Đánh giá</th> -->
+                    </tr>
+                    <tr th:each="detailList,state : ${detailList}">
+                        <td class="text-center">[[${state.index+1}]]</td>
+                        <td style="text-align: center;"> <img th:src="@{${detailList.product.image}}" alt=""></td>
+                        <td>
+
+                            <h4>[[${detailList.product.name}]]</h4>
+                        </td>
+                        <td class="text-center">[[${#numbers.formatDecimal(detailList.unit_price,0,'COMMA',0,'POINT')}]] .đ</td>
+                        <td class="text-center">[[${detailList.quantity}]]</td>
+                        <td class="text-center" th:if="${detailList.product.discount}==null" style="color:var(--main); font-weight: 500;">[[${#numbers.formatDecimal(detailList.product.consignment.selling_price*detailList.quantity,0,'COMMA',0,'POINT')}]]</td>
+                        <td class="text-center" th:if="${detailList.product.discount}!=null" style="color:var(--main); font-weight: 500;">[[${#numbers.formatDecimal((detailList.product.consignment.selling_price-detailList.product.consignment.selling_price*detailList.product.discount.percent_discount/100)*detailList.quantity,0,'COMMA',0,'POINT')}]]</td>
+                        <td class="ratting-btn"> <button th:if="${inforOrder.status}==4" class="fas fa-star" data-toggle="modal"
+                                data-target="#exampleModal" th:value="${detailList.product.id}"
+                             
+                                id="id-product" >Đánh giá</button> </td>
+                                   <!-- th:attr="ng-click=@{|hienthi(${detailList.product.id})|}" -->
+                            <!-- Modal -->
+                                <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" ng-controller="review-ctrl">
+                                         <!-- th:action="@{|/vgreens/product/${detailList.product.id}|}" method="post"
+                                             th:object="${review}" -->
+                                         <form>
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm
+                                                     </h5>
+                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                         aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body rate-container">
+                                                     <div class="rating-wrap">
+                                                         <div class="content">
+                                                             <div>
+                                                             <input type="hidden" name="" >
+                                                             </div>
+                                                             <fieldset class="rating">
+                                                                 <input type="radio" ng-model="form.rating" id="star5"
+                                                                     name="rating" value="5"><label for="star5"
+                                                                     class="full"></label>
+                                                                 <input type="radio" ng-model="form.rating" id="star4"
+                                                                     name="rating" value="4"><label for="star4"
+                                                                     class="full"></label>
+                                                                 <input type="radio" ng-model="form.rating" id="star3"
+                                                                     name="rating" value="3"><label for="star3"
+                                                                     class="full"></label>
+                                                                 <input type="radio" ng-model="form.rating" id="star2"
+                                                                     name="rating" value="2"><label for="star2"
+                                                                     class="full"></label>
+                                                                 <input type="radio" ng-model="form.rating" id="star1"
+                                                                     name="rating" value="1"><label for="star1"
+                                                                     class="full"></label>
+                                                             </fieldset>
+                                                         </div>
+                                                         <h4 id="rating-value">0 trên 5</h4>
+                                                     </div>
+                                                     <div class="comment">
+                                                         <textarea name="" id="" ng-model="form.comment" cols="30"
+                                                             rows="3" placeholder="Đánh giá sản phẩm...."></textarea>
+                                                     </div>
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                     <button type="button" class="btn btn-secondary"
+                                                         data-dismiss="modal">Close</button>
+                                                     <button type="submit"
+                                                         th:attr="ng-click=@{|hienthi(${detailList.product.id})|}"
+                                                         class="btn btn-primary" >Save changes</button>
+                                                 </div>
+                                             </div>
+                                         </form>
+                                    </div>
+                                </div>     
+                    </tr>
+                </table>
+               
+>>>>>>> df406d0ff8912f284177e395e050ad6f4da0626c
+            </div>
+            <a href="product.html" class="_btn">Tiếp tục mua sắm</a>
+
+        </section>
+
+
+
+
+
+
+<<<<<<< HEAD
+     
+
+        <!-- footer section ends -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                    </div>
+                    <div class="modal-body rate-container">
+
+                        <div class="rating-wrap">
+                            <!-- <h2>Star Rating</h2> -->
+                            <div class="content">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label for="star5"
+                                        class="full"></label>
+                                    <input type="radio" id="star4.5" name="rating" value="4.5"><label for="star4.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label for="sta-4"
+                                        class="full"></label>
+                                    <input type="radio" id="star3.5" name="rating" value="3.5"><label for="star3.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3"
+                                        class="full"></label>
+                                    <input type="radio" id="star2.5" name="rating" value="2.5"><label for="star2.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2"
+                                        class="full"></label>
+                                    <input type="radio" id="star1.5" name="rating" value="1.5"><label for="star1.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1"
+                                        class="full"></label>
+                                    <input type="radio" id="star0.5" name="rating" value="0.5"><label for="star0.5"
+                                        class="half"></label>
+                                </fieldset>
+                            </div>
+
+                            <h4 id="rating-value">0 trên 5</h4>
+                        </div>
+
+                        <div class="comment">
+                            <textarea name="" id="" cols="30" rows="3" placeholder="Đánh giá sản phẩm...."></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn rating_btn">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+=======
+      
+>>>>>>> df406d0ff8912f284177e395e050ad6f4da0626c
+    </main>
+
+
+
+</body>
+
+</html>

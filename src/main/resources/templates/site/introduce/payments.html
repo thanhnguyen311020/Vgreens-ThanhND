@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | [[#{introduce.titlePWeb}]]</title>
+
+
+<body>
+
+    <main>
+        <style>
+            p,
+            li {
+                font-size: initial;
+            }
+
+            ul {
+                list-style: disc !important;
+            }
+        </style>
+        <br>
+        <div class="container">
+            <h2 style="text-align: center;"><strong>______[[#{introduce.titleP}]]______</strong></h2>
+            <p>[[#{introduce.payment1}]]</p>
+            <ul>
+                <li>[[#{introduce.payment2}]]</li>
+                <li>[[#{introduce.payment3}]]</li>
+            </ul>
+            <p>[[#{introduce.payment4}]] <a href="tel:0867709873"><i class="fas fa-phone"></i>
+                    [[#{introduce.payment5}]]</a>.</p>
+        </div>
+    </main>
+</body>
+
+</html>

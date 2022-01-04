@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
+    </script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGreens | Forgot Password</title>
+    <link rel="stylesheet" href="/css/siteStyle/forgotPassStyle.css">
+    <script src="/js/jquery1.js"></script>
+</head>
+
+<body>
+    <div class="forgot-pass-container">
+        <a href="/vgreens/index">
+            <img src="/images/logoWeb.png" alt="logo">
+        </a>
+        <div class="fogot-pass-box">
+            <div class="box">
+                <a href="index.html" style="text-decoration: none;">VGreens</a>
+                <p>Cập nhập lại mật khẩu</p>
+                <div class="form">
+                    <form th:action="@{/vgreens/login/reset_password}" method="post">
+                        <input type="hidden" name="token" th:value="${token}" />
+                        <p>
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Enter your new password" required autofocus />
+                        </p>
+                        <p>
+                            <input type="password" class="form-control" placeholder="Confirm your new password" required
+                                oninput="checkPasswordMatch(this);" />
+                        </p>
+
+                        <!-- <input type="password" id="password" class="form-control" name="password"
+                            placeholder="Nhập mật khẩu" required autofocus>
+                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu"
+                            oninput="checkPasswordMatch(this);" required /> -->
+                        <div class="notRemember">Bạn không nhớ email? <a href="#">Liên hệ với chúng tôi</a></div>
+                        <input type="submit" value="Cập nhập mật khẩu" id="reset" />
+                    </form>
+                </div>
+                <a href="/vgreens/index">Về lại trang chủ</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkPasswordMatch(fieldConfirmPassword) {
+            if (fieldConfirmPassword.value != $("#password").val()) {
+                fieldConfirmPassword.setCustomValidity("Mật khẩu không phù hợp!");
+            } else {
+                fieldConfirmPassword.setCustomValidity("");
+            }
+        }
+    </script>
+</body>
+
+</html>

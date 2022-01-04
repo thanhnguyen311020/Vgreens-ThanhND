@@ -1,0 +1,162 @@
+<header ng-controller="profile-ctrl">
+    <div class="social-call" >
+        <div class="social">
+            <a href="https://www.facebook.com/vgreens.fpolydn" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="https://www.youtube.com/channel/UCVpRvtAfKv7VdBd4ZNtFkBQ" class="fab fa-youtube"></a>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-white dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="/images/icons8_language_32px.png" alt="" srcset="">
+                [[#{header.language}]]
+            </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+                <a class="dropdown-item" href="?lang=en"> <img src="/images/icons8_usa_32px.png" alt="" srcset="">
+                    [[#{header.en}]]</a>
+                <a class="dropdown-item" href="?lang=vi"> <img src="/images/icons8_vietnam_32px.png" alt="" srcset="">
+                    [[#{header.vi}]]</a>
+            </div>
+        </div>
+
+
+        <!-- <div class="phone">
+            <span>Call +09587663</span>
+        </div> -->
+
+    </div>
+
+    <div class="nav" id="navx" >
+        <a href="/vgreens/index" class="logo" >
+            <!-- <i class="fas fa-utensils"></i>greens. -->
+            <img src="/images/logoWeb.png" alt="">
+        </a>
+
+        <nav class="navbar">
+            <a th:href="@{/vgreens/index}" th:text="#{header.home}"></a>
+            <a th:href="@{/vgreens/shop}" th:text="#{header.shop}"></a>
+            <a th:href="@{/vgreens/introduce}" th:text="#{header.aboutUs}"></a>
+            <a th:href="@{/vgreens/contact}" th:text="#{header.contact}"></a>
+         
+        </nav>
+
+        <div class="icons">
+
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search search" id="search-icon"></i>
+            <a ng-controller="shopping-cart-ctrl" th:href="@{/vgreens/favorite}" class="fas fa-heart">
+                <span>{{wishlist.countwishlist}}</span>
+            </a>
+            <a ng-controller="shopping-cart-ctrl" th:href="@{/vgreens/cart}" class="fas fa-shopping-cart">
+                <span>{{cart.count}}</span>
+            </a>
+            <li class="drop-menu" th:if="${#request.remoteUser}">
+                <a class="nav-link"  id="navbarDropdown" role="button" style="padding: 0;">
+                    <img ng-show="user.photo !=null" ng-src="{{user.photo}}" alt="" width="200px"
+                        style="border-radius: 50%;max-width: 45px;">
+                    <img ng-if="user.photo ==''" src="/upload/accounts/icons8_user_24px.png" alt=""
+                        style="border-radius: 50%;max-width: 24px;">
+                </a>
+                <ul>
+                    <th:block th:unless="${#request.remoteUser}">
+                        <li>
+                            <a th:href="@{/vgreens/login}" ><i class="fas fa-sign-in-alt">
+                                [[#{header.signin}]]
+                            </i>
+                               </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/vgreens/login/register}" ><i
+                                    class="fas fa-sign-in-alt"></i> [[#{header.register}]]</a>
+                        </li>
+
+                    </th:block>
+
+                    <th:block th:if="${#request.remoteUser}">
+                        <li>
+                            <a th:href="@{/vgreens/account/orders/findall}"><i
+                                    class="fas fa-tasks"></i> [[#{header.yourOrder}]]</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/vgreens/account}"><i
+                                    class="fas fa-user-cog"></i> [[#{header.yourFile}]]</a>
+                        </li>
+                        <!-- <li>
+                        <a th:href="@{/vgreens/login/forgotpassword}"><i class="fas fa-tasks"></i> Quên mật khẩu</a>
+                    </li> -->
+                        <li>
+                            <a th:href="@{/vgreens/account/change_password}"><i class="fas fa-key"></i> [[#{header.change}]]</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/vgreens/logoff}"><i class="fas fa-sign-in-alt"></i> [[#{header.signout}]]</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </li>
+
+            <li class="fas fa-user-alt drop-menu" th:unless="${#request.remoteUser}">
+                <ul>
+                    <th:block th:unless="${#request.remoteUser}">
+                        <li>
+                            <a th:href="@{/vgreens/login}" ><i
+                                    class="fas fa-sign-in-alt"></i> [[#{header.signin}]]</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/vgreens/login/register}"><i class="fas fa-sign-in-alt"></i>
+                                [[#{header.register}]]</a>
+                        </li>
+
+                    </th:block>
+
+                    <th:block th:if="${#request.remoteUser}">
+                        <li>
+                            <a th:href="@{/vgreens/account/orders}"><i class="fas fa-tasks"></i> 
+                                [[#{header.yourOrder}]]</a>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/vgreens/account}"><i class="fas fa-user-cog"></i> [[#{header.yourFile}]]</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/vgreens/account/change_password}"><i class="fas fa-key"></i>
+                                [[#{header.change}]]</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/vgreens/logoff}"><i class="fas fa-sign-in-alt"></i> [[#{header.signout}]]</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </li>
+            <div th:if="${#request.remoteUser}" class="_username">{{user.username}}</div>
+            <!-- {{user.first_name}} {{user.last_name}} -->
+            <div th:unless="${#request.remoteUser}" class="_username">[[#{header.hello}]]</div>
+
+            <!-- <a href="login.html" class="fas fa-user-alt"></a> -->
+        </div>
+    </div>
+    <div class="search-bar">
+        <!-- search-input -->
+        <div class="search-input">
+            <!-- input -->
+            <input type="text" placeholder="Search For Product">
+            <!-- cancel-_btn -->
+            <a href="javascript:void(0);" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("a[href*=lang]").click(function () {
+                $.ajax({
+                    url: "/vgreens/index" + $(this).attr("href")
+                }).then(resp => {
+                    location.reload();
+                });
+                return false;
+            });
+        })
+    </script>
+</header>

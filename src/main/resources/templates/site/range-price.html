@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../../static/images/logoVgreens.png" type="image/x-icon">
+    <style>
+
+      *,
+      *::before,
+      *:after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        
+      }
+
+      body{
+        height: 100vh;
+        display: -ms-grid;
+        display: grid;
+        background-color: #3264fe;
+        place-items: center;
+      }
+      .wrapper{
+        position: relative;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 50px 40px 20px 40px;
+      }
+      .range-container{
+        position: relative;
+        width: 100%;
+        height: 100px;
+        border:1px solid black;
+        margin-top: 30px;
+      }
+
+      input[type="range"]{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%;
+        outline: none;
+        position: absolute;
+        margin: auto;
+        top:0;
+        bottom: 0;
+        background-color: transparent;
+        pointer-events: none;
+      }
+
+      .slider-track{
+        width: 100%;
+        height: 5px;
+        /* background-color: #d5d5d5; */
+        position: absolute;
+        margin: auto;
+        top:0;
+        bottom: 0;
+        border-radius: 5px;
+
+      }
+
+      input[type="range"]::-webkit-slider-runnable-track{
+        -webkit-appearance: none;
+        height: 5px;
+      }
+
+      input[type="range"]::-moz-range-track{
+        -moz-appearance: none;
+        height: 5px;
+      }
+
+      input[type="range"]::-ms-track{
+        appearance: none;
+        height: 5px;
+      }
+
+      input[type="range"]::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        height: 1.7em;
+        width: 1.7em;
+        background-color: #3264fe;
+        cursor: pointer;
+        border-radius: 10px;
+        margin-top: -9px;
+        pointer-events: auto;
+      }
+
+      input[type="range"]::-moz-range-thumb{
+        -webkit-appearance: none;
+        height: 1.7em;
+        width: 1.7em;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: #3264fe;
+        pointer-events: auto;
+      }
+
+      input[type="range"]::-ms-thumb{
+        appearance: none;
+        height: 1.7em;
+        width: 1.7em;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: #3264fe;
+        pointer-events: auto;
+      }
+
+      input[type="range"]:active::-webkit-slider-thumb{
+        background-color: #ffffff;
+        border: 3px solid #3264fe;
+      }
+
+      .values{
+        background: #3264fe;
+        width: 32%;
+        position: relative;
+        margin: auto;
+        padding: 10px 0;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 25px;
+        color: #ffffff;
+
+      }
+
+      .values::before{
+        content: "";
+        position: absolute;
+        height: 0;
+        width: 0;
+        border-top:15px solid #3264fe;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        margin: auto;
+        bottom: -14px;
+        left: 0;
+        right: 0;
+      }
+
+
+    </style>
+
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <div class="values">
+        <input id="range1">
+          0
+        </input>
+        <span> &dash; </span>
+        <input id="range2">
+          100
+        </input>
+      </div>
+      <div class="range-container">
+        <div class="slider-track"></div>
+        <input type="range" oninput="slideOne()" min="0" max="100" value="30" id="slider-range-1">
+        <input type="range" oninput="slideTwo()" min="0" max="100" value="70" id="slider-range-2">
+
+
+      </div>
+
+    </div>
+
+    <script>
+
+      window.onload = function(){
+        slideOne();
+        slideTwo();
+      }
+
+      let sliderOne = document.getElementById("slider-range-1");
+      let sliderTwo = document.getElementById("slider-range-2")
+      let displayValOne = document.getElementById("range1");
+      let displayValTwo = document.getElementById("range2");
+      let minGap=0;
+      let sliderTrack = document.querySelector(".slider-track");
+      let sliderMaxvalue = document.getElementById("slider-range-1").max;
+
+      function slideOne() {
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+          sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        displayValOne.value = sliderOne.value;
+        fillColor();
+      }
+
+      function slideTwo(){
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+          sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        displayValTwo.value = sliderTwo.value;
+        fillColor();
+      }
+
+      function fillColor() {
+        percent1 = (sliderOne.value / sliderMaxvalue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxvalue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}%, #3264f4 ${percent1}% ,
+         #3264fe ${percent2}%, #dadae6 ${percent2}%)`;
+        // console.log(percent1, percent2);
+      }
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+  </body>
+</html>

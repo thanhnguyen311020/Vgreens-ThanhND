@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-12 title-control">
+        <h3>Lô hàng</h3>
+        <button id="_form">Thêm Mới </button>
+    </div>
+</div>
+
+<div class="row ">
+
+    <div class="col-md-12">
+
+        <div class="control-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tìm kiếm</th>
+                        <!-- <th>Loại sản phẩm</th> -->
+                        <th>Nhà cung cấp</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="search" name="keyname" id="namec" ng-model="search"
+                                    placeholder="Search...">
+                            </div>
+                        </td>
+                        <!-- <td>
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" name="" id="">
+                                                            <option selected>All</option>
+                                                            <option>Rau củ</option>
+                                                            <option>Hoa quả</option>
+                                                            <option>Các loại hạt</option>
+                                                        </select>
+                                                    </div>
+                                                </td> -->
+                        <td>
+                            <div class="form-group">
+
+                                <select class="form-control"
+                                    onchange="angular.element(this).scope().getBySup(this.options[this.selectedIndex].value)"
+                                    required name="" id="">
+                                    <option selected  value="">Tất cả</option>
+                                    <option ng-repeat="sup in suppliers" id="sup" ng-value="sup.id">{{sup.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <!-- <td class="text-right">
+
+
+                            <button class="btn btn-danger" ng-click="deleteAll()" id="btnDelete" disabled>
+                                <i class="far fa-trash-alt"></i>Xóa mục đã chọn
+                            </button>
+
+
+                        </td> -->
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-12 mt-4 tabConsignment">
+        
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="consignment-tab" data-toggle="tab" href="#consignment" role="tab" aria-controls="consignment" aria-selected="true" ng-click="initialize()">Lô hàng mới</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="consignmentAll-tab" data-toggle="tab" href="#consignmentAll" role="tab" aria-controls="consignmentAll" aria-selected="false" ng-click="getConsignment()">Tất cả</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="consignment_expired-tab" data-toggle="tab" href="#consignment_expired" role="tab" aria-controls="consignment_expired" aria-selected="false" ng-click="findConsignmentExpiryLessDateNow()">Hết hạn</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="consignment" role="tabpanel" aria-labelledby="consignment-tab">
+               <th:block th:replace="@{/admin/consignment/_table}">
+
+               </th:block>
+            </div>
+            <div class="tab-pane fade" id="consignmentAll" role="tabpanel" aria-labelledby="consignmentAll-tab">
+                <th:block th:replace="@{/admin/consignment/_tableAll}">
+
+               </th:block>
+            </div>
+            <div class="tab-pane fade" id="consignment_expired" role="tabpanel" aria-labelledby="consignment_expired-tab">
+                <th:block th:replace="@{/admin/consignment/_table}">
+
+               </th:block>
+            </div>
+          </div>
+
+
+        
+
+    </div>
+
+</div>

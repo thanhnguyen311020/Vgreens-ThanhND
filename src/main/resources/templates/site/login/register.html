@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon" />
+    <title>Vgreens | Đăng Ký</title>
+    <link rel="stylesheet" href="/css/siteStyle/register.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="form-container">
+            <form th:action="@{/vgreens/login/register}" method="POST" th:object="${customer}">
+                <a href="/vgreens/index" style="text-align: center;">
+                    <img class="avatar" src="/images/icon.png">
+                </a>
+                <div class="form-content">
+                    <div class="form-left">
+                        <div class="input-div one">
+                            <div class="i">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Tài Khoản</h5>
+                                <input type="text" th:field="*{username}" class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{username}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Mật Khẩu</h5>
+                                <input type="password" name="password" id="password" th:field="*{password}"
+                                    class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{password}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Email</h5>
+                                <input type="email" th:field="*{email}" class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{email}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-phone-square"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Số điện thoại</h5>
+                                <input type="text" th:field="*{phone_number}" class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{phone_number}"></small>
+
+
+                    </div>
+
+                    <div class="form-right">
+                        <div class="input-div one">
+                            <div class="i">
+                                <i class="far fa-user-circle"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Họ tên đệm</h5>
+                                <input th:field="*{first_name}" type="text" class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{first_name}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Tên khách hàng</h5>
+                                <input type="text" th:field="*{last_name}" class="input">
+                            </div>
+                        </div>
+                        <small th:errors="*{last_name}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Tỉnh - Thành phố</h5>
+                                <!-- <input type="text" class="input"> -->
+                                <select style="height: 50px; border: none;"
+                                    class="custom-select custom-select-lg mb-3 input" name="country" id="country"
+                                    th:field="*{country_id}">
+                                    <option value="" selected></option>
+                                    <!-- <option >Đà Nẵng</option> -->
+                                    <th:block th:each="country : ${listcountries}">
+
+                                        <option th:value="${country.id}">[[${country.name}]]</option>
+                                    </th:block>
+
+
+                                </select>
+                            </div>
+                        </div>
+                        <small th:errors="*{country_id}"></small>
+                        <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Quận - Huyện</h5>
+                                <input type="text" class="input" name="state" id="state" th:field="*{state}"
+                                    list="listStates">
+                                <datalist id="listStates"></datalist>
+                            </div>
+                        </div>
+                        <small th:errors="*{state}"></small>
+
+
+                        <!-- <div class="input-div pass">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Mã bưu điện</h5>
+                                <input type="password" class="input">
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+                <div class="input-div input-div-address one">
+                    <div class="i">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Địa chỉ</h5>
+                        <input type="text" th:field="*{address_line}" class="input">
+                    </div>
+                </div>
+                <small th:errors="*{address_line}"></small>
+
+
+                <button type="submit" class="btn" value="Đăng Ký tài khoản">Đăng ký tài khoản</button>
+            </form>
+
+
+        </div>
+
+
+        <div class="img-container">
+
+            <div class="text">
+                <h1>Chào mừng đến với vgreens</h1>
+                <p>Nơi cung cấp các thực phẩm sạch an toàn, đảm bảo sức khỏe cho mọi nhà</p>
+                <a href="/vgreens/login" class="bnt">Đăng Nhập</a>
+            </div>
+            <img class="img" src="/images/undraw_shopping_app_flsj.svg" alt="">
+        </div>
+    </div>
+    <script src="/js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        contextPath = "[[@{/}]]";
+        var dropDownCountry;
+        var dataListState;
+        var fieldState;
+        $(document).ready(function () {
+            dropDownCountry = $("#country");
+            dataListState = $("#listStates");
+            fieldState = $("#state");
+
+            dropDownCountry.on("change", function () {
+                loadStateForCountry();
+                fieldState.val("").focus();
+            })
+        });
+
+        function loadStateForCountry() {
+            slectedCountry = $("#country option:selected");
+            countryId = slectedCountry.val();
+            url = contextPath + "states/list_state_by_country/" + countryId;
+
+            $.get(url, function (responseJSON) {
+                dataListState.empty();
+
+                $.each(responseJSON, function (index, state) {
+                    $("<option>").val(state.name).text(state.name).appendTo(dataListState);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

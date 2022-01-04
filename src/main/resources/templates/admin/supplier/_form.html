@@ -1,0 +1,78 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới nhà phân phối</h5>
+
+                <button id="_list" ng-model="initialize">Danh sách nhà phân phối</button>
+            </div>
+
+            <form method="POST" novalidate name="supplireForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id">Mã nhà phân phối</label>
+                                <input readonly type="text" class="form-control" ng-value="form.id"  aria-describedby="helpId" placeholder="Trường được nhập tự động">
+                                <!-- <small id="helpId" class="form-text text-muted ">Help
+                                    text</small> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Tên nhà phân phối</label>
+                                <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                    ng-model="form.name" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="supplireForm.name.$error.required" class="form-text text-muted">Vui lòng nhập tên nhà phân phối</small>
+                            </div>
+
+                           
+
+                            
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="">Ngày tạo:</label>
+                                <input type="date" class="form-control" ng-model="form.created_time" name="created_time" id="created_time"
+                                    aria-describedby="helpId" placeholder=""
+                                   >
+                            </div>
+
+                            <div class="form-group">
+                              <label for="phone" >Điện thoại</label>
+                              <input type="text"
+                                class="form-control" ng-model="form.phone" name="phone"  id="phone"  aria-describedby="helpId" placeholder=""
+                                ng-minlength="10" ng-required=true>
+                                <small id="helpId" ng-show="supplireForm.phone.$error.required" class="form-text text-muted">Vui lòng nhập số điện thoại</small>
+                                <small id="helpId" ng-show="supplireForm.phone.$error.minlength" class="form-text text-muted">Số điện thoại tối thiểu 10 kí tự</small>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <textarea class="form-control" ng-model="form.address" name="" id="" rows="3"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-disabled="supplireForm.$invalid" ng-show="!isShow" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-disabled="supplireForm.$invalid" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success"  ng-click="reset()">Làm mới</button>
+                    <button th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</button>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

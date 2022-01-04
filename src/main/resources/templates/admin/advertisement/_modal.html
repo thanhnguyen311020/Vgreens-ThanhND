@@ -1,0 +1,64 @@
+<!-- Modal -->
+		<!-- Button trigger modal -->
+		<div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa Người Dùng</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="delete(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
+ <!-- Modal -->
+ <div class="modal fade " id="loadDiscount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Lô hàng: <span>{{temp.name}}</span></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="form-inline row">
+                <div class="form-group col-md-12 searchCon">
+            
+                    <input type="search" name="search" id="search" ng-model="searchCon" class="form-control" placeholder="Tìm kiếm theo tên" aria-describedby="helpId">
+                    
+                </div>
+            </form>
+            <ul class="row p-2 modal-contents" id="modalContent">
+               
+                <li  ng-repeat="item in consignments | filter: searchCon" class="col-md-4 modal-consignment " ng-click="selectConsignment(item)">
+                    <div class="text">
+                        <h5>Lô hàng: {{item.name}}</h5>
+                        <span>Giá bán: {{item.selling_price}}</span>
+                        <span>Ngày Nhập: {{item.expiry_time | date :'dd/MM/yyyy'}}</span>
+                        <span>Số Lượng: {{item.currentQuantity}}</span>
+                    </div>
+                   
+                </li>
+              
+               
+            </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Xác nhận</button>
+          <!-- <button type="button" class="btn btn-primary" >Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>

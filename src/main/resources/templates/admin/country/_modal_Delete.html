@@ -1,0 +1,48 @@
+<!-- Modal -->
+		<!-- Button trigger modal -->
+		<div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa thông tin tỉnh thành</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="delete(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="deleteItemState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa thông tin quận huyện</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="deleteState(clickedItemState)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>

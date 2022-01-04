@@ -1,0 +1,113 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới vận chuyển</h5>
+
+                <button id="_list">Danh sách đơn hàng vận chuyển</button>
+            </div>
+            <form method="POST" name="ordertrackForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <div class="form-group">
+                                <label for="productId">ID</label>
+                                <input  readonly type="text" ng-value="form.id" value="Tự động nhập" class="form-control" name="productId"
+                                    id="productId" aria-describedby="helpId" placeholder="">
+                                <small id="helpId" class="form-text text-muted">Help
+                                    text</small>
+                            </div> -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Mã Đơn Hàng</label>
+                                    <select class="form-control" ng-model="form.order.id" name="order" id="order"
+                                       required>
+                                        <option value="" disabled selected>--Chọn đơn hàng--</option>
+                                        <option ng-repeat="country in countries" ng-value="country.id"
+                                          >{{country.name}}</option>
+                                    </select>
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="ordertrackForm.order.$invalid"
+                                            class="form-text text-muted">Vui lòng chọn đơn hàng</small>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ml-3"> <label for="">Tiêu Đề</label>
+                                <div class="input-group mb-3">
+
+                                    <input type="text" class="form-control" name="title" id="title"
+                                        aria-describedby="helpId" required
+                                        ng-model="form.title" placeholder="--Tiêu Đề--" >
+                                    
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="ordertrackForm.title.$invalid"
+                                            class="form-text text-muted">Vui lòng nhập tiêu đề</small>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                           
+                    
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group ml-3"> <label for="">Ngày tạo</label>
+                                <div class="input-group mb-3">
+
+                                    <input type="date" class="form-control" name="created_time" id="created_time"
+                                      required aria-describedby="helpId"
+                                        ng-model="form.created_time" >
+                                  
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="ordertrackForm.created_time.$invalid"
+                                            class="form-text text-muted">Vui lòng không để trống</small>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ml-3"> <label for="">Ngày cập nhật</label>
+                                <div class="input-group mb-3">
+
+                                    <input type="date" class="form-control" name="updated_time" id="updated_time"
+                                       required aria-describedby="helpId"
+                                        ng-model="form.updated_time" >
+                                  
+                                    <div class="validateMessage">
+                                        <small id="helpId" ng-show="ordertrackForm.updated_time.$invalid"
+                                            class="form-text text-muted">Vui lòng không để trống</small>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group ml-12"> <label for="">Mô tả</label>
+                                <div class="input-group mb-12">
+
+                                    <textarea class="form-control" name="description" id="description" rows="4" cols="50"
+                                      required aria-describedby="helpId"
+                                        ng-model="form.description" ></textarea>
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-show="!isShow" ng-disabled="ordertrackForm.$invalid"
+                        ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success" ng-click="reset()">Làm mới</button>
+                    <deleten type="button" class="btn btn-danger" ng-show="isShow" ng-click="delete(form)">Xóa</deleten>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

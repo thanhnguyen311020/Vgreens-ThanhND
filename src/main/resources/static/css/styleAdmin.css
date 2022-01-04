@@ -1,0 +1,343 @@
+:root {
+    /* --main-bg-color: #28a745; */
+    --main-bg-color: #fff;
+    --main-text-color: #192a56;
+    /* --second-text-color: #bbbec5; */
+    --second-text-color: #6c757d;
+    --second-bg-color: #c1efde;
+  }
+  
+  .primary-text {
+    color: var(--main-text-color);
+  }
+  
+  .second-text {
+    color: var(--second-text-color);
+  }
+  
+  .primary-bg {
+    background-color: var(--main-bg-color);
+   
+  }
+  
+  .home{
+    color: var(--main-text-color);
+    text-decoration: none;
+   
+  }
+  .home:hover{
+    color: var(--main-text-color);
+    text-decoration: none;
+  }
+  
+  .secondary-bg {
+    background-color: var(--main-bg-color);
+  }
+  
+  .rounded{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: .5rem !important;
+  }
+  
+  .rounded-full {
+    border-radius: 100%;
+  }
+  
+  ._siderbar{
+    background: var(--main-bg-color);
+  }
+  
+  #wrapper {
+    overflow-x: hidden;
+    background-image: linear-gradient(
+      to right,
+      #baf3d7,
+      #c2f5de,
+      #cbf7e4,
+      #d4f8ea,
+      #ddfaef
+    );
+  }
+  
+  .navbar{
+    background: #fff;
+    height: auto;
+    padding: 1.5rem 1.5rem;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px; */
+  }
+  
+  #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin 0.25s ease-out;
+    -moz-transition: margin 0.25s ease-out;
+    -o-transition: margin 0.25s ease-out;
+    transition: margin 0.25s ease-out;
+    border-right: .1rem solid #ececec;
+  }
+  
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 15rem;
+  }
+  
+  #page-content-wrapper {
+    min-width: 100vw;
+    background-color:#ffffff;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+  
+  #menu-toggle {
+    cursor: pointer;
+    color:#28a745;  
+  }
+  
+  .list-group-item {
+    border: none;
+    font-weight: 500 !important;
+    padding: .7rem 2rem;
+    cursor: pointer;
+    
+  }
+  
+  .list-group-item.active {
+    background-color: transparent;
+    color: var(--main-text-color);
+    font-weight: bold !important;
+    border: none;
+  }
+  .links:hover{
+    color: #28a745;
+  }
+  
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+  
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: -15rem;
+    }
+  }
+
+
+  .dropdown-container {
+    display: none;
+    padding: 0rem 2rem .7rem 3rem;
+  }
+  .dropdown-container>a{
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    color: #6c757d;
+    font-size: 1rem;
+    padding: .5rem 0;
+  }
+
+  .dropdown-container>a:hover{
+    color:#28a745;
+  }
+  
+  /* Optional: Style the caret down icon */
+  /* .fa-caret-down {
+    float: right;
+    padding-right: 8px;
+  }
+  
+  /* Some media queries for responsiveness */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  } 
+  .container-fluid{
+    margin: 0!important;
+    padding-left: var(--bs-gutter-x,.0);
+    padding-right: var(--bs-gutter-x,.0);
+    
+  }
+
+
+.tab_container{
+    margin: 0!important;
+    --bs-gutter-y: 0 !important;
+    --bs-gutter-x: 0;
+    
+  }
+
+
+  .tab_container{
+    margin: 0;
+  }
+
+  .table_admin{
+    width: 100%;
+
+    padding: 1rem;
+   
+  }
+
+  table tr .td{
+    background-color: #28a745;
+    display: block;
+  }
+
+.table_admin th{
+  font-size: .8rem;
+  padding: .5rem 0;
+  border-bottom: .1rem solid #ececec;
+  margin-bottom: 2rem !important;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #6c757d
+}
+
+.table_admin td:first-child
+,.table_admin th:first-child{
+  text-align: center;
+  
+}
+
+.table_admin td{
+  border-bottom: .1rem solid #ececec;
+  background-color: #fff;
+  cursor: pointer;
+  color:#4b4f53;
+ 
+}
+
+.table_admin img{
+  max-height: 3rem;
+  border-radius: 50%;
+}
+
+
+.table_admin ._control_edit,
+.table_admin ._control_delete{
+  text-decoration: none;
+  font-size: .7rem;
+  padding: .2rem .5rem;
+  border-radius: 1rem;
+  color: #fff;
+}
+
+.table_admin ._control_edit{
+  background-color: #192a56;
+
+}
+.table_admin ._control_delete{
+  background-color: red;
+
+}
+
+.tab_container .control_tab{
+  display: flex;
+  background-color: #fff;
+  border: none !important;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  display: none;
+}
+.tab_container .control_tab li{
+  margin: 0 .5rem;
+}
+
+.tab_container .control_tab li a{
+  border: none !important;
+  background-color: #fff;
+  color:#192a56;
+  font-weight: bold ;
+  background-color: #6c757d;
+}
+
+.card{
+  border: none !important;
+}
+
+.card-body{
+  background-color: #ffffff;
+}
+
+/* tab header */
+.header_tab_list, .card-header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F0FFF0;
+  padding: 1rem 1rem;
+}
+
+.header_tab_list ._sort,
+.header_tab_list ._fillter{
+  display: flex;
+  align-items: center;
+gap: .5rem;
+}
+
+.header_tab_list ._sort h3,
+.header_tab_list h3{
+  font-size: 2rem;
+  color:#192a56;
+  font-weight: 700;
+  
+}
+
+.header_tab_list ._sort span{
+  color:#eee;
+  font-size: .7rem;
+  margin-right: 1rem;
+  font-weight: 500;
+  background-color: #28a745;
+  border-radius: 2rem;
+  padding: 0 .5rem;
+
+}
+.header_tab_list ._sort label{
+  color:var(--second-text-color);
+
+  font-weight: 500;
+}
+
+
+
+.header_tab_list ._sort select{
+  border: none !important;
+  background-color: #F0FFF0 !important;
+  padding-left: 0;
+  padding-right: 0;
+  font-weight: 600;
+}
+
+.header_tab_list ._sort select:focus{
+  outline: none;
+  box-shadow: none;
+}
+
+.list_body{
+  padding: 1rem!important;
+  background-color: #fff;
+}
+
+
+.navigation_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+  
+  

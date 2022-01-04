@@ -1,0 +1,159 @@
+/* Font Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    /* --main: rgb(134, 186, 9); */
+    --main: #28a745;
+    --black: #192a56;
+    /* --black: #3f3e3e; */
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    --danger: #F32013;
+
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    /* text-transform: capitalize; */
+    transition: all .2s linear;
+
+}
+
+.forgot-pass-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+   
+}
+.forgot-pass-container>a{
+    top: 5%;
+    left: 5%;
+    width: 5%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.forgot-pass-container>a img{
+    z-index: 1;
+    width: 100%;
+    cursor: pointer;
+    
+}
+
+.fogot-pass-box {
+    position: relative;
+    max-width: 1200px;
+    height: 100vh;
+    margin: auto;
+}
+
+.fogot-pass-box .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    transform: translate(-50%, -50%);
+    border-top: .3rem solid #28a745;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    padding: 1rem 1.5rem;
+}
+
+
+
+.fogot-pass-box .box>a:first-child {
+    font-size: 2rem;
+    padding: 1rem;
+    color: var(--black);
+    font-weight: 700;
+}
+
+.fogot-pass-box .box>a:last-child {
+    display: block;
+    width: 100%;
+    text-align: right;
+    font-size: .9rem;
+    color: #28a745;
+}
+
+.fogot-pass-box .box>a:hover {
+    color: #192a56;
+}
+
+.fogot-pass-box .box>p {
+    font-size: 1rem;
+    text-transform: none;
+    color: var(--light-color);
+}
+
+.fogot-pass-box .box small {
+    display: inline-block;
+    line-height: 1.5;
+    font-size: .9rem;
+    color: #333;
+    text-transform: none;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.fogot-pass-box .box input {
+    width: 100%;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border: .1rem solid var(--main);
+    text-transform: none;
+    margin-top: 1rem;
+}
+
+.fogot-pass-box .box .form .notRemember {
+    padding: 2rem 0;
+    font-size: .9rem;
+    text-transform: none;
+}
+
+.fogot-pass-box .box .form .notRemember a {
+    color: var(--main);
+    text-transform: none;
+}
+
+.fogot-pass-box .box button {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #28a745;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+#reset {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #28a745;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.fogot-pass-box .box button:hover {
+    background-color: #192a56;
+}
+
+
+@media(max-width: 900px) {
+    html {
+        font-size: 60%;
+    }
+}

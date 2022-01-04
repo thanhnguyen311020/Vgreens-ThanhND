@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Account</title>
+
+<body>
+
+    <main>
+
+
+
+        <div class="titlePage">
+            <h1>Trang cá nhân</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">trang cá nhân</a>
+            </div>
+        </div>
+
+
+
+        <section class="account">
+
+            <div class="account-container">
+
+                <a th:href="@{/vgreens/account/profile}" class="box">
+                    <i class="fas fa-user-lock"></i>
+                    <h1>Thông tin tài khoản</h1>
+                    <span>Chỉnh sửa thông tin cá nhân</span>
+                </a>
+                <a th:href="@{/vgreens/account/address}" class="box">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h1>Địa chỉ của bạn</h1>
+                    <span>Chỉnh sửa địa chỉ của bạn</span>
+                </a>
+                <a th:href="@{/vgreens/account/orders}" class="box">
+                    <i class="fas fa-cart-arrow-down"></i>
+                    <h1>Đơn hàng của bạn</h1>
+                    <span>Kiểm tra tình trạng các đơn hàng</span>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

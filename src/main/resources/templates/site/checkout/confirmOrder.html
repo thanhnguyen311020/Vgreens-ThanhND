@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>VGreesn | Xác nhận đặt hàng</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon" />
+    <!-- Bootstrap CSS -->
+    <!-- boostrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+        integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <link rel="stylesheet" href="/css/siteStyle/confirmorder.css">
+    <!-- Loader css -->
+    <link rel="stylesheet" href="/css/siteStyle/loaders.css">
+
+</head>
+
+<body ng-app="vgreens-site-app">
+    <div class=" container-fluid my-5 " ng-controller="confirm-info-order">
+        <div class="row justify-content-center ">
+            <div class="col-xl-10">
+                <div class="card shadow-lg ">
+                    <div class="row p-2 mt-3 justify-content-between mx-sm-2">
+                        <div class="col">
+                            <p class="text-muted space mb-0 shop"> VGreens</p>
+                            <p class="text-muted space mb-0 shop">Store Locator</p>
+                        </div>
+                        <div class="col">
+                            <div class="row justify-content-start ">
+                                <div class="col"> <img class="irc_mi img-fluid cursor-pointer " src="/images/icon.png"
+                                        width="70" height="70"> </div>
+                            </div>
+                        </div>
+                        <div class="col-auto"> <img class="irc_mi img-fluid bell" src="https://i.imgur.com/uSHMClk.jpg"
+                                width="30" height="30"> </div>
+                    </div>
+                    <div class="row mx-auto justify-content-center text-center">
+                        <div class="col-12 mt-3 ">
+                            <nav aria-label="breadcrumb" class="second ">
+                                <ol class="breadcrumb indigo lighten-6 first ">
+                                    <li class="breadcrumb-item font-weight-bold "><a class="black-text text-uppercase "
+                                            href="/vgreens/shop"><span class="mr-md-3 mr-1">QUAY LẠI SHOP</span></a><i
+                                            class="fa fa-angle-double-right " aria-hidden="true"></i></li>
+                                    <li class="breadcrumb-item font-weight-bold"><a class="black-text text-uppercase"
+                                            href="/vgreens/cart/checkout"><span class="mr-md-3 mr-1">GIỎ
+                                                HÀNG</span></a><i class="fa fa-angle-double-right text-uppercase "
+                                            aria-hidden="true"></i>
+                                    </li>
+                                    <li class="breadcrumb-item font-weight-bold"><a
+                                            class="black-text text-uppercase active-2" href="#"><span
+                                                class="mr-md-3 mr-1">XÁC NHẬN ĐƠN HÀNG</span></a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col-md-5">
+                            <div class="card border-0">
+                                <div class="card-header pb-0">
+                                    <h2 class="card-title space ">Xác nhận đơn hàng</h2>
+                                    <p class="card-text text-muted mt-4 space">CHI TIẾT VẬN CHUYỂN</p>
+                                    <hr class="my-0">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto mt-0">
+                                            <p><b>
+                                                    <div class="deliver" id="deliverDays" name="deliverDate">Ngày giao
+                                                        hàng dự kiến: {{deliverDate| date:'EEE, dd-MM-yyyy'}}.</div>
+                                                </b></p>
+
+                                            <p><b>
+                                                    <div class="deliver" id="deliverDays" name="deliverDays">Số ngày vận
+                                                        chuyển: {{deliverDays}}.</div>
+                                                </b></p>
+                                            <p><b>Thông tin liên lạc: {{confirmOrderInfoSession.last_name}}
+                                                    {{confirmOrderInfoSession.first_name}} </b>,
+                                                <b>{{confirmOrderInfoSession.phone_number}}.</b></p>
+                                            <p><b>Địa chỉ: {{confirmOrderInfoSession.address_line}},
+                                                    {{confirmOrderInfoSession.state}},
+                                                    {{confirmOrderInfoSession.country.name}}.</b></p>
+                                            <p><b>Mã bưu điện: {{confirmOrderInfoSession.postal_code}}.</b></p>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <p><b>Email: {{confirmOrderInfoSession.email}}</b> </p>
+                                            <p><b>Ghi chú: {{confirmOrderInfoSession.description}}</b> </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            <p class="text-muted mb-2">CHI TIẾT THANH TOÁN</p>
+                                            <hr class="mt-0">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-md-5">
+                                        <div class="col"> <button type="button" name="" id=""
+                                                class="btn btn-lg btn-block " ng-click="order.purchase()">THANH TOÁN KHI
+                                                NHẬN HÀNG</button> </div>
+                                    </div>
+                                    <div class="row mb-md-5">
+                                        <div class="col">
+                                            <paypal-buttons props="paypal"></paypal-buttons>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row mb-md-5">
+                                        <div class="col"> <button type="button" name="" id=""
+                                                class="btn btn-lg btn-block ">THANH TOÁN VỚI MOMO</button> </div>
+                                    </div>
+                                    <div class="row mb-md-5">
+                                        <div class="col"> <button type="button" name="" id=""
+                                                class="btn btn-lg btn-block ">THANH TOÁN VỚI VN PAY</button> </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card border-0 ">
+                                <div class="card-header card-2">
+                                    <p class="card-text text-muted mt-md-4 mb-2 space">ĐƠN HÀNG CỦA BẠN <span
+                                            class=" small text-muted ml-2 cursor-pointer">CHỈNH SỬA GIỎ HÀNG</span> </p>
+                                    <hr class="my-2">
+                                </div>
+                                <div class="card-body pt-0">
+                                    <div class="" ng-repeat="item in cart.items">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto col-md-7">
+                                                <div class="media flex-column flex-sm-row"> <img class=" img-fluid"
+                                                        src="{{item.image}}" width="62" height="62">
+                                                    <div class="media-body my-auto">
+                                                        <div class="row ml-2">
+                                                            <div class="col-auto">
+                                                                <p class="mb-0"><b>{{item.name}}</b></p><small
+                                                                    class="text-muted">{{item.unit.name}}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" pl-0 flex-sm-col col-auto my-auto">
+                                                <p class="boxed">{{item.qty}}</p>
+                                            </div>
+                                            <div class=" pl-0 flex-sm-col col-auto my-auto">
+                                                <p ng-if="item.discount!=null">
+                                                    <b>{{item.qty*item.consignment.selling_price-item.qty*item.consignment.selling_price*item.discount.percent_discount/100 | number }}.đ</b>
+                                                </p>
+                                                <p ng-if="item.discount==null">
+                                                    <b>{{item.qty*item.consignment.selling_price | number }}.đ</b></p>
+                                            </div>
+                                        </div>
+                                        <hr class="my-2">
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <p class="mb-1"><b>Thành Tiền</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>{{total |number}}.đ</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col">
+                                                    <p class="mb-1"><b>Giảm Giá</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>{{Coupon.coupon_percent}} %</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col">
+                                                    <p class="mb-1"><b>Phí Giao Hàng</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>{{shipping| number}}.đ</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <p><b>Tổng Cộng</b></p>
+                                                </div>
+                                                <div class="flex-sm-col col-auto">
+                                                    <p class="mb-1"><b>{{TotalAll |number}}.đ</b></p>
+                                                </div>
+                                            </div>
+                                            <hr class="my-0">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-5 mt-4 ">
+                                        <div class="col-md-7 col-lg-6 mx-auto"><button type="button"
+                                                class="btn btn-block btn-outline-primary btn-lg">THÊM MÃ GIẢM
+                                                GIÁ</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader-container">
+        <span class="loader"></span>
+    </div>
+    <!-- Optional JavaScript -->
+    <script src="/js/toast-bs4/bootstrap-toaster.js"></script>
+    <script src="/js/admin/dirPagination.js"></script>
+    <!-- Loader js -->
+        <script src="/js/loaders.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous">
+    </script>
+
+    <!-- SDK paypal developer -->
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AU-ylVeFxcA_EbmX5p2kj0qcvDpTh7JMAeOUNWGhU4a5akHCvdsDDCUcjvQiCEeLpYGqaMFGd8D17ddl">
+    </script>
+    <!-- SDK paypal developer -->
+    <script src="/siteScript/app.js"></script>
+
+    <script src="/siteScript/shopping/confirm-infoOrder.js"></script>
+  
+
+   
+
+
+
+</body>
+
+</html>

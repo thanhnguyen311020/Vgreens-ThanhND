@@ -1,0 +1,200 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới lô hàng</h5>
+
+                <button id="_list">Danh sách lô hàng</button>
+            </div>
+
+            <form method="POST" name="consignmentForm" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <div class="form-group">
+                                <label for="id">Mã lô hàng</label>
+                                <input ng-disabled="true" ng-value="form.id" type="text" class="form-control"
+                                    aria-describedby="helpId" placeholder="" 
+                                  >
+                               
+                            </div> -->
+                            <div class="form-group">
+                                <label for="id">Tên lô hàng</label>
+                                <input ng-model="form.name" type="text" class="form-control" name="name" id="name"
+                                    aria-describedby="helpId" placeholder=""  minlength="1"  maxlength="100"
+                                   ng-required=true postive>
+                                    <small id="helpId" ng-show="consignmentForm.name.$error.required" class="form-text text-muted">Vui lòng nhập tên lô hàng</small>
+                                
+                                </div>
+
+                            <!-- <div class="form-group">
+                                <label for="product"> Sản phẩm</label>
+                                <select class="form-control" ng-model="form.product.id" id="products" name="products" required>
+                                  <option value="" selected>Sản phẩm</option>
+                                  <option ng-repeat="p in products" ng-value="p.id">{{p.name}}</option>
+                  
+                  
+                                </select>
+                             
+                                  <small class="error" ng-show="productForm.categories.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn loại sản phẩm</small>
+                             
+                              </div> -->
+
+                              <div class="form-group">
+                                <label for="product"> Nhà phân phối</label>
+                                <select class="form-control" ng-model="form.supplier.id" id="suppliers" name="suppliers" required>
+                                  <option value="" selected>Chọn nhà phân phối...</option>
+                                  <option ng-repeat="p in suppliers" ng-value="p.id">{{p.name}}</option>
+                  
+                  
+                                </select>
+                             
+                                  <small class="error form-text text-muted" ng-show="consignmentForm.suppliers.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn nhà phân phối</small>
+                             
+                              </div>
+
+                         
+
+
+
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Số lượng</span>
+                                </div>
+                                <input ng-model="form.numberOfInputs" type="number" class="form-control"
+                                    aria-label="Amount (to the nearest dollar)"  name="numberOfInputs" id="numberOfInputs" min="0"
+                                    ng-required=true>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                                <div class="validateMessage">
+                                    <small id="helpId" ng-show="consignmentForm.numberOfInputs.$error.required" class="form-text text-muted">Vui lòng nhập số lượng</small>
+                                    <small id="helpId" ng-show="consignmentForm.numberOfInputs.$error.min" class="form-text text-muted">Số lượng là số dương</small>
+                              
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Số lượng bán</span>
+                                </div>
+                                <input readonly ng-model="form.numberOfSales" name="numberOfSale" id="numberOfSale" type="number" class="form-control"
+                                    aria-label="Amount (to the nearest dollar)">
+                                
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Hàng trả về</span>
+                                </div>
+                                <input readonly ng-model="form.numberOfReturns" name="numberOfReturn" id="numberOfReturn" type="number" class="form-control" 
+                                    aria-label="Amount (to the nearest dollar)">
+                                
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Hàng hiện tại</span>
+                                </div>
+                                <input ng-disabled="!isShow"  type="number" id="currentQuantity" name="currentQuantity" class="form-control" required min="0"
+                                    aria-label="Amount (to the nearest dollar)">
+                                <!-- <div class="input-group-append">
+                                    <span class="input-group-text">.00</span> ng-model="form.currentQuantity"
+                                </div> -->
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Giá nhập</span>
+                                </div>
+                                <input ng-model="form.purchase_price" type="number" class="form-control"
+                                    aria-label="Amount (to the nearest dollar)" id="purchase_price" name="purchase_price"  min="0"
+                                    ng-required=true positive>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+                                <div class="validateMessage">
+                                    <small id="helpId" ng-show="consignmentForm.purchase_price.$error.required" class="form-text text-muted">Vui lòng nhập giá thu mua</small>
+                                    <small id="helpId" ng-show="!consignmentForm.purchase_price.$error.required && consignmentForm.purchase_price.$error.min" class="form-text text-muted">Giá nhập phải là số dương</small>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Giá bán</span>
+                                </div>
+                                <input ng-model="form.selling_price" type="number" class="form-control"
+                                    aria-label="Amount (to the nearest dollar)" id="selling_price" name="selling_price" min="0"
+                                    ng-required=true positive>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+                                <div class="validateMessage">
+                                    <small id="helpId" ng-show="consignmentForm.selling_price.$error.required" class="form-text text-muted">Vui lòng nhập giá bán</small>
+                                    <small id="helpId" ng-show="!consignmentForm.selling_price.$error.required && consignmentForm.selling_price.$error.min"
+                                     class="form-text text-muted">Giá bán phải là số dương</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="created_time">Ngày nhập</label>
+                                <input readonly type="datetime-local" class="form-control" ng-model="form.created_time" name="created_time"
+                                    id="created_time" aria-describedby="helpId" placeholder="" 
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="consignmentForm.created_time.$error.required" class="form-text text-muted">Vui chọn ngày nhập hàng</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updated_time">Ngày cập nhập</label>
+                                <input readonly type="datetime-local" class="form-control" ng-model="form.updated_time" name="updated_time"
+                                    id="updated_time" aria-describedby="helpId" placeholder="">
+         
+                            </div>
+
+                            <div class="form-group">
+                                <label for="expory_date">Hạn sử dụng</label>
+                                <input type="date" class="form-control" ng-model="form.expiry_time" name="expory_date" ng-change="chooseDate()"
+                                    id="expory_date" aria-describedby="helpId" placeholder="" ng-required=true>
+                                    <small id="helpId" ng-show="consignmentForm.expory_date.$error.required" class="form-text text-muted">Vui chọn ngày hết hạn</small>
+                            </div>
+
+                            <label for="">Trạng thái</label>
+                            <span style="color: red;">*</span>
+                            <div class="card">
+
+                                <div class="form-check form-check-inline">
+                                    <input ng-model="form.status" name="status" class="form-check-input" type="radio" ng-value="true">
+                                    <label class="form-check-label" for="inlineRadio1">Có</label>
+                                    <input ng-model="form.status" name="status" class="form-check-input ml-5" type="radio"
+                                        ng-value="false">
+                                    <label class="form-check-label" for="inlineRadio2">Không</label>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" id="btnDelete" ng-disabled="consignmentForm.$invalid" disabled ng-show="!isShow" ng-click="create()">Thêm
+                        mới</button>
+                    <button type="button" class="btn btn-warning" id="btnUpdate" ng-disabled="consignmentForm.$invalid" ng-show="isShow" disabled ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success" ng-click="reset()">Làm mới</button>
+                    <button th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</button>
+
+                </div>
+        </div>
+
+        </form>
+
+    </div>
+</div>

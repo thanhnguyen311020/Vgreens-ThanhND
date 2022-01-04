@@ -1,0 +1,259 @@
+<nav ng-controller="navbar-ctrl">
+    <div class="sidebar-top">
+        <span class="shrink-btn">
+            <i class='bx bx-chevron-left'></i>
+        </span>
+        <img src="/images/icon.png" class="logo" alt="">
+        <h3 class="hide"><a href="/vgreens/index">V<span>greens</span></a></h3>
+    </div>
+
+    <div class="search">
+        <i class='bx bx-search'></i>
+        <input type="text" class="hide" placeholder="Tìm kiếm nhanh ...">
+    </div>
+
+    <div class="sidebar-links">
+        <ul>
+            <!-- <div class="active-tab"></div> -->
+            <li class="tooltip-element" data-tooltip="0">
+                <a href="/vgreens/admin/dashboard" id="dashboard" data-active="0">
+                    <!--class="active"-->
+                    <div class="icon">
+                        <i class='bx bxs-bar-chart-alt-2'></i>
+
+                        <i class='bx bx-bar-chart-alt-2'></i>
+                    </div>
+                    <span class="link hide">Trang chủ</span>
+                    <!-- <span ng-show="productCount != null && productCount != 0"  class="countProduct">{{productCount}}</span> -->
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="1">
+                <a href="/vgreens/admin/order-management" id="order" data-active="1">
+                    <div class="icon">
+                        <i class='bx bxs-cart-download'></i>
+                        <i class='bx bx-cart-alt'></i>
+                    </div>
+                    <span class="link hide">Đơn hàng</span>
+                </a>
+            </li>
+            <li  th:if="${#request.isUserInRole('DIRE')} OR ${#request.isUserInRole('ADMIN')} OR ${#request.isUserInRole('SHIP')}">
+                <a href="/vgreens/admin/ordertrack-management" id="orderTrack">
+                    <div class="icon">
+                        <i class="fas fa-shipping-fast"></i>
+                        <i class="fas fa-truck"></i>
+                    
+                    </div>
+                    <span class="link hide">Quản lý vận chuyển</span>
+                </a>
+            </li>
+            <li class="tooltip-element">
+                <a data-toggle="collapse" aria-expanded="false" id="product" class="dropdown-toggle"
+                    href="#productSubMenu" data-active="2">
+                    <div class="icon">
+                        <i class='bx bx-list-minus'></i>
+                        <i class='bx bx-list-ol'></i>
+                    </div>
+                    <span class="link hide">Quản lý sản phẩm</span>
+                </a>
+
+                <ul class="collapse list-unstyled dropSidebarMenu" id="productSubMenu">
+                    <li data-tooltip="2">
+                        <a href="/vgreens/admin/product-management">
+                            <div class="icon">
+                                <i class='bx bxl-product-hunt'></i>
+                                <i class='bx bxl-product-hunt'></i>
+                            </div>
+                            <span class="link hide">Sản Phẩm</span>
+                        </a>
+                    </li>
+                    <li data-tooltip="3">
+                        <a href="/vgreens/admin/consignment-management">
+                            <div class="icon">
+                                <i class='bx bx-box'></i>
+                                <i class='bx bxs-box'></i>
+                            </div>
+                            <span class="link hide">Quản lý lô hàng</span>
+                        </a>
+                    </li>
+                    <li data-tooltip="4">
+                        <a href="/vgreens/admin/category-management">
+                            <div class="icon">
+                                <i class='bx bx-message-square-detail'></i>
+                                <i class='bx bxs-message-square-detail'></i>
+                            </div>
+                            <span class="link hide">Loại hàng</span>
+                        </a>
+                    </li>
+                    <li data-tooltip="5">
+                        <a href="/vgreens/admin/discount-management">
+                            <div class="icon">
+                                <i class='bx bxs-discount'></i>
+                                <i class='bx bxs-discount'></i>
+                            </div>
+                            <span class="link hide">Quản lý khuyến mãi</span>
+                        </a>
+                    </li>
+                    <li data-tooltip="6" >
+                        <a href="/vgreens/admin/product-review">
+                            <div class="icon">
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="link hide">Đánh giá từ khách hàng</span>
+                        </a>
+                    </li>
+                    <li data-tooltip="6" th:if="${#request.isUserInRole('DIRE')} OR ${#request.isUserInRole('ADMIN')}" >
+                        <a href="/vgreens/admin/coupon-management">
+                            <div class="icon">
+                                <i class='bx bxs-discount'></i>
+                                <i class='bx bxs-discount'></i>
+                            </div>
+                            <span class="link hide">Quản lý mã giảm giá</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="tooltip-element" data-tooltip="6">
+                <a href="/vgreens/admin/account-management" id="account" data-active="3">
+                    <div class="icon">
+                        <i class='bx bxs-user-account'></i>
+                        <i class='bx bxs-user-account'></i>
+                    </div>
+                    <span class="link hide">Người Dùng</span>
+                </a>
+            </li>
+            <div class="tooltip">
+                <span class="show">Dashboard</span>
+                <span>Đơn Hàng</span>
+                <span>Sản Phẩm</span>
+                <span>Lô hàng</span>
+                <span>Loại hàng</span>
+                <span>Khuyến mãi</span>
+                <span>Người dùng</span>
+
+            </div>
+        </ul>
+
+        <h4 class="hide">Chức năng khác</h4>
+
+        <ul>
+            <li class="tooltip-element" data-tooltip="0">
+                <a data-toggle="collapse" aria-expanded="false" id="supplier" class="dropdown-toggle" href="#SubMenu"
+                    data-active="4">
+                    <div class="icon">
+                        <i class='bx bx-notepad'></i>
+                        <i class='bx bxs-notepad'></i>
+                    </div>
+                    <span class="link hide">Đối tác</span>
+                </a>
+                <ul class="collapse list-unstyled dropSidebarMenu" id="SubMenu">
+                    <li th:if="${#request.isUserInRole('DIRE')} OR ${#request.isUserInRole('ADMIN')}" >
+                        <a href="/vgreens/admin/supplier-management">
+                            <div class="icon">
+                                <i class='bx bxl-product-hunt'></i>
+                                <i class='bx bxl-product-hunt'></i>
+                            </div>
+                            <span class="link hide">Nhà phân phối</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vgreens/admin/post-management">
+                            <div class="icon">
+                                <i class="fab fa-adversal"></i>
+                                <i class="fab fa-adversal"></i>
+                            </div>
+                            <span class="link hide">Quảng cáo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vgreens/admin/advertisement-management">
+                            <div class="icon">
+                                <i class="fab fa-adversal"></i>
+                                <i class="fab fa-adversal"></i>
+                            </div>
+                            <span class="link hide">Giao Diện</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vgreens/admin/country-management">
+                            <div class="icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <span class="link hide">Quản lý quận huyện</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vgreens/admin/unit-management">
+                            <div class="icon">
+                                <i class='bx bx-box'></i>
+                                <i class='bx bxs-box'></i>
+                            </div>
+                            <span class="link hide">Quản lý đơn vị</span>
+                        </a>
+                    </li>
+                    <li th:if="${#request.isUserInRole('DIRE')} OR ${#request.isUserInRole('ADMIN')}" >
+                        <a href="/vgreens/admin/shippingrate-management">
+                            <div class="icon">
+                                <i class="fas fa-money-bill-alt"></i>
+                                <i class="fas fa-money-bill-alt"></i>
+                            </div>
+                            <span class="link hide">Quản lý giá cước vận chuyển</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li>
+            <li th:if="${#request.isUserInRole('DIRE')} OR ${#request.isUserInRole('ADMIN')}" class="tooltip-element" data-tooltip="1">
+                <a href="/vgreens/admin/authority-management" id="authority" data-active="5">
+                    <div class="icon">
+                        <i class='bx bx-shield'></i>
+                        <i class='bx bxs-lock'></i>
+                    </div>
+                    <span class="link hide" >Phân quyền</span>
+                </a>
+            </li>
+            <li class="tooltip-element mb-5" data-tooltip="1">
+                <a href="/vgreens/admin/help-management" data-active="5">
+                    <div class="icon">
+                        <i class='bx bx-help-circle'></i>
+                        <i class='bx bxs-help-circle'></i>
+                    </div>
+                    <span class="link hide">Trợ giúp</span>
+                </a>
+                <a href="#" data-active="5">
+                    <div class="icon">
+                        <i class='bx bx-cog'></i>
+                        <i class='bx bxs-cog'></i>
+                    </div>
+                    <span class="link hide">Cài đặt</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar-footer">
+        <a href="#" class="account tooltip-element" data-tooltip="0">
+            <i class='bx bx-user'></i>
+        </a>
+        <div class="admin-user tooltip-element" data-tooltip="1">
+            <div class="admin-profile hide">
+                <img src="/images/face-1.png" alt="">
+                <div class="admin-info">
+                    <h3 >[[${#request.remoteUser}]]</h3>
+                    <h5>[[${#request.userPrincipal.Authorities}]]</h5>
+                    <!-- <h5 th:text="${#authentication.getPrincipal()}"></h5> -->
+                    <!-- <div th:if="${#request.remoteUser}" class="_username">{{user.first_name}} {{user.last_name}}</div> -->
+                </div>
+            </div>
+            <a th:href="@{/vgreens/logoff}" class="log-out">
+                <i class='bx bx-log-out'></i>
+            </a>
+        </div>
+        <div class="tooltip">
+            <span class="show">John Doe</span>
+            <span>Logout</span>
+        </div>
+    </div>
+
+</nav>

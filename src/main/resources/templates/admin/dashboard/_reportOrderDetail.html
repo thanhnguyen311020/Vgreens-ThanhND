@@ -1,0 +1,100 @@
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div style="width: 20%;">
+                    <h5>Lịch sử giao dịch</h5>
+                </div>
+                <div style="width: 70%;" class="_date">
+                    <input type="datetime-local" name="" id="startDateOrderDetail"> <input
+                        type="datetime-local" name="" id="endDateOrderDetail">
+                    <button class="btn_filter" ng-click="getOrderDetails()">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button class="btn_filter" ng-disabled="orderDetails.length === 0"  ng-click="exportExcel()">
+                        <i class="far fa-file-excel"></i> Excel
+                    </button>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Mã đơn</thc>
+                            <th>Khách hàng</th>
+                            <th>Sản phẩm</th>
+                            <th>Ngày mua</th>
+                            <th>Số lượng</th>
+                            <th ng-click="sortBy('unit_price')">Giá tiền
+                                <i style="display: inline !important;" class="" ng-show="porp=='unit_price'"
+                                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                            </th>
+                            <th>Thành tiền</th>
+
+                            <!-- <th ng-click="sort('unit_price')">Họ và tên
+                                <i style="display: inline !important;" class="" ng-show="porp=='unit_price'"
+                                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                            </th> -->
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in orderDetails | filter : search | orderBy:porp:reverse| limitTo: pageSize : begin">
+                            <td scope="row" class="text-center"><a href="#">{{item.order.id}}</a></td>
+                            <td>{{item.order.account.first_name}} {{item.order.account.last_name}} </td>
+                            <td class="td-product">
+                                <img ng-if="item.product.image.startsWith('https')" src="{{item.product.image}}" alt="">
+                                <div class="product-info">
+                                    <div>
+                                        <a href="#">{{item.product.name}}</a>
+                                    </div>
+                                    <!-- <span>11027</span> -->
+                                </div></td>
+                            <td>{{item.order.createDate | date : 'HH:mm dd/MM'}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.unit_price}}.đ</td>
+                            <td>{{item.unit_price * item.quantity}}.đ</td>
+                        </tr>
+
+                        <tr ng-show="orderDetails.length === 0">
+                            <td colspan="7" class="text-center"> Không có dữ liệu</td>
+                        </tr>
+                     
+
+                    </tbody>
+                </table>
+                <p>
+                    <!-- <span>{{begin +1}}</span>of
+                    <span>{{pageCount}}</span>
+                </p>
+                <a class="btn btn-primary" ng-click="first()">First</a>
+                <a class="btn btn-primary" ng-click="prev()">Prev</a>
+                <a class="btn btn-primary" ng-click="next()">Netx</a>
+                <a class="btn btn-primary" ng-click="last()">Last</a> -->
+
+                <div class="pagination-container">
+                    <div ng-hide="pageSize >= orderDetails.length" class="pages-in">
+                        <span>Bạn đang ở trang</span></span> {{page +1}} - {{pageCount}}
+                    </div>
+                    <div class="pagination-control">
+                       
+                        <select ng-model="pageSize" ng-change="repaginate()" name="" id="" convert-to-number>
+                            <!-- <option value="" selected>1</option> -->
+                            <option value="10"  >10</option>
+                            <option value="20">20</option>
+                            <option value="50">30</option>
+                        </select>
+                        <button ng-disabled="page == 0" ng-hide="pageSize >= orderDetails.length" ng-click="prev()"><i class='bx bxs-left-arrow-alt' ></i></button>
+                        <button  ng-hide="pageSize >= orderDetails.length" ng-disabled="page+1 >= pageCount"  ng-click="next()"><i class='bx bxs-right-arrow-alt'></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <h4>Doanh số: <span>{{sumAmount | number:0}} .VND </span></h4> 
+                <h4>Doanh số từ Paypal: <span>{{sumAmountPaypal | number:0}} .VND </span></h4> 
+                
+            </div>
+        </div>
+    </div>
+</div>

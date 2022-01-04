@@ -1,0 +1,132 @@
+<div class="row mt-3">
+
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-header" style="display: flex; align-items: center;">
+				<h5 style="margin-bottom: 0px !important;">Doanh thu của sản phẩm</h5>
+			
+
+			</div>
+			<div class="card-body">
+				<div class="_date mb-3">
+			
+					<input type="month" name="" id="startDateConsiment">
+					<input type="month" name="" id="endDateConsiments">
+					<button class="btn_filter" ng-click="getConsignment()">
+						<i class="fas fa-chart-line"></i>
+					</button>
+					<button class="btn_filter" ng-click="exportExcelProduct()">
+						<i class="fas fa-chart-line"> Excel</i>
+					</button>
+				</div>
+				<table class="table_consignment">
+					<thead>
+						<tr>
+							<th class="text-center" style="min-width: 40px;" >Mã</th>
+							<th>Tên sản phẩm</th>
+							<th class="text-center">Số lượng bán</th>
+							<th class="text-right">Tổng doanh thu</th>
+							
+
+						</tr>
+					</thead>
+					<tbody> 
+						<tr dir-paginate="item in statisticProduct|itemsPerPage:pageSizes | orderBy : name">
+							<td class="text-center" scope="row">{{item.product.id}}</td>
+							<td class="td-product" ng-click="edit(item)">
+                                <img style="border-radius: 50%;" ng-show="{{!item.product.image.startsWith('https')}}" src="/images/no_image.png" alt="">
+                                <img style="border-radius: 50%;" ng-show="{{item.product.image.startsWith('https')}}" ng-src="{{item.product.image}}" alt="">
+                                <div class="product-info">
+                                    <div><a >{{item.product.name}}</a></div>
+                                    <!-- <span>11027</span> -->
+                                </div>
+                            </td>
+							<td class="text-center">{{item.countProduct}}</td>
+							<td class="text-right">{{item.sumUnitPrice | number}} đ</td>
+							<!-- <td>{{item.created_time | date:'dd-MM-yyyy'}}</td>
+							<td>{{item.purchase_price | number:0}}.đ</td>
+							<td>{{item.numberOfInputs * item.purchase_price | number:0}}.đ</td> -->
+						</tr>
+						<tr ng-show="statisticProduct.length === 0">
+                            <td colspan="7" class="text-center"> Không có dữ liệu</td>
+                        </tr>
+
+
+					</tbody>
+
+				</table>
+			</div>
+			<div class="card-header">
+              
+                <div class="pagination">
+                  <div class="form-group" style="display: flex; margin-bottom: 0px !important;">
+                    <label for="staticEmail" class="col-form-label">Hiển thị: </label>
+                    <div class="">
+                      <div>
+                        <select ng-model="pageSizes" ng-options="num for num in [10,20,50,100]"></select>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="page-box">
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links-numbers="true">
+                    </dir-pagination-controls>
+                  </div>
+                </div>
+              </div>
+		</div>
+	</div>
+
+	<div class="col-md-4 ">
+
+		<div class="card">
+			<div class="card-header header-product-consignment">
+				<h5>Hàng tồn kho</h5>
+				<select class="fas" name="" ng-model="porp" ng-change="sortBy(porp)" id="">
+					<option value="consignment.expiry_time" class="fas">Hạn sử dụng &#xf162; </option>
+					<option value="consignment.currentQuantity" class="fas">Số lượng &#xf162;</option>
+
+				</select>
+			</div>
+			<div class="card-body review-sidebar">
+				<ul>
+
+					<li
+						ng-repeat="item in products |  orderBy : porp |  limitTo: pageSizeProduct : beginQuantityProduct ">
+						<img src="{{item.image}}" alt="">
+						<div class="product-rate">
+							<h5>{{item.name}}</h5>
+							<h6>{{item.consignment.purchase_price}}.đ/{{item.unit.name}}</h6>
+							<h6 ng-style="{'color': (item.consignment.currentQuantity < 10) ? 'red' : '#666'}">
+								<span ng-style="{'color': (item.consignment.currentQuantity < 10) ? 'red' : '#666'}">Số
+									lượng:</span> {{item.consignment.currentQuantity}}
+							</h6>
+							<h6><span>Hạn sử dụng:</span> {{item.consignment.expiry_time | date:'dd/MM/yyyy' }}</h6>
+							<!-- <div class="p-{{item.product.id}}">
+                                                        <div class="stars-outer">
+                                                            <div class="stars-inner"></div>
+                                                        </div>
+                                                        <span class="number-rating"></span>
+                                                        <span>{{item.ratingCount | number:1}}/5</span>
+                                                    </div> -->
+						</div>
+
+					</li>
+
+
+
+				</ul>
+
+				<div class="showMore">
+					<a ng-show="pageSizeProduct < products.length" ng-click="showMore(5)" value="Xem thêm">Xem thêm</a>
+					<a ng-show="pageSizeProduct > 5" ng-click="showMore(-5)" value="Xem thêm">Thu nhỏ</a>
+				</div>
+			</div>
+			<!-- <div class="card-footer text-muted">
+				Footer
+			</div> -->
+		</div>
+
+	</div>
+
+</div>

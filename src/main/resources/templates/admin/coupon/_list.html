@@ -1,0 +1,177 @@
+<div class="row">
+  <div class="col-12 title-control">
+    <h3>Mã giảm giá</h3>
+    <button id="_form">Thêm Mới </button>
+  </div>
+</div>
+
+<div class="row ">
+
+  <div class="col-md-12">
+
+    <div class="control-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Tìm kiếm</th>
+            <!-- <th>Loại sản phẩm</th> -->
+            <!-- <th>Nhà cung cấp</th> -->
+            <!-- <th></th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="search" name="keyname" id="namec" ng-model="search" placeholder="Search...">
+              </div>
+            </td>
+            <!-- <td>
+                          <div class="form-group">
+
+                              <select class="form-control" name="" id="">
+                                  <option selected>All</option>
+                                  <option>Rau củ</option>
+                                  <option>Hoa quả</option>
+                                  <option>Các loại hạt</option>
+                              </select>
+                          </div>
+                      </td> -->
+            <!-- <td>
+                          <div class="form-group">
+
+                              <select class="form-control" 
+                          onchange="angular.element(this).scope().getBySup(this.options[this.selectedIndex].value)" required name="" id="">
+                                  <option selected disabled>All</option>
+                                  <option ng-repeat= "sup in suppliers" id="sup" ng-value="sup.id">{{sup.name}}</option>
+                              </select>
+                          </div>
+                      </td> -->
+            <!-- <td class="text-center">
+                          <button><i class="fas fa-search"></i> Tìm kiếm</button>
+                      </td> -->
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-md-12 mt-4  ">
+    <!-- <div class="form-group">
+          <div class="col-12 title-control">
+            <button
+              class="btn btn-danger"
+              ng-click="deleteAll()"
+              id="btnDelete"
+              disabled
+            >
+              <i class="far fa-trash-alt"></i>Xóa mục đã chọn
+            </button>
+          </div>
+        </div> -->
+
+    <div class="card">
+      <!-- <div class="card-header">
+        <h5>Thông tin mã giảm giá</h5>
+
+        <div class="pagination">
+      
+          <div class="form-group ml-5">
+            <label for="staticEmail" class=" col-form-label">Hiển thị: </label>
+            <div class="">
+              <select ng-model="pageSize" ng-options="num for num in [8, 16, 32,50]"></select>
+            </div>
+          </div>
+
+          <div class="page-box">
+            <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true">
+            </dir-pagination-controls>
+          </div>
+        </div>
+
+      </div> -->
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <!-- <th>
+                <input type="checkbox" ng-model="item.selected" ng-click="selectAll()" />
+              </th> -->
+              <th class="text-center">Mã</th>
+              <th class="text-center">Mã giảm giá</th>
+              <th  class="text-center" ng-click="sort('coupon_percent')">Giảm giá (%)
+                <i style="display: inline !important;" class="" ng-show="sortKey=='coupon_percent'"
+                  ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+              </th>
+              <th  class="text-center" ng-click="sort('created_time')">Ngày nhập
+                <i style="display: inline !important;" class="" ng-show="sortKey=='created_time'"
+                  ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+              </th>
+              <th  class="text-center" ng-click="sort('updated_time')">Ngày cập nhập
+                <i style="display: inline !important;" class="" ng-show="sortKey=='updated_time'"
+                  ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+              </th>
+              <th class="text-center">Ghi chú</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+              <!-- <td scope="row">
+                    <input type="checkbox" ng-model="item.checked" name="all" />
+                  </td> -->
+              <td class="text-center">{{$index}}</td>
+              <td class="text-center">
+                {{item.name | uppercase}}</a>
+              </td>
+              <td class="text-center" ng-click="edit(item)">{{item.coupon_percent}} &#37;</td>
+              <td class="text-center" ng-click="edit(item)">{{item.created_time | date:'HH:mm dd-MM-yyyy '}}</td>
+              <td class="text-center" ng-click="edit(item)">{{item.updated_time | date:'HH:mm dd-MM-yyyy '}}</td>
+              <td class="text-center" width="200" ng-click="edit(item)">{{item.note}}</td>
+              <td>
+                <div class="btn-group droplistbtn ">
+                  <a type="button" class="fas fa-cogs " data-toggle="dropdown">
+                    <!-- <span class="caret"></span> -->
+                    <!-- <span class="sr-only">Toggle Dropdown</span> -->
+                  </a>
+                  <ul class="dropdown-menu drop_menu" role="menu">
+                    <a ng-click="edit(item)"><i class="far fa-edit"></i>Cập nhập</a>
+                    <a th:if="${#request.isUserInRole('DIRE')}" ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i
+                        class="far fa-trash-alt"></i>Xóa</a>
+
+                  </ul>
+                </div>
+              </td>
+            </tr>
+
+            <tr ng-show="items.length === 0">
+              <td class="text-center" colspan="6">Không có dữ liệu</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-header">
+        <h5></h5>
+        <div class="pagination">
+          <div class="form-group ml-5">
+            <label for="staticEmail" class="col-form-label">Hiển thị: </label>
+            <div class="">
+              <div>
+                <select ng-model="pageSize" ng-options="num for num in [10,20,50,100]"></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-box">
+            <dir-pagination-controls max-size="5" direction-links="true" boundary-links-numbers="true">
+            </dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

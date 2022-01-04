@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Account</title>
+
+<body>
+    <main  >
+
+
+
+
+        <div class="titlePage">
+            <h1>Quản lý địa chỉ</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Trang cá nhân</a> - <a href="#">trang cá nhân</a>
+            </div>
+        </div>
+        <div class="">
+            <form th:action="@{/vgreens/account/address/save}" method="post" th:object="${address}">
+                <div class="container modal-body-address-form">
+                    
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{address_default}">
+                        <div class="form-group">
+                            <label for="first_name">Tên</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name"
+                                th:field="*{first_name}" aria-describedby="helpId" placeholder="Tên">
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Họ</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name"
+                                th:field="*{last_name}" aria-describedby="helpId" placeholder="Họ">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_number">Số điện thoại</label>
+                            <input type="text" class="form-control" name="phone_number" id="phone_number"
+                                th:field="*{phone_number}" aria-describedby="helpId" placeholder="012345678">
+                        </div>
+                        <div class="form-group">
+                            <label for="address_line">Địa chỉ</label>
+                            <input type="text" class="form-control" name="address_line" id="address_line"
+                                th:field="*{address_line}" aria-describedby="helpId" placeholder="Địa chỉ">
+    
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Quận/Huyện</label>
+                            <input type="text" class="form-control" name="state" id="state" th:field="*{state}"
+                                aria-describedby="helpId" placeholder="Quận/Huyện" list="listStates">
+    
+                            <datalist id="listStates"></datalist>
+    
+    
+                        </div>
+                        <div class="form-group mt-5">
+                            <label for="country">Tỉnh/Thành phố</label>
+    
+    
+                            <select class="custom-select custom-select-lg mb-3" name="country" id="country"
+                                th:field="*{country_id}">
+                                <option value="0">Chọn Tỉnh/Thành Phố</option>
+                                <th:block th:each="country : ${listcountries}">
+    
+                                    <option th:value="${country.id}">[[${country.name}]]</option>
+                                </th:block>
+    
+    
+                            </select>
+    
+                            <!-- <input type="text" class="form-control" name="password" id="password"
+                        
+                            aria-describedby="helpId" placeholder="Tỉnh/Thành phố"> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="postal_code">Mã bưu điện</label>
+                            <input type="text" class="form-control" name="postal_code" id="postal_code"
+                                th:field="*{postal_code}" aria-describedby="helpId" placeholder="Mã bưu điện">
+                        </div>
+    
+                  
+                </div>
+                <div class="text-center">
+                    <a th:href="@{/vgreens/account/address}"  class="btn btn-danger" data-dismiss="modal">Hủy</a>
+                    <button type="submit" class="btn btn-success">Lưu</button>
+                </div>
+            </form>
+
+        </div>
+        
+
+
+        
+
+
+
+
+      
+        <script>
+            contextPath = "[[@{/}]]";
+            var dropDownCountry;
+            var dataListState;
+            var fieldState;
+            $(document).ready(function () {
+                dropDownCountry = $("#country");
+                dataListState = $("#listStates");
+                fieldState = $("#state");
+
+                dropDownCountry.on("change", function () {
+                    loadStateForCountry();
+                    fieldState.val("").focus();
+                })
+            });
+
+            function loadStateForCountry() {
+                slectedCountry = $("#country option:selected");
+                countryId = slectedCountry.val();
+                url = contextPath + "states/list_state_by_country/" + countryId;
+
+                $.get(url, function (responseJSON) {
+                    dataListState.empty();
+
+                    $.each(responseJSON, function (index, state) {
+                        $("<option>").val(state.name).text(state.name).appendTo(dataListState);
+                    });
+                });
+            }
+        </script>
+       
+    </main>
+
+
+</body>
+
+</html>

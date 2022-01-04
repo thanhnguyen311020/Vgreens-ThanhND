@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index::dynamic(~{::title},~{::main})}">
+
+<head>
+	<title>VGreens - Discount Management</title>
+
+
+
+</head>
+
+<body>
+
+	<main ng-controller="authority-ctrl">
+		<input type="hidden" value="6" id="checkActive">
+		<!-- <header class="nav-main">
+			<h2>Dashboard > Quản lý khuyến mãi</h2>
+			<div class="admin_info">
+				<img src="../images/pic-1.png" alt=""> <a onclick="drop_menu_header()" class="dropbtn">ThanhND <i
+						class='bx bx-cog'></i></a>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#">Profile</a> <a href="#">Đăng xuất</a> <a href="#">Link
+						3</a>
+				</div>
+			</div>
+		</header> -->
+
+		<input type="hidden" value="6" id="checkActive">
+
+
+		<section class="box-container content-main">
+
+			<div class="row">
+				<div class="col-12 title-control">
+					<h3>Quản lý phân quyền</h3>
+					<button id="_form" data-toggle="modal" data-target="#addAuthority">Thêm Mới Nhân Viên</button>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-header">
+					<h5>Cấp quyền quản lý</h5>
+				</div>
+				<div class="card-body">
+					<table class="table-authority">
+
+						<tr style="text-align: center;">
+							<th class="text-left">Tên người dùng</th>
+							<th ng-repeat="role in roles">
+								{{role.name}}
+							</th>
+						</tr>
+
+						<tr ng-repeat="acc in admins">
+							<td scope="row">{{acc.username}}</td>
+							<!-- <td ng-repeat="role in roles">
+                            <input type="checkbox" ng-checked="authority_of(acc,role)" ng-click="authority_changed(acc,role)">
+                        </td> -->
+
+							<td class="switch-container" ng-repeat="role in roles">
+
+								<div class="switch-button">
+									<input type="checkbox" ng-checked="authority_of(acc,role)" class="toggle1"
+										id="rounded">
+									<label ng-click="authority_changed(acc,role)" data-checked="Enabled" class="rounded"
+										data-unchecked="Disabled"></label>
+								</div>
+
+							</td>
+
+						</tr>
+
+
+					</table>
+				</div>
+				<div class="card-footer text-muted">
+					Footer
+				</div>
+			</div>
+
+		</section>
+
+
+		<!-- Modal -->
+		<!-- Button trigger modal -->
+		<!-- <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa khuyến mãi</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="delete(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="addAuthority" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Thêm nhân viên</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="" method="post">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="">Chức vụ</label>
+											<select class="form-control" ng-model="form.role.id" name="" id="">
+												<option value="" selected>Chức vụ</option>
+												<option ng-repeat="item in roles" ng-value="item.id"
+													ng-selected="item.id == 'STAF'">{{item.name}}</option>
+											</select>
+								
+										</div>
+
+										<div class="form-group col-md-6">
+										  <label for="">Tài khoảng nhân viên</label>
+										  <input type="text"
+											class="form-control" name="username" id="username" aria-describedby="helpId" placeholder="">
+										</div>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="row">
+										
+										<div class="col-12">
+											
+											<div style="height: 200px !important;" class="table-wrapper-scroll-y my-custom-scrollbar">
+												<div class="form-group">
+													<label for="">Search</label>
+													<input type="text" name="search" ng-model="search" id="" class="form-control" placeholder=""
+														aria-describedby="helpId">
+												</div>
+												<table class="table table-bordered table-striped mb-0">
+													<thead>
+														<tr>
+															<th scope="col">#</th>
+															<th scope="col">Người dùng</th>
+															<th scope="col">Email</th>
+															<th scope="col">Điện thoại</th>
+															<th scope="col"></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="item in accounts | filter:search">
+															<th scope="row">{{$index + 1}}</th>
+															<td>{{item.username}}</td>
+															<td>{{item.email}}</td>
+															<td>{{item.phone_number}}</td>
+															<td ng-click="pushUsername(item.username)"><i class="fas fa-upload" ></i> Nạp</td>
+														</tr>
+
+													</tbody>
+												</table>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary" ng-click="addStaff()">Thêm nhân viên</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+
+</body>
+
+</html>

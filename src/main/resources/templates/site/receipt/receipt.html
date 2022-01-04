@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Vgreens | Hóa đơn</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <!-- Loader css -->
+    <link rel="stylesheet" href="/css/siteStyle/loaders.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+        body {
+            background-color: #97e1a0;
+            font-family: 'Montserrat', sans-serif
+        }
+
+        .card {
+            border: none
+        }
+
+        .logo {
+            background-color: white
+            
+        }
+
+        .totals tr td {
+            font-size: 13px
+        }
+
+        .footer {
+            background-color: white
+        }
+
+        .footer span {
+            font-size: 12px
+        }
+
+        .product-qty span {
+            font-size: 12px;
+            color: #9b0505
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="text-left logo p-2 px-5"> <img src="/images/icon.png" width="50"> </div>
+                    <div class="invoice p-5">
+                        <h5>Đơn Đặt Hàng Của Bạn Đã Được Xác Nhận!</h5> <span class="font-weight-bold d-block mt-4">
+                            Hello, [[${orderreceipt.first_name}]] [[${orderreceipt.last_name}]]</span> <span>Đơn hàng
+                            của bạn đã được xác nhận. Chúng tôi sẽ gửi hàng bạn sẽ nhận được hàng trong vòng
+                            [[${orderreceipt.deliver_days}]] ngày !</span>
+                        <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Ngày Đặt Hàng</span>
+                                                <span>[[${orderreceipt.createDate}]]</span> </div>
+                                        </td>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Mã Đơn Hàng</span>
+                                                <span>[[${orderreceipt.id}]]</span> </div>
+                                        </td>
+                                        <td>
+                                            <div th:if="${orderreceipt.payment_method}==COD" class="py-2"> <span
+                                                    class="d-block text-muted">Thanh Toán</span> <span><img
+                                                        src="https://img.icons8.com/color/48/000000/in-transit--v2.png"
+                                                        width="20" /> [[${orderreceipt.payment_method}]]</span> </div>
+                                            <!-- <div th:if="${orderreceipt.payment_method}==MasterCard" class="py-2"> <span class="d-block text-muted">Thanh Toán</span> <span><img src="https://img.icons8.com/color/48/000000/mastercard.png" width="20" />[[${orderreceipt.payment_method}]]</span> </div> -->
+                                            <div th:if="${orderreceipt.payment_method}==PAYPAL" class="py-2"> <span
+                                                    class="d-block text-muted">Thanh Toán</span> <span><img
+                                                        src="https://img.icons8.com/color/48/000000/paypal.png"
+                                                        width="20" />[[${orderreceipt.payment_method}]]</span> </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="py-2"> <span class="d-block text-muted">Địa Chỉ Giao Hàng</span>
+                                                <span>[[${orderreceipt.address_line}]], [[${orderreceipt.state}]],
+                                                    [[${orderreceipt.country}]]</span> </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="product border-bottom table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr th:each=" oddetail : ${oddetail}">
+                                        <td width="20%"> <img th:src="@{${oddetail.product.image}}"
+                                                width="70"> </td>
+                                        <td width="60%"> <span
+                                                class="font-weight-bold">[[${oddetail.product.name}]]</span>
+                                            <div class="product-qty"> <span class="d-block">Số Lượng:
+                                                    [[${oddetail.quantity}]]</span> <span>Đơn vị:
+                                                    [[${oddetail.product.unit.name}]]</span> </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text-right"> <span class="font-weight-bold">[[${#numbers.formatDecimal(oddetail.unit_price,0,'COMMA',0,'POINT')}]] .đ</span> </div>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td width="20%"> <img src="https://i.imgur.com/SmBOua9.jpg" width="70"> </td>
+                                        <td width="60%"> <span class="font-weight-bold">Men's Collar T-shirt</span>
+                                            <div class="product-qty"> <span class="d-block">Quantity:1</span> <span>Color:Orange</span> </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text-right"> <span class="font-weight-bold">$77.50</span> </div>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row d-flex justify-content-end">
+                            <div class="col-md-5">
+                                <table class="table table-borderless">
+                                    <tbody class="totals">
+                                        <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Thành Tiền</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span>[[${#numbers.formatDecimal(orderreceipt.sub_total,0,'COMMA',0,'POINT')}]] .đ</span> </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Phí Vận Chuyển</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span>[[${#numbers.formatDecimal(orderreceipt.shipping_cost,0,'COMMA',0,'POINT')}]] .đ</span> </div>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Tax Fee</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span>$7.65</span> </div>
+                                            </td>
+                                        </tr> -->
+                                        <tr>
+                                            <td>
+                                                <div class="text-left"> <span class="text-muted">Giảm Giá</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span class="text-success">[[${#numbers.formatDecimal(orderreceipt.discount,0,'COMMA',0,'POINT')}]] .đ</span> </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-top border-bottom">
+                                            <td>
+                                                <div class="text-left"> <span class="font-weight-bold">Tổng Thành Tiền</span> </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-right"> <span class="font-weight-bold">[[${#numbers.formatDecimal(orderreceipt.amount,0,'COMMA',0,'POINT')}]] .đ</span> </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p>Chúng tôi sẽ gửi hóa đơn đặt hàng thành công tới email của bạn!</p>
+                        <p class="font-weight-bold mb-0">Cảm ơn bạn đã mua sắm với chúng tôi!</p> <span>VGreens Market</span>
+                    </div>
+                    <div class="d-flex justify-content-between footer p-3"> <span>Cần Trợ Giúp? Quay về <a th:href="${'/vgreens/account/orders/findall'}"> Quản lý đơn hàng</a></span> <span>[[${#calendars.format(gettoday, 'EEE - dd-MM-yyyy')}]]</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader  -->
+    <div class="loader-container">
+        <span class="loader"></span>
+    </div>
+ <!-- Loader  -->
+     <!-- Loader js -->
+     <script src="/js/loaders.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="01446f84456ed525ca3096ab-text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

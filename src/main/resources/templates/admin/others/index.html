@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{/admin/index::dynamic(~{::title},~{::main})}"
+>
+  <head>
+    <title>VGreens - HELP</title>
+  </head>
+
+  <body>
+    <main>
+      <input type="hidden" value="2" id="checkActive" />
+      <section class="box-container content-main">
+        <div class="map-container row">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30673.338928026023!2d108.17258534237776!3d16.05680248045082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421907f4e404e3%3A0xdf90a41801904e48!2zVGhhbmggS2jDqiwgxJDDoCBO4bq1bmcsIFZp4buHdCBOYW0!5e0!3m2!1svi!2sus!4v1632631471278!5m2!1svi!2sus"
+            width="100%"
+            height="600"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="col box">
+          <div class="contact-info">
+            <span><i class="fas fa-home"></i></span>
+            <div class="info">
+              <h3>Số 137 Nguyễn Thị Thập, Thanh Khê, Đà Nẵng</h3>
+            </div>
+          </div>
+        </div>
+		<div class="page-content page-container" id="page-content">
+				<div class="row container d-flex justify-content-center">
+					<div class="col-md-6 grid-margin stretch-card">
+							<div class="card-body">
+								<div class="template-demo"> 
+									<a href="https://www.facebook.com/vgreens.fpolydn"><button type="button" class="btn btn-social-icon btn-facebook btn-rounded"><i class="fab fa-facebook"></i></button> </a>
+									<a href="https://www.youtube.com/channel/UCVpRvtAfKv7VdBd4ZNtFkBQ"><button type="button" class="btn btn-social-icon btn-youtube btn-rounded"><i class="fab fa-youtube"></i></button>  </a>
+									 <a href="#"><button type="button" class="btn btn-social-icon btn-instagram btn-rounded"><i class="fab fa-instagram"></i></button></a> 
+									 </div>
+							</div>
+					</div>
+				</div>
+		</div>
+      </section>
+    </main>
+  </body>
+</html>

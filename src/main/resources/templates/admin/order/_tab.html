@@ -1,0 +1,147 @@
+<div class="row">
+    <div class="col-12 title-control">
+        <h3>Đơn hàng <i class="fas fa-exclamation-circle"></i></h3>
+        <button id="">Tạo Mới Đơn Hàng</button>
+    </div>
+</div>
+
+<div class="row ">
+
+
+    <div class="col-md-12 ">
+
+
+        <div class="card card-order">
+            <div class="card-header header-tab-order">
+                <!-- <h5>Thông tin sản phẩm</h5>
+
+                                        <div class="pagination">
+                                            <div class="form-group">
+                                                <label for="staticEmail" class=" col-form-label">Show: </label>
+                                                <div class="">
+                                                    <select  ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="page-box">
+                                                <dir-pagination-controls 
+                                              max-size="5"
+                                              direction-links="true"
+                                              boundary-links="true" >
+                                          </dir-pagination-controls>
+                                            </div>
+                                        </div> -->
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="home-tab" ng-click="getOrderByStatus(0)" data-toggle="tab"
+                            href="#order-1" role="tab" aria-controls="home" aria-selected="true">Đơn hàng mới <span>{{ordernew}}</span></a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" ng-click="getOrderByStatus(1)"
+                            href="#order-2" role="tab" aria-controls="profile" aria-selected="false">Đã xác nhận</a>
+                    </li>
+                    <li th:if="${#request.isUserInRole('DIRE')} "  class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="getOrderByStatus(2)"
+                            href="#order-3" role="tab" aria-controls="contact" aria-selected="false">Đang lấy hàng</a>
+                    </li>
+                    <li th:if="${#request.isUserInRole('DIRE')} " class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="getOrderByStatus(3)"
+                            href="#order-4" role="tab" aria-controls="contact" aria-selected="false">Đang giao hàng</a>
+                    </li>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="getOrderByStatus(4)"
+                            href="#order-5" role="tab" aria-controls="contact" aria-selected="false">Giao thàng thành công</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="findAllOrderBetweenDate()"
+                            href="#order-all" role="tab" aria-controls="contact" aria-selected="false">Tất cả</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" ng-click="getOrderByStatus(5)"
+                            href="#order-0" role="tab" aria-controls="contact" aria-selected="false">Đơn hàng đã hủy</a>
+                    </li>
+                    
+
+
+
+                </ul>
+  
+
+            </div>
+            <div class="card-body">
+                <div class="search-container">
+                    <div style="width: 60%;" class="search-box">
+                        <i class='bx bx-search-alt-2' ></i>
+                        <input type="text" ng-model="search" id="search" placeholder="Tìm kiếm theo tên khách hàng, số điện thoại...">
+                    </div>
+                    <div class="sort-box">
+                        <button class="bnt_default dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                            <i class='bx bx-sort'></i> Trạng Thái</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item"
+                                ng-click="findAllOrderBetweenDate()"
+                                href="#">Tất cả</a>
+                                <a class="dropdown-item"
+                                ng-click="findAllOrderBetweenDateFillterStatus(0)"
+                                href="#">Chưa xác nhận</a>
+                                <a class="dropdown-item" 
+                                ng-click="findAllOrderBetweenDateFillterStatus(1)"
+                                href="#">Đã xác nhận</a>
+                                <a class="dropdown-item" 
+                                 ng-click="findAllOrderBetweenDateFillterStatus(2)"
+                                href="#">Đang lấy hàng</a>
+                                <a class="dropdown-item" 
+                                 ng-click="findAllOrderBetweenDateFillterStatus(3)"
+                                href="#">Đang giao hàng</a>
+                                <a class="dropdown-item" 
+                                 ng-click="findAllOrderBetweenDateFillterStatus(4)"
+                                href="#">Giao hàng thành công</a>
+                                <a class="dropdown-item" 
+                                 ng-click="findAllOrderBetweenDateFillterStatus(5)"
+                                href="#">Đơn hàng hủy</a>
+                              </div>
+                        <!-- <button class="bnt_default"><i class='bx bxs-file-export' ></i> PDF</button>
+                        <button class="bnt_default"><i class='bx bx-arrow-from-left'></i> Cập nhập</button> -->
+                    </div>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="order-1" role="tabpanel" aria-labelledby="home-tab">
+
+                        <th:block th:replace="/admin/order/_table"></th:block>
+
+                    </div>
+                    <div class="tab-pane fade" id="order-2" role="tabpanel" aria-labelledby="profile-tab">
+                        <th:block th:replace="/admin/order/_table"></th:block>
+                    </div>
+                    <div class="tab-pane fade" id="order-3" role="tabpanel" aria-labelledby="contact-tab">
+                        <th:block th:replace="/admin/order/_table"></th:block>
+                    </div>
+                    <div class="tab-pane fade" id="order-4" role="tabpanel" aria-labelledby="contact-tab">
+                        <th:block th:replace="/admin/order/_table"></th:block>
+                    </div>
+                    <div class="tab-pane fade" id="order-5" role="tabpanel" aria-labelledby="contact-tab">
+                        <th:block th:replace="/admin/order/_table"></th:block>
+                    </div>
+                    <div class="tab-pane fade" id="order-0" role="tabpanel" aria-labelledby="contact-tab">
+                        <th:block th:replace="/admin/order/_table"></th:block>
+                    </div>
+                    <div class="tab-pane fade" id="order-all" role="tabpanel" aria-labelledby="contact-tab">
+                        <th:block th:replace="/admin/order/_tableAllOrder"></th:block>
+                    </div>
+                </div>
+
+
+
+            </div>
+     
+        </div>
+
+    </div>
+
+</div>
+
+<th:block th:replace="/admin/order/_modal">
+
+</th:block>

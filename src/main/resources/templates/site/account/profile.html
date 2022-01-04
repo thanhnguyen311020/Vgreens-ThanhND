@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+<title>VGreens | Profile</title>
+
+<body>
+
+    <main ng-controller="profile-ctrl">
+        <div class="titlePage">
+            <h1>Thông tin cá nhân</h1>
+            <div class="link">
+                <a th:href="@{/vgreens/index}">Trang chủ</a> - <a href="#">Thông tin cá nhân</a>
+            </div>
+        </div>
+        <section class="_profile  bg-light">
+
+            <div class="row profile-container">
+                <div class="col-4 box-info ">
+                    <form multiple novalidate name="profileForm">
+                        <h1>{{user.username}}</h1>
+                        <label for="image" ng-if="!user.photo.startsWith('https')">
+                            <img ng-if="user.img == null" src="/images/pic-1.png" alt="">
+                            <img ng-if="user.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+
+                        </label>
+                        <label for="image" ng-if="user.photo.startsWith('https')">
+                            <img ng-if="user.img == null" ng-src="{{user.photo}}" alt="">
+                            <img ng-if="user.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+                        </label>
+                        <div class="form-group">
+                            <input type="file" onchange="angular.element(this).scope().imageChanged(this.files)"
+                                class="form-control-file" name="image" id="image"
+                                aria-describedby="inputGroupFileAddon01">
+                        </div>
+                        <div class="info">
+                            <span><i class="fas fa-user"></i>Tên đăng nhập :
+                                <span class="text-capitalize">{{user.username}}</span> </span>
+                            <span><i class="fas fa-envelope-square"></i>Email : {{user.email}}</span>
+                            <span><i class="far fa-calendar"></i>Ngày đăng ký :
+                                {{user.register_date| date: "yyyy-MM-dd"}}</span>
+                            <span><i class="fas fa-map-marker-alt"></i><small>{mặc định}</small>
+                                {{user.address_line}},
+                                {{user.state}},{{user.country.name}}</span>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress">Họ :</label>
+                                    <input type="text" ng-model="user.first_name" class="form-control" id="inputAddress"
+                                        name="first_name" required>
+                                    <small class="error" ng-show="profileForm.first_name.$error.required">
+                                        Không được để trống họ người dùng.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputAddress2">Tên :</label>
+                                    <input type="text" ng-model="user.last_name" class="form-control" id="inputAddress2"
+                                        name="last_name" required>
+                                    <small class="error" ng-show="profileForm.last_name.$error.required">
+                                        Không được để trống tên người dùng.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputAddress"><span><i class="fas fa-phone-square-alt"></i></span>Số
+                                        điện
+                                        thoại :</label>
+                                    <input type="text" name="phone_number" ng-model="user.phone_number"
+                                        class="form-control" id="inputAddress" ng-pattern="/^[0-9][0-9]{9}$/" required>
+                                    <small class="error" ng-show="profileForm.phone_number.$error.required">
+                                        Không được để trống tên người dùng.
+                                    </small>
+                                    <small class="error"
+                                        ng-show="profileForm.phone_number.$dirty&&profileForm.phone_number.$error.pattern">
+                                        Định dạng số điện thoại không hợp lệ.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">Đường :</label>
+                                    <input type="text" ng-model="user.address_line" name="address_line"
+                                        class="form-control" id="inputCity" required>
+                                    <small class="error" ng-show="profileForm.address_line.$error.required">
+                                        Không được để trống tên đường người dùng.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputCity">Quận/Huyện :</label>
+                                    <!-- <input type="text" class="form-control" ng-model="user.state" name="state"
+                                        id="state" aria-describedby="helpId" placeholder="Quận/Huyện" required> -->
+                                    <select class="custom-select custom-select-lg mb-3" name="state" id="state"
+                                        ng-model="user.state">
+                                        <!-- <option ng-repeat="c in country" ng-value="c.id">{{c.name}}</option> -->
+                                        <option value="" selected>Chọn tỉnh thành...</option>
+
+                                        <option ng-repeat="s in states" ng-value="s.name">{{s.name}}</option>
+                                    </select>
+
+                                    <small class="error" ng-show="profileForm.state.$error.required">
+                                        Không được để trống tên đường người dùng.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="password">Thành phố : </label>
+                                    <select class="custom-select custom-select-lg mb-3" name="country" id="country"
+                                        ng-model="user.country.id" ng-change="chooseCountry()">
+                                        <!-- <option ng-repeat="c in country" ng-value="c.id">{{c.name}}</option> -->
+                                        <option value="" selected>Chọn tỉnh thành...</option>
+
+                                        <option ng-repeat="c in countryall" ng-value="c.id"
+                                            ng-click="showStateWhenChooseCountry(c)">{{c.name}}</option>
+                                    </select>
+                                    <small class="error" ng-show="profileForm.country.$error.required">
+                                        Vui lòng chọn thành phố của bạn.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password">Mã bưu điện :</label>
+                                    <input type="text" class="form-control" name="password" id="password"
+                                        ng-model="user.postal_code" aria-describedby="helpId" placeholder="Mã bưu điện">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <button class="_btn">Cập Nhập Hồ Sơ</button>  data-target=".bd-example-modal-lg"-->
+                        <button type="button" class="_btn" data-toggle="modal"
+                            ng-disabled="profileForm.$invalid && profileForm.$dirty" ng-click="update()">Cập
+                            nhập
+                            hồ sơ</button>
+                    </form>
+                </div>
+
+                <div class="col-7 box-order">
+                    <h1>Lịch sử mua hàng</h1><br>
+
+
+                    <h4 class="panel-title ">
+                        <div class="row pb-5 text-left" style=" border-bottom: 0.3rem solid #ececec;">
+                            <div class="col-1"> Mã</div>
+                            <div class="col-2">Ngày mua</div>
+                            <div class="col-2">Gía vận chuyển</div>
+                            <div class="col-1">Giảm giá</div>
+                            <div class="col-2">Thành tiền</div>
+                            <div class="col-2">Phương thức thanh toán</div>
+                            <div class="col-2">Tình trạng</div>
+                        </div>
+                    </h4>
+
+                    <div id="accordion" class="panel-group">
+
+                        <div dir-paginate="history in histories|orderBy:'-createDate'|itemsPerPage:pageSize">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index+1}}"
+                                            ng-click="print($event, history.id)" class="nothing">
+                                            <div class="row text-left p-2"
+                                                style=" border-bottom: 0.3rem solid #ececec;">
+                                                <div class="col-1">{{history.id}}</div>
+                                                <div class="col-2">{{history.createDate| date:'yyyy-MM-dd'}}</div>
+                                                <div class="col-2">{{history.shipping_cost|number}}.đ</div>
+                                                <div class="col-1">{{history.discount | number}}.đ</div>
+                                                <div class="col-2">{{history.amount|number}}.đ</div>
+                                                <div class="col-2">{{history.payment_method}}
+                                                </div>
+                                                <div class="col-2"><span ng-if="history.status==0"
+                                                        class="td-status td-status-1 waitingstatus"><i
+                                                            class="fas fa-circle"></i> Chờ xác nhận</span>
+                                                    <span ng-if="history.status==1"
+                                                        class="td-status td-status-2 confirmstatus"><i
+                                                            class="fas fa-circle"></i> Đã xác nhận</span>
+                                                    <span ng-if="history.status==2"
+                                                        class="td-status td-status-3 packedstatus"><i
+                                                            class="fas fa-circle"></i> Đang lấy hàng</span>
+                                                    <span ng-if="history.status==3"
+                                                        class="td-status td-status-4 shippingstatus"><i
+                                                            class="fas fa-circle"></i> Đang giao hàng</span>
+                                                    <span ng-if="history.status==4"
+                                                        class="td-status td-status-5 arrivedstatus badge bg-success text-light">
+                                                        <i class="fas fa-circle ps-0"></i> Đã giao hàng</span>
+                                                    <span ng-if="history.status==5" class="td-status td-status-6 cancelstatus badge bg-danger
+                                                        text-light"><i class="fas fa-circle"></i> Đã hủy</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse{{$index+1}}" class="panel-collapse collapse ">
+                                    <div class="panel-body  bg-white">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Tên sản phẩm</th>
+                                                    <th scope="col">Hình ảnh</th>
+                                                    <th scope="col">Gía bán</th>
+                                                    <th scope="col">Số lượng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="itemHis in detailHistories">
+                                                    <td>{{itemHis.product.name}}</td>
+                                                    <td style="text-align: center;"> <img
+                                                            ng-src="{{itemHis.product.image}}" alt=""></td>
+                                                    <td>{{itemHis.unit_price | number}}</td>
+                                                    <td>{{itemHis.quantity }}</td>
+
+                                                    <!-- <td class="text-center" ng-if="itemHis.product.discount==null"
+                                                        style="color:var(--main); font-weight: 500;">
+                                                        {{itemHis.product.consignment.selling_price*itemHis.quantity|number}}
+                                                    </td>
+                                                    <td class="text-center" ng-if="itemHis.product.discount!=null"
+                                                        style="color:var(--main); font-weight: 500;">
+                                                        {{(itemHis.product.consignment.selling_price-itemHis.product.consignment.selling_price*itemHis.product.discount.percent_discount/100)*itemHis.quantity|number}}
+                                                    </td> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-auto navigation">
+                        <div class="show">
+                            <label for="">Xem:</label>
+
+                            <select ng-model="pageSize" ng-options="num for num in [10, 20, 50,100]"></select>
+
+                            <div class="page-box">
+                                <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <style>
+            .error {
+                color: rgb(238, 69, 69)
+            }
+        </style>
+    </main>
+
+</body>
+
+</html>

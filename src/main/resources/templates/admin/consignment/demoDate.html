@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+  
+</head>
+
+<body >
+    <div ng-app="testApp" ng-controller="testController">
+        <input id="test" type="datetime-local">
+        
+<div>
+    
+    <form name="paymentForm">
+        <input type="number" name="amount" ng-model="amount" positive />
+    </form>
+    
+    <div class="error" ng-show="paymentForm.amount.$error.positive">Amount should be positive number.</div>
+</div>
+    </div>
+</body>
+<script>
+    var app = angular.module('testApp', []);
+    app.controller('testController', function ($scope) {
+        var todayDate = new Date();
+        todayDate.setSeconds(0)
+        todayDate.setMilliseconds(0)
+        // $scope.sampleDate =  todayDate ;
+        document.getElementById("test").value = todayDate;
+        console.log(todayDate)
+    });
+
+    app.directive('positive', [function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+            ctrl.$validators.positive = function(value) {
+                return value && value >= 0;
+            };
+        }
+    };
+}]);
+</script>
+
+</html>

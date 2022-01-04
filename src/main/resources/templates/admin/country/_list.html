@@ -1,0 +1,168 @@
+<div class="row">
+    <div class="col-12 title-control">
+        <h3>Quản lý quận huyện</h3>
+
+    </div>
+</div>
+
+<div class="row ">
+
+
+
+    <div class="col-md-6 mt-4  ">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thông tin tỉnh thành</h5>
+
+                <button type="button" style="background-color: var(--dark-color)  !important; color: #fff;"
+                    ng-click="reset()" class="btn " data-toggle="modal" data-target="#countryModal"><i
+                        class="fas fa-plus"></i> Thêm mới</button>
+
+            </div>
+
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="radio" name="" id=""></th>
+                            <th>Mã</th>
+                            <th>Mã khu vực</th>
+                            <th ng-click="sort('name')">Tên Tỉnh Thành
+                                <i style="display: inline !important;" class="" ng-show="sortKey=='name'"
+                                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                            </th>
+
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item in countries|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize"
+                            ng-click='showStatesWhenCheckedRadio(item)'>
+                            <td scope="row">
+                                <input type="radio" name="radio-td" id="radio-{{item.id}}">
+                            </td>
+                            <td>{{item.id}}</td>
+
+                            <td>{{item.code}}</td>
+                            <td>{{item.name}}</td>
+
+
+
+                            <td>
+                                <a ng-click="edit(item)" data-toggle="modal" data-target="#countryModal"><i
+                                        class="far fa-edit"></i></a>
+                                <a ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i
+                                        class="far fa-trash-alt"></i></a>
+                            </td>
+
+                        </tr>
+
+                        <tr ng-show="countries.length === 0">
+                            <td class="text-center" colspan="5">Không có dữ liệu</td>
+                        </tr>
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer country-page">
+
+
+                <div class="pagination ">
+                    <div class="form-group">
+                        <label for="staticEmail" class=" col-form-label">Show: </label>
+                        <div class="">
+                            <select ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]"></select>
+                        </div>
+                    </div>
+
+                    <div class="page-box">
+                        <dir-pagination-controls max-size="3" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 mt-4  ">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thông tin quận, huyện</h5>
+
+                <button  type="button" style="background-color: var(--dark-color)  !important; color: #fff;" class="btn "
+                    id="addState" data-toggle="modal" data-target="#stateModal"><i class="fas fa-plus"></i> Thêm
+                    mới</button>
+
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Quận Huyện</th>
+
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in states">
+                            
+                            <td>{{$index + 1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <a ng-click="editState(item)" data-toggle="modal" data-target="#stateModal"><i
+                                        class="far fa-edit"></i></a>
+                                <a ng-click="selectItemState(item)" data-toggle="modal"
+                                    data-target="#deleteItemState"><i class="far fa-trash-alt"></i></a>
+                            </td>
+
+
+                        </tr>
+
+                        <tr ng-if="!states.length">
+                            <td colspan="5">Không có dữ liệu</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted">
+
+                <!-- Phân trang kiểu cũ -->
+
+                <!-- <nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+
+                                            <dir-pagination-controls 
+                                              max-size="5"
+                                              direction-links="true"
+                                              boundary-links="true" >
+                                          </dir-pagination-controls>
+                                            
+                                              <div style="margin-left: 20px;">
+                                                <label for="search">Xem:</label>
+                                                    <select style="height: 40px;" ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+                                              </div>
+                                            </nav>  -->
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <th:block th:replace="@{/admin/country/_modalEdit}">
+
+    </th:block>
+
+
+</div>

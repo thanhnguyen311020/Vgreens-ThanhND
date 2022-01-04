@@ -1,0 +1,119 @@
+<div id="updateStatusModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Chi tiết đơn hàng 
+                    <span id="titleModal" ng-if="status == 0"> Chưa xác nhận </span>
+                    <span id="titleModal" ng-if="status == 1"> Đã xác nhận </span>
+                    <span id="titleModal" ng-if="status == 2">Đang lấy hàng </span>
+                    <span id="titleModal" ng-if="status == 3"> Giao hàng thành công </span>
+                    <span id="titleModal" ng-if="status == 4"> Giao hàng thành công </span>
+                    <span id="titleModal" ng-if="status == 5"> Đã hủy </span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="post">
+                <div class="modal-body">
+                    <div class="row">
+                        
+                        <div style="overflow-y: auto; max-height: 400px;" class="col-md-6 ">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">Họ tên lót</label>
+                                    <input readonly type="text" ng-model="form.first_name" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Tên khách hàng</label>
+                                    <input readonly type="text" ng-model="form.last_name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">Ngày mua hàng</label>
+                                    <input readonly type="text" id="formCreateDate" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Số điện thoại</label>
+                                    <input readonly type="text" ng-model="form.phone_number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="">Giảm giá</label>
+                                    <input readonly type="text" ng-model="form.discount" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="">Tổng tiền</label>
+                                    <div class="input-group mb-2 mr-sm-2">
+                                       
+                                        <input readonly style="color:var(--main-color)" type="text" ng-model="form.amount" class="form-control" id="inlineFormInputGroupUsername2" placeholder="">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">VND</div>
+                                          </div>
+                                      </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="">Phương thức thanh toán</label>
+                                    <input readonly type="text" ng-model="form.payment_method" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Địa chỉ</label>
+                                <textarea readonly class="form-control" ng-model="form.address_line" name="" id="" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Ghi chú</label>
+                                <textarea readonly class="form-control" ng-model="form.description" name="" id="" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                                <table class="table table-bordered table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in details">
+                                            <th scope="row">{{$index + 1}}</th>
+                                            <td class="td-product">
+                                                <!-- <img ng-show="{{item.product.image === null}}" src="/images/pic-1.png" alt=""> -->
+                                                <img ng-show="{{item.product.image != null}}" ng-src="{{item.product.image}}" alt="">
+                                                <div class="product-info">
+                                                    <div><a >{{item.product.name}}</a></div>
+                                                    <span>{{item.unit_price}}.đ</span>
+                                                    <!-- <span>11027</span> -->
+                                                </div>
+                                            </td>
+                                            <td>{{item.quantity}}</td>
+                                            <td style="font-weight: 500; color: var(--main-color)">{{item.unit_price * item.quantity}}.đ</td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-success" th:unless="${#request.isUserInRole('DIRE')} " id="btnUpdateStaff" ng-disabled="form.status == 2 || form.status == 3"  ng-click="updateStatusOrder()"></button>
+                <button type="button" th:if="${#request.isUserInRole('DIRE')} " class="btn btn-success" id="btnUpdate" ng-click="updateStatusOrder()"></button>
+            </div>
+        </div>
+    </div>
+</div>

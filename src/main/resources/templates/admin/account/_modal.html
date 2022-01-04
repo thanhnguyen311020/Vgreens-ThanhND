@@ -1,0 +1,114 @@
+<!-- Modal -->
+		<!-- Button trigger modal -->
+		<div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa Người Dùng</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="delete(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="updateStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Thay đổi trạng thái</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span>Bạn có muốn thay đổi trạng thái của người dùng <b>"{{message}}"</b></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<input type="hidden" ng-value="clickedItem.id">
+						<button type="button" class="btn btn-danger" data-dismiss="modal"
+							ng-click="updateStatus(clickedItem)">Xác nhận</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	
+
+		<div class="modal fade" id="listOrderDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">Lịch sử mua hàng</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				 <div class="row">
+					 <div class="col-md-12">
+						 <div class="form-group">
+						   <label for="search1">Tìm kiếm</label>
+						   <input type="search"
+							 class="form-control" name="search1" id="search1" ng-model="searchDetails" aria-describedby="helpId" placeholder="">
+						 
+						 </div>
+					 </div>
+					 <div style="max-height: 350px;" class="col-md-12 table-wrapper-scroll-y my-custom-scrollbar">
+						 <table class="table-modal">
+							 <thead>
+								<tr>
+									<th>#</th>
+									<th>Sản Phẩm</th>
+									<th class="text-center">Ngày mua</th>
+									<th class="text-center">Giá tiền</th>
+									<th class="text-center">Số Lượng</th>
+									<th class="text-center">Thành tiền</th>
+									<th>Đơn</th>
+								</tr>
+							 </thead>
+							 <tbody>
+								 <tr ng-repeat="item in orderDetails | filter : searchDetails ">
+									<td>{{$index+1}}</td>
+									<td class="td-product">
+										<img  ng-show="{{!item.product.image.startsWith('https')}}" src="/images/no_image.png" alt="">
+										<img  ng-show="{{item.product.image.startsWith('https')}}" ng-src="{{item.product.image}}" alt="">
+										<div class="product-info">
+											<div><a href="#">{{item.product.name}}</a></div>
+											<!-- <span>11027</span> -->
+										</div>
+									</td>
+									<td class="text-center">{{item.order.createDate | date : 'dd/MM/yyyy'}}</td>
+									<td class="text-center">{{item.unit_price}}</td>
+									<td class="text-center">{{item.quantity}}</td>
+									<td class="text-center">{{item.unit_price * item.quantity}}</td>
+									<td>{{item.order.id}}</td>
+								 </tr>
+
+								 <tr ng-show="orderDetails.length === 0">
+									 <td colspan="7">Không có thông tin</td>
+								 </tr>
+							 </tbody>
+						 </table>
+					 </div>
+				 </div>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+				
+				</div>
+			  </div>
+			</div>
+		  </div>

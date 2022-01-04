@@ -1,0 +1,218 @@
+<div class="row">
+    <div class="col-12 title-control" id="productList">
+        <h3>Quản Lý Bài Viết</h3>
+        <button id="_form" >Thêm Mới </button>
+    </div>
+</div>
+<div class="row ">
+    <div class="col-md-12">
+
+        <div class="control-list">
+            <table>
+              <thead>
+                    <tr>
+                        <th>Tìm kiếm</th>
+                 
+                        <!-- <th>Loại sản phẩm</th>
+                        <th>Trạng thái</th>
+                        <th>Tính theo</th> -->
+                       
+                    </tr>
+              
+               
+                    <tr>
+                        <th scope="row">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input  type="search" name="keyname"
+                                   id="namec" ng-model="search" placeholder="Tìm kiếm theo tên....">
+                            </div>
+                        </th>
+                        <!-- <th>
+                            <div class="form-group">
+                                <select class="form-control" 
+                            onchange="angular.element(this).scope().getByCate(this.options[this.selectedIndex].value)" required name="select_cate" id="select_cate">
+                                    <option selected  value="">Tất cả</option>
+                                    <option ng-repeat= "cate in cates" id="cate" ng-value="cate.id">{{cate.name}}</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group ">
+                                <select class="form-control" name="select_status" id="select_status" 
+                                 onchange="angular.element(this).scope().getProductStatus(this.options[this.selectedIndex].value)">
+                                    <option selected value="">Tất cả</option>
+                                    <option value="1">Hiển thị</option>
+                                    <option value="0">Ẩn</option>
+                                </select>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group ">
+                                <select class="form-control" name="select_status" id="select_status" 
+                                 onchange="angular.element(this).scope().getUnit(this.options[this.selectedIndex].value)">
+                                    <option selected value="">Tất cả</option>
+                                    <option ng-repeat= "unit in units" id="unit" ng-value="unit.id">{{unit.name}}</option>
+                                </select>
+                            </div>
+                        </th>
+                         -->
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-12 mt-4  ">
+        <div class="form-group">
+            <!-- <div class="col-12 title-control">
+              <button
+                class="btn btn-danger"
+                ng-click="deleteAll()"
+                id="btnDelete"
+                disabled
+              >
+                <i class="far fa-trash-alt"></i>Xóa mục đã chọn
+              </button>
+            </div> -->
+          </div>
+
+        <div class="card">
+            <!-- <div class="card-header">
+                <h5>Thông tin sản phẩm</h5>
+
+                <div class="pagination">
+                   
+                    <div class="form-group ml-4">
+                        <label for="staticEmail" class=" col-form-label">Hiển thị: </label>
+                        <div class="">
+                            <div class="">
+                                <select  ng-model="pageSize" ng-options="num for num in [10, 20, 50,100]" ></select>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="page-box">
+                            <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+                            </dir-pagination-controls>
+                        </div>
+                </div>
+
+            </div> -->
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Mã</th>
+                            <th>Tiêu đề</th>
+                           
+                            <th>Hình ảnh</th>
+
+                           
+                            <th class="text-center">Lượt xem</th>
+                            <!-- <th>Đơn vị</th> -->
+                            <!-- <th>Mô tả</th> -->
+                            <!-- <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+                        <tr  data-toggle="collapse" data-target="#info{{item.postfoods_Id}}" class="accordion-toggle">
+                            <td scope="row">
+                                <i class='bx bx-plus'></i>
+                            </td>
+                            <td>{{item.postfoods_Id}}</td>
+                            <td>{{item.post_title}}</td>
+                         
+                            <td class="td-product">
+                                <img ng-show="{{!item.post_image.startsWith('http')}}" src="/images/no_image.png" alt="">
+                                <img ng-show="{{item.post_image.startsWith('http')}}" ng-src="{{item.post_image}}" ng-click="edit(item)" alt="">
+                            </td>
+                          
+                            <td class="text-center">{{item.post_view}}</td>
+                            
+
+                            <!-- <td>{{item.description}}</td> -->
+                            <!-- <td width="200">{{item.description}}</td> -->
+                            <!-- <td><div class="btn-group droplistbtn ">                                                   
+                                <a type="button" class="fas fa-cogs " data-toggle="dropdown"> 
+                                </a>
+                                <ul class="dropdown-menu drop_menu" role="menu">
+                                   <a ng-click="edit(item)"><i class="far fa-edit"></i>Cập nhập</a>
+                                  <a ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i class="far fa-trash-alt"></i>Xóa</a>
+                                  
+                                </ul>
+                              </div>
+                            </td> -->
+                        </tr>
+
+
+                        <tr>
+                            <th style="border: 0px !important; padding: 0px !important" colspan="12" class="hiddenRow">
+                                <div class="accordian-body collapse" id="info{{item.postfoods_Id}}">
+                                    <table class="table table-striped">
+                                       
+                
+                                        <tbody>
+                                             <tr data-toggle="collapse" class="accordion-toggle "
+                                                data-target="#demo10">
+                                                <td  style="padding: .3rem .5rem !important;" >
+                                                     <span> Ngày nhập: </span>{{item.created_time | date: 'HH:mm dd/MM/yyyy'}}</td>
+                                                <td class="text-center"  rowspan="2" style="width: 250px;">
+                                                    <button class="bnt_default" ng-click="edit(item)"></i>Cập nhập</button>
+                                                    <button class="bnt_default" ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"></i>Xóa</button>
+                                                </td>
+                                            </tr>
+                
+                                            <tr data-toggle="collapse" class="accordion-toggle "
+                                                data-target="#demo10">
+                                                <td  style="padding: .3rem .5rem !important;" ><span>Ngày cập nhật:</span> {{item.updated_time | date: 'HH:mm dd/MM/yyyy'}}</td>
+                                                
+                                               
+                                            </tr>
+                                           
+                
+                
+                
+                                        </tbody>
+                                    </table>
+                
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+
+                    <tbody ng-show="items.length === 0">
+                        <tr>
+                            <td colspan="9">
+                                Không có dữ liệu
+                            </td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+            <div class="card-header">
+                <h5></h5>
+                <div class="pagination">
+                  <div class="form-group ml-5">
+                    <label for="staticEmail" class="col-form-label">Hiển thị: </label>
+                    <div class="">
+                      <div>
+                        <select ng-model="pageSize" ng-options="num for num in [10,20,50,100]"></select>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="page-box">
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links-numbers="true">
+                    </dir-pagination-controls>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+    </div>
+
+</div>

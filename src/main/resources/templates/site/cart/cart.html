@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Cart</title>
+
+<body>
+
+
+    <main ng-controller="shopping-cart-ctrl">
+
+
+
+        <div class="titlePage">
+            <h1>Giỏ hàng</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Giỏ hàng</a>
+            </div>
+        </div>
+
+
+        <section class="titlePage-cart">
+            <div class="box-text">
+                <a href="#">Giỏ hàng</a> <span> </span> <a style=" color: #ccc" href="">Chi tiết thanh toán</a> <span>
+                </span> <a style=" color: #ccc">Đặt hàng thành công</a>
+            </div>
+        </section>
+
+
+        <section class="shopping-cart">
+
+            <div class="cart-container row">
+
+                <table class="box col-10 m-auto">
+                    <tr>
+                        <th>Mã </th>
+                        <th>Sản phẩm</th>
+                        <th>Giảm giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                        <th></th>
+                        </te>
+
+                    <tr ng-repeat ="item in cart.items">
+                        <td>{{item.id}}</td>
+                        <td class="product-info">
+
+                            <img ng-src="{{item.image}}" alt="">
+                            <div>
+                                <div class="product_name"><a href="#">{{item.name}}</a>
+                                </div>
+                                <span>{{item.consignment.selling_price |number}}.đ</span>
+
+                            </div>
+                        </td>
+
+                        <td ng-if="item.discount!=null" style="text-align: center;">{{item.discount.percent_discount}}%</td>
+                        <td ng-if="item.discount==null" style="text-align: center;"></td>
+                        <td>
+                            <!-- <div class="quantity-container">
+                                <button class="cart-qty-plus"  type="button" value="+">+</button>
+                                <input type="number" name="qty" class="qty form-control" ng-change="cart.saveToLocalStorage()" ng-model="item.qty">
+                                <button class="cart-qty-minus" type="button" value="-">-</button>
+                            </div> -->
+
+                            <div class="quantity-container">
+                                <button class="cart-qty-plus" type="button" value="+">+</button>
+                                <input type="number" name="qty" min="0" value="1" class="qty form-control"  ng-change="cart.saveToLocalStorage()" ng-model="item.qty">
+                                <button class="cart-qty-minus" type="button" value="-">-</button>
+                            </div>
+
+                         
+                        </td>
+                        <td ng-if="item.discount!=null" class="_amount">
+                            {{item.qty*item.consignment.selling_price-item.qty*item.consignment.selling_price*item.discount.percent_discount/100 | number }}.đ
+                        </td>
+                        <td ng-if="item.discount==null" class="_amount">
+                            {{item.qty*item.consignment.selling_price | number }}.đ
+                        </td>
+                        <td>
+                            <button ng-click="cart.remove(item.id)" class="far fa-times-circle"></button>
+                        </td>
+                    </tr>
+                    
+                </table>
+
+                <ul class="ul-cart">
+                    <li ng-repeat ="item in cart.items">
+                        <div class="info-cart">
+                            <div class="content">
+                                <img src="{{item.image}}" alt="img">
+                                <div class="text">
+                                    <a href="#">{{item.name}}  </a><br>
+                                    <span>{{item.consignment.selling_price |number}}.đ - </span><span>{{item.discount.percent_discount}}%</span><br>
+                                    <span class="amount" ng-if="item.discount!=null">Thành tiền: {{item.qty*item.consignment.selling_price-item.qty*item.consignment.selling_price*item.discount.percent_discount/100 | number }}.đ</span>
+                                    <span class="amount" ng-if="item.discount==null">Thành tiền:  {{item.qty*item.consignment.selling_price | number }}.đ
+                                    </td>.đ</span>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <div class="quantity-container">
+                                    <button class="cart-qty-plus"  type="button" name="qty" value="+" ng-model="item.qty" ng-click="cart.saveToLocalStorage()">+</button>
+                                    <input type="number" name="qty" class="qty form-control" ng-change="cart.saveToLocalStorage()" ng-model="item.qty">
+                                    <button class="cart-qty-minus" type="button" name="qty" value="-" ng-model="item.qty" ng-click="cart.saveToLocalStorage()">-</button>
+                                </div>
+                                <a href="#"  ng-click="cart.remove(item.id)" class="far fa-times-circle"></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="col-10 m-auto _checkout-container">
+                    <div class="voucher">
+                        <h4>Mã giảm giá</h4>
+                        <div class="box">
+                            <form>
+                                <input type="text" ng-model="couponsform.name" id="coupon" name="coupon">
+                              
+                            </form>
+                            <button class="_btn" ng-click="getCoupon()">Áp dụng mã</button>
+                           
+                        </div>
+                    </div>
+
+                    <div class="checkout-box">
+                        <table>
+                            <tr>
+                                <th>Tạm tính</th>
+                                <td>{{cart.sub_total| number }}.đ</td>
+                            </tr>
+                            <tr>
+                                <th>Giảm giá</th>
+                               
+                                <td>{{cart.amountdiscount| number}}.đ</td>
+                            </tr>
+                            <tr>
+                                <th>Voucher</th>
+                                <td>{{cart.coupon}} %</td>
+                               
+                            </tr>
+                            <tr>
+                                <th class="total_price">Tổng tiền</th>
+                                <td class="total_price">{{cart.total |number}}.đ</td>
+                            </tr>
+                        </table>
+                        <a th:href="@{/vgreens/cart/checkout}" class="btn_checkout">Tiến hành thanh toán</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+
+            </div>
+            <!-- <a href="#" class="btn" style="text-transform: none; border-radius: 0;">
+                <- Tiếp tục mua sắm</a>
+                    <div class="total-price">
+                        <div class="voucher">
+                            <h3>Mã giảm giá</h3>
+
+                            <div>
+                                <input type="email" name="" id="" placeholder="Mã giảm giá">
+                                <a href="#" class="">Áp dụng mã</a>
+                            </div>
+
+                        </div>
+                        <table>
+                            <tr>
+                                <td>Tạm Tính</td>
+                                <td>
+                                <td> 20000 VND</td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giảm Giá:</td>
+                                <td colspan="2">
+                                    0%
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="">Tổng Tiền</td>
+                                <td colspan="2" style="color: #FF2300;;" class="">20000
+                                    VND</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <a href="#" class="btn">Thanh toán</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+</body>
+
+</html>

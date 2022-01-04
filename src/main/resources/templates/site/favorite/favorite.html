@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Favorite</title>
+
+<body>
+
+    <main ng-controller="shopping-cart-ctrl">
+
+
+        <div class="titlePage">
+            <h1>Sản Phẩm Yêu Thích</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Đơn hàng</a>
+            </div>
+        </div>
+
+        <section class="_orderDetail" style="min-height: 100vh;">
+
+            <div  style="overflow-x:auto;" class="row orderDetail-container m-2">
+
+
+
+                <table class="col-10 list-detail m-auto mt-5">
+                    <thead>
+                    <tr>
+                        <th class="text-center">STT</th>
+                        <th class="text-center">Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th class="text-center">Giá bán</th>
+                        <th class="text-center">Giảm giá</th>
+                        <th class="text-center">Tình trạng</th>
+                        <th></th>
+                        <th></th>
+                        <!-- <th class="ratting-btn"> Đánh giá</th> -->
+                    </tr>
+                </thead>
+                    <tr ng-repeat="item in wishlist.itemswishlist">
+                        <td class="text-center">{{item.id}}</td>
+                        <td style="text-align: center;"> <img ng-src="{{item.image}}" alt="">
+                        </td>
+                        <td >
+
+                            <h4>{{item.name}}</h4>
+                        </td>
+                        <td>{{item.consignment.selling_price |number}}.đ</td>
+                        <td class="text-center" ng-if="item.discount==null">Không</td>
+                        <td class="text-center" ng-if="item.discount!=null">{{item.discount.percent_discount}}%</td>
+                        <td class="text-center" style="color:var(--main); font-weight: 500;">Còn hàng</td>
+                        <td class="buy-btn"> <button ng-click="cart.addtocart(item.id)" class="fas shopping-cart"><i
+                                    class="fas fa-cart-plus"></i> Mua
+                                hàng</button> </td>
+                        <td class="delete-btn"> <button ng-click="wishlist.removewishlist(item.id)"
+                                class="fas shopping-cart"><i class="fas fa-cart-plus"></i> Xóa
+                            </button> </td>
+                    </tr>
+                 
+                </table>
+
+
+            </div>
+            <a href="product.html" class="_btn mt-5">Tiếp tục mua sắm</a>
+
+        </section>
+
+
+
+
+
+
+
+
+        <!-- footer section ends -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body rate-container">
+
+                        <div class="rating-wrap">
+                            <!-- <h2>Star Rating</h2> -->
+                            <div class="content">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5"><label for="star5"
+                                        class="full"></label>
+                                    <input type="radio" id="star4.5" name="rating" value="4.5"><label for="star4.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label for="sta-4"
+                                        class="full"></label>
+                                    <input type="radio" id="star3.5" name="rating" value="3.5"><label for="star3.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3"
+                                        class="full"></label>
+                                    <input type="radio" id="star2.5" name="rating" value="2.5"><label for="star2.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2"
+                                        class="full"></label>
+                                    <input type="radio" id="star1.5" name="rating" value="1.5"><label for="star1.5"
+                                        class="half"></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1"
+                                        class="full"></label>
+                                    <input type="radio" id="star0.5" name="rating" value="0.5"><label for="star0.5"
+                                        class="half"></label>
+                                </fieldset>
+                            </div>
+
+                            <h4 id="rating-value">0 trên 5</h4>
+                        </div>
+
+                        <div class="comment">
+                            <textarea name="" id="" cols="30" rows="3" placeholder="Đánh giá sản phẩm...."></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary">Đánh giá</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+</body>
+
+</html>

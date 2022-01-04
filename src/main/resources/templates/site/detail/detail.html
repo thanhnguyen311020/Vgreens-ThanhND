@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Detail</title>
+
+<body>
+
+    <main ng-controller="shopping-cart-ctrl">
+        <section class="detail" style="font-size: 2rem;">
+
+            <div th:if="${prodetail.discount==null}" class="detail-container">
+
+                <div class="box" style="align-items: center;">
+                    <img th:src="@{${prodetail.image}}" alt="">
+                </div>
+
+
+                <div class="box">
+                    <p>Home / Product</p>
+                    <input type="hidden" name="" id="product_id" th:value="${prodetail.id}">
+                    <h1 th:text="${prodetail.name}"></h1>
+                    <p>
+                        <input id="input-7-xs" class="rating rating-loading" th:value="${#numbers.formatDecimal(review.ratingCount, 0, 'COMMA', 1, 'POINT')}" data-min="0" data-max="5"
+                                data-step="0.5" data-size="md" data-show-caption="false"data-show-clear="false"></p>
+                    <h4 class="price">[[${#numbers.formatDecimal(prodetail.consignment.selling_price, 0, 'COMMA', 0,
+                        'POINT')}]] .đ </h4>
+                        
+                     <div class="hethang" th:if="${prodetail.consignment.currentQuantity==0}">
+                        <div class="info">
+                            <h5 class="brand">Xuất xứ: <span th:text="${prodetail.consignment.supplier.name}"> </span> </h5>
+    
+                            <h5 class="availibity" >Tình trạng: <span> Hết Hàng</span></h5>
+                            <h5 class="availibity" >Tính theo: <span th:text="${prodetail.unit.name}"> </span></h5>
+
+                        </div>
+                        <div class="quantity">
+                            <div class="quantity-container">
+                                <button class="cart-qty-plus" type="button" value="+">+</button>
+                                <input type="text" name="qty" min="0" value="1" class="qty form-control">
+                                <button class="cart-qty-minus" type="button" value="-">-</button>
+                            </div>
+                            <button style="height: 100%;" class="_btn hethang">Hết hàng</button>
+                        </div>
+                     </div> 
+
+                     <div class="hethang" th:unless="${prodetail.consignment.currentQuantity==0}">
+                        <div class="info">
+                            <h5 class="brand">Xuất xứ: <span th:text="${prodetail.consignment.supplier.name}"> </span> </h5>
+    
+                            <h5 class="availibity" >Tình trạng: <span>Còn hàng</span></h5>
+                            <h5 class="availibity" >Tính theo: <span th:text="${prodetail.unit.name}"> </span></h5>
+
+                        </div>
+                        <div class="quantity">
+                            <div class="quantity-container">
+                                <button class="cart-qty-plus" type="button" value="+">+</button>
+                                <input type="text" name="qty" min="0" value="1" class="qty form-control">
+                                <button class="cart-qty-minus" type="button" value="-">-</button>
+                            </div>
+                            <button th:attr="ng-click=@{|cart.addtocart(${prodetail.id})|}" style="height: 100%;" class="_btn">Thêm vào giỏ hàng</button>
+                        </div>
+                     </div>   
+                   
+
+
+                    <h3>Thông tin sản phẩm <i class="fas fa-indent"></i></h3>
+
+                    <!-- <div th:text="${prodetail.description}"></div> -->
+                    <p th:utext="${prodetail.description}"></p>
+                </div>
+
+            </div>
+            <div th:if="${prodetail.discount!=null}" class="detail-container">
+
+                <div class="box">
+                    <img th:src="@{${prodetail.image}}" alt="">
+                </div>
+
+
+                <div class="box">
+                    <p>Home / Product</p>
+                    <h1 th:text="${prodetail.name}"></h1>
+                      <input type="hidden" name="" id="product_id" th:value="${prodetail.id}">
+                    <p>
+                            <input id="input-7-xs" class="rating rating-loading"
+                                th:value="${#numbers.formatDecimal(review.ratingCount, 0, 'COMMA', 1, 'POINT')}" data-min="0" data-max="5"
+                                data-step="0.5" data-size="md" data-show-caption="false"data-show-clear="false" ></p>
+                    <h4 class="price">[[${#numbers.formatDecimal(prodetail.consignment.selling_price-prodetail.consignment.selling_price*prodetail.discount.percent_discount/100, 0, 'COMMA', 0,
+                        'POINT')}]] .đ <span>[[${#numbers.formatDecimal(prodetail.consignment.selling_price, 0, 'COMMA', 0,
+                        'POINT')}]] .đ</span></h4>
+                        
+                        <div class="hethang" th:if="${prodetail.consignment.currentQuantity==0}">
+                            <div class="info">
+                                <h5 class="brand">Xuất xứ: <span th:text="${prodetail.consignment.supplier.name}"> </span> </h5>
+        
+                                <h5 class="availibity" >Tình trạng: <span> Hết Hàng</span></h5>
+                                <h5 class="availibity" >Tính theo: <span th:text="${prodetail.unit.name}"> </span></h5>
+                            </div>
+                            <div class="quantity">
+                                <div class="quantity-container">
+                                    <button class="cart-qty-plus" type="button" value="+">+</button>
+                                    <input type="text" name="qty" min="0" value="1" class="qty form-control">
+                                    <button class="cart-qty-minus" type="button" value="-">-</button>
+                                </div>
+                                <button style="height: 100%;" class="_btn hethang">Hết hàng</button>
+                            </div>
+                         </div> 
+    
+                         <div class="hethang" th:unless="${prodetail.consignment.currentQuantity==0}">
+                            <div class="info">
+                                <h5 class="brand">Xuất xứ: <span th:text="${prodetail.consignment.supplier.name}"> </span> </h5>
+        
+                                <h5 class="availibity" >Tình trạng: <span>Còn hàng</span></h5>
+                                <h5 class="availibity" >Tính theo: <span th:text="${prodetail.unit.name}"> </span></h5>
+
+                            </div>
+                            <div class="quantity">
+                                <div class="quantity-container">
+                                    <button class="cart-qty-plus" type="button" value="+">+</button>
+                                    <input type="text" name="qty" min="0" value="1" class="qty form-control">
+                                    <button class="cart-qty-minus" type="button" value="-">-</button>
+                                </div>
+                                <button th:attr="ng-click=@{|cart.addtocart(${prodetail.id})|}" style="height: 100%;" class="_btn">Thêm vào giỏ hàng</button>
+                            </div>
+                         </div>   
+                    <!-- <h3>Thông tin sản phẩm <i class="fas fa-indent"></i></h3>
+
+                    <p th:text="${prodetail.description}"></p> -->
+                     <p th:utext="${prodetail.description}"></p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- rate-and-review section -->
+
+        <section class="product_description_area ">
+            <div class="container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                            aria-selected="true">Món ngon</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Thông tin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Bình luận</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                            aria-controls="review" aria-selected="false">Đánh giá</a> 
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div th:if="${postfoods.post_description!=null}">
+                            <p  th:utext="${postfoods.post_description}"></p>
+                        </div>
+                        
+                        <p th:if="${postfoods.post_description==1}"></p>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <h5>Tên nhà cung cấp</h5>
+                                        </td>
+                                        <td>
+                                            <h5 th:text="${prodetail.consignment.supplier.name}"></h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Ngày hết hạn</h5>
+                                        </td>
+                                        <td>
+                                            <h5 th:text="${#calendars.format(prodetail.consignment.expiry_time, 'dd-MM-yyyy HH:mm')}" ></h5>
+                                        </td>
+                                    </tr>
+                                  
+                                    <tr>
+                                        <td>
+                                            <h5>Thông tin sản phẩm</h5>
+                                        </td>
+                                        <td>
+                                            <h5 th:utext="${prodetail.description}"></h5>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>
+                                            <h5>Weight</h5>
+                                        </td>
+                                        <td>
+                                            <h5>52gm</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Quality checking</h5>
+                                        </td>
+                                        <td>
+                                            <h5>yes</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Freshness Duration</h5>
+                                        </td>
+                                        <td>
+                                            <h5>03days</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>When packeting</h5>
+                                        </td>
+                                        <td>
+                                            <h5>Without touch of hand</h5>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Each Box contains</h5>
+                                        </td>
+                                        <td>
+                                            <h5>60pcs</h5>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" ng-controller="product-review-ctrl" id="contact" role="tabpanel"
+                        aria-labelledby="contact-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="comment_list">
+                                    <div class="review_item" ng-repeat="cmt in comments">
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="/img/product/review-1.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>{{cmt.username}}</h4>
+                                                <h5>{{cmt.created_time|date:'yyyy-MM-dd HH:mm:ss'}}</h5>
+                                                
+                                            </div>
+                                        </div>
+                                        <p>{{cmt.comment}}</p>
+                                        <a class="reply_btn"  style="float: right;">Reply</a>
+                                    </div>
+                                    <!-- <div class="review_item reply">
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="/img/product/review-2.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>Thảo Duy Ngô</h4>
+                                                <h5>12th Feb, 2018 at 05:56 pm</h5>
+                                                <a class="reply_btn" href="#">Trả lời</a>
+                                            </div>
+                                        </div>
+                                        <p>Tôi muốn giao hàng sản phẩm này ở Tỉnh khác được không shop?</p>
+                                    </div>
+                                    <div class="review_item mt-5">
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="/img/product/review-3.png" alt="">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4>Minh Tân</h4>
+                                                <h5>12th Feb, 2018 at 05:56 pm</h5>
+                                                <a class="reply_btn" href="#">Trả lời</a>
+                                            </div>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor
+                                            incididunt ut labore et
+                                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                            ullamco
+                                            laboris nisi ut aliquip ex ea
+                                            commodo</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="review_box">
+                                    <h4>Post a comment</h4>
+                                    <form class="row contact_form"
+                                        id="contactForm" novalidate="novalidate">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control"ng-model="formCmt.comment" name="message" id="message" rows="1"
+                                                    placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" value="submit"
+                                                th:attr="ng-click=@{|create(${prodetail.id})|}"
+                                                class="_btn primary-btn">Submit
+                                                Now</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-controller="product-review-ctrl" class="tab-pane fade show active" id="review"
+                        role="tabpanel" aria-labelledby="review-tab">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row total_rate">
+                                    <div class="col-6">
+                                        <div class="box_total">
+                                            <h5>ĐÁNH GIÁ</h5>
+                                            <h4>[[${#numbers.formatDecimal(review.ratingCount, 0, 'COMMA', 1, 'POINT')}]]
+                                            <input type="hidden" name="txt_value" id="txt_value" th:value="${Sumrat}">
+                                            <h6 >([[${r}]] Nhận xét)</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="rating_list">
+                                            <h3>Dựa trên 5 nhận xét</h3>
+                                            <div class="flex-grow-1">
+                                                <div class="row align-items-center" >
+                                                    <div class="col-4 p-0 text-right">
+                                                           <div th:if="${rating5[1]==5 or rating5[1]==null}">
+                                                               <i class="fa fa-star"></i>
+                                                               <i class="fa fa-star"></i>
+                                                               <i class="fa fa-star"></i>
+                                                               <i class="fa fa-star"></i>
+                                                               <i class="fa fa-star"></i>
+                                                           </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar bg-success"
+                                                                        th:if="${rating5[0]}!=0"
+                                                                        role="progressbar"
+                                                                        th:value="${rating5[0]}/${Sumrat}*100"
+                                                                        aria-valuenow="5" aria-valuemin="0"
+                                                                        aria-valuemax=""></div>
+                                                                        <div class="progress-bar bg-success"
+                                                                            th:if="${rating5[0]}==0" role="progressbar"
+                                                                            value="0"
+                                                                            aria-valuenow="5" aria-valuemin="0"
+                                                                            aria-valuemax=""></div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2"> [[${r5}]]</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 p-0 text-right">
+                                                        <div th:if="${rating4[1]==4 or rating4[1]==null}">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar " style="background-color: rgb(48, 196, 35);"
+                                                                        th:if="${rating4[0]}!=0"
+                                                                        role="progressbar"
+                                                                        th:value="${rating4[0]}/${Sumrat}*100"
+                                                                        aria-valuenow="5" aria-valuemin="0"
+                                                                        aria-valuemax=""></div>
+                                                                        <div class="progress-bar"
+                                                                            style="background-color: rgb(48, 196, 35);"
+                                                                            th:if="${rating4[0]}==0" role="progressbar"
+                                                                            value="0"
+                                                                            aria-valuenow="5" aria-valuemin="0"
+                                                                            aria-valuemax=""></div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2"> [[${r4}]]</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 p-0 text-right">
+                                                        <div th:if="${rating3[1]==3 or rating3[1]==null}">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar"
+                                                                        style="background-color: rgb(241, 239, 69);"
+                                                                        th:if="${rating3[0]}!=0"
+                                                                        role="progressbar"
+                                                                        th:value="${rating3[0]}/${Sumrat}*100"
+                                                                        aria-valuenow="5" aria-valuemin="0"
+                                                                        aria-valuemax=""></div>
+                                                                        <div class="progress-bar"
+                                                                            style="background-color: rgb(241, 239, 69);"
+                                                                            th:if="${rating3[0]}==0" role="progressbar"
+                                                                            value="0" aria-valuenow="5"
+                                                                            aria-valuemin="0" aria-valuemax=""></div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2"> [[${r3}]]</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 p-0 text-right">
+                                                        <div th:if="${rating2[1]==2 or rating2[1]==null}">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar"
+                                                                        style="background-color: rgb(241, 172, 69);"
+                                                                        th:if="${rating2[0]}!=0"
+                                                                        role="progressbar"
+                                                                        th:value="${rating2[0]}/${Sumrat}*100"
+                                                                        aria-valuenow="5" aria-valuemin="0"
+                                                                        aria-valuemax=""></div>
+                                                                         <div class="progress-bar"
+                                                                             style="background-color: rgb(241, 172, 69);"
+                                                                             th:if="${rating2[0]}==0" role="progressbar"
+                                                                             value="0" aria-valuenow="5"
+                                                                             aria-valuemin="0" aria-valuemax=""></div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2">[[${r2}]]</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 p-0 text-right">
+                                                        <div th:if="${rating1[1]==1 or rating1[1]==null}">
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-10">
+                                                                <div class="progress" style="height: 20px;">
+                                                                    <div class="progress-bar "
+                                                                        style="background-color: rgb(240, 83, 35);"
+                                                                        role="progressbar" th:if="${rating1[0]}!=0"
+                                                                        th:value="${rating1[0]}/${Sumrat}*100"
+                                                                        aria-valuenow="5" aria-valuemin="0"
+                                                                        aria-valuemax=""></div>
+                                                                        <div class="progress-bar "
+                                                                            style="background-color: rgb(240, 83, 35);"
+                                                                            th:if="${rating1[0]}==0" role="progressbar"
+                                                                            value="0" aria-valuenow="5"
+                                                                            aria-valuemin="0" aria-valuemax=""></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2"> [[${r1}]]</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                        </div></div>
+                                    </div>
+                                </div>
+                         
+                                <div class="review_list "
+                                    style="overflow-y: auto;overflow-x: hidden; max-height: 800px; background:#f1f6f7;"
+                                    ng-if="pager.values!=null">
+                                    <div class="row" ng-repeat="revPr in pager.values|orderBy:'-[9]'">
+                                        <div class="col-md-12">
+                                            <div class="media g-mb-30 media-comment">
+                                                <img ng-if="revPr[3]!=''"
+                                                    class="d-flex g-width-50 g-height-50 rounded-circle g-mt-3 g-mr-15"
+                                                     ng-src="{{revPr[3]}}">
+                                                 <img ng-if="revPr[3]==''" src="/images/userAvatar.png" alt=""
+                                                     class="d-flex g-width-50 g-height-50
+                                                     rounded-circle g-mt-3 g-mr-15">
+                                                <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                                    <div class="g-mb-15">
+                                                        <h5 class="h5 g-color-gray-dark-v1 mb-0">
+                                                            {{revPr[1]}} {{revPr[2]}}</h5>
+                                                            <div ng-switch="revPr[8]">
+                                                                <div ng-switch-when="5">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                                <div ng-switch-when="4">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                                <div ng-switch-when="3">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                                <div ng-switch-when="2">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                                <div ng-switch-when="1">
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                                <div ng-switch-default></div>
+                                                            </div>
+                                                        <span
+                                                            class="g-color-gray-dark-v4
+                                                            g-font-size-12">{{revPr[9]| date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                                    </div>
+                                                    <p style="font-size: 1.5rem;">{{revPr[7]}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                   </div>
+                                   <br>
+                                   
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination justify-content-center ">
+                                            <li class="page-item ">
+                                                <a class="page-link" ng-click="pager.first()" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item " ><a class="page-link"
+                                                    ng-click="pager.prev()">Prev</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link">{{pager.page+1}} of
+                                                    {{pager.count}}</a></li>
+
+                                            <li class="page-item">
+                                                <a class="page-link" ng-click=" pager.next()">Next</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" ng-click="pager.last()" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- rate-and-review section end -->
+
+
+        <!-- section product -->
+
+
+        <section class="product_container productx">
+
+            <h1 class="heading-details">Sản phẩm cùng loại</h1>
+
+            <div class="box_container" style="text-align: center;">
+
+                <div  class="box" th:each="p : ${prodetail.category.products}">
+                    <span th:if="${p.discount!=null && p.discount.percent_discount != 0}" class="discount">[[${p.discount.percent_discount}]]%</span>
+                    <div class="icons">
+                        <button th:attr="ng-click=@{|wishlist.addtowishlist(${p.id})|}" class="fas fa-heart"></button>
+                        <!-- <a href="#" class="fas fa-share"></a> -->
+                        <button th:attr="ng-click=@{|cart.addtocart(${p.id})|}" class="fas fa-shopping-cart"></button>
+                    </div>
+                    <img th:src="@{${p.image}}" alt="">
+                    <h3><a th:href="@{'/vgreens/product/detail/'+${p.id}}">[[${p.name}]]
+
+                    </a></h3>
+                    <!-- <div class="stars">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div> -->
+                    <div th:if="${p.discount!=null}" class="price">[[${#numbers.formatDecimal(p.consignment.selling_price-p.consignment.selling_price*p.discount.percent_discount/100, 0, 'COMMA', 0,
+                        'POINT')}]] .đ <span th:if="${p.discount.percent_discount != 0}">[[${#numbers.formatDecimal(p.consignment.selling_price, 0, 'COMMA', 0,
+                            'POINT')}]] .đ</span></div>
+                        <div th:if="${p.discount==null}" class="price">[[${#numbers.formatDecimal(p.consignment.selling_price, 0, 'COMMA', 0,
+                            'POINT')}]] .đ </div>
+                </div>
+              
+
+            </div>
+
+
+        </section>
+
+        <!-- section product -->
+        
+<style>
+    
+    @media (min-width: 0) {
+    .g-mr-15 {
+    margin-right: 1.07143rem !important;
+    }
+    }
+    @media (min-width: 0){
+    .g-mt-3 {
+    margin-top: 0.21429rem !important;
+    }
+    }
+
+    .g-height-50 {
+    height: 50px;
+    }
+
+    .g-width-50 {
+    width: 50px !important;
+    }
+
+    @media (min-width: 0){
+    .g-pa-30 {
+    padding: 1.3rem !important;
+    }
+    }
+
+    .g-bg-secondary {
+    background-color: #fafafa !important;
+    }
+
+    .u-shadow-v18 {
+    box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+    }
+
+    .g-color-gray-dark-v4 {
+    color: #777 !important;
+    }
+
+    .g-font-size-12 {
+    font-size: 1rem !important;
+    }
+
+    .media-comment {
+    margin-top:20px
+    }
+</style>
+   
+    <script>
+        console.log('d ');
+        $(document).ready(function () {
+            $('.progress .progress-bar').css("width",
+                function () {
+                    return $(this).attr("value") + "%";
+                }
+            )
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#input-7-xs').rating({
+                displayOnly: true,
+                step: 0.5
+            });
+        });
+    </script>
+     </main>
+</body>
+
+</html>

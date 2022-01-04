@@ -1,0 +1,62 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới Danh mục</h5>
+                <button id="_list">Danh sách Danh mục</button>
+            </div>
+            <form action="" method="POST" name="frmAddCategory" novalidate enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Tên Danh Mục</label>
+                                <input type="text" class="form-control" ng-model="form.name" minlength="1" required
+                                    maxlength="30" name="name" id="name" aria-describedby="helpId"
+                                    placeholder="Tên danh mục">
+                                <span ng-show="frmAddCategory.name.$invalid" class="has-error">Phải nhập tên danh mục
+                                </span><br>
+                                <span ng-show="frmAddCategory.name.$error.minlength" class="has-error">Tên danh mục phải
+                                    dài hơn 1 kí tự
+                                </span>
+                                <span ng-show="frmAddCategory.name.$error.maxlength" class="has-error">Tên danh mục phải
+                                    ngắn hơn 30 kí tự
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p>{{form.image}}</p>
+                            <div class="form-group input-image">
+                                <!-- <label for="image" ng-if="!form.image.startsWith('https')">
+                                    <img ng-if="form.img == null" src="/images/pic-1.png" alt="">
+                                    <img ng-if="form.img != null " ng-src="{{'/upload/accounts/'+imageTemp}}" alt="">
+                                  
+                                </label>
+                                <label for="image"  ng-if="form.image.startsWith('https')">
+                                    <img ng-if="form.img == null" ng-src="{{form.image}}" alt="">
+                                    <img ng-if="form.img != null " ng-src="{{'/upload/accounts/' + imageTemp}}" alt="">
+                                </label> -->
+                                <img  ng-src="{{'/upload/accounts/' + imageTemp}}" alt="">
+                                <input type="file" class="form-control-file" name="" id="image" placeholder=""
+                                    onchange="angular.element(this).scope().imageChanged(this.files)">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-show="!isShow"
+                        ng-disabled="frmAddCategory.$invalid" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success" ng-click="reset()">Làm mới</button>
+                    <deleten type="button" class="btn btn-danger" ng-show="isShow" ng-click="delete(form)">Xóa</deleten>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    
+</div>  

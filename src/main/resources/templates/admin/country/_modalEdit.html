@@ -1,0 +1,85 @@
+    <!-- Modal -->
+    <div class="modal fade" id="countryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" name="countryForm" novalidate>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông tin tỉnh thành</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="code">Mã tỉnh thành</label>
+                            <input type="text" class="form-control" ng-model="form.code" name="code" id="code" minlength="1"
+                                aria-describedby="helpId" placeholder="Mã tỉnh thành" ng-required=true postive>
+                                <small id="helpId" ng-show="countryForm.code.$error.required" class="form-text text-muted">Nhập mã tỉnh, thành</small>
+                                <small id="helpId" ng-show="countryForm.code.$error.minlength" class="form-text text-muted">Mã tỉnh thành lớn hơn 1 kí tự</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Tên tỉnh thành</label>
+                            <input type="text" class="form-control" ng-model="form.name" name="name" id="name" minlength="1" ng-required=true postive
+                                aria-describedby="helpId" placeholder="Tên tỉnh thành">
+                                <small id="helpId" ng-show="countryForm.name.$error.required" class="form-text text-muted">Nhập Tên tỉnh, thành</small>
+                                <small id="helpId" ng-show="countryForm.name.$error.minlength" class="form-text text-muted">Mã tỉnh thành lớn hơn 1 kí tự</small>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-success" ng-click="create()" ng-show="!isShow" ng-disabled="countryForm.$invalid"><i class="fas fa-plus"></i> Thêm mới</button>
+                        <button type="button" class="btn btn-success" ng-click="update()" ng-show="isShow"><i class="far fa-edit"></i> Cập nhập</button>
+                        <button type="button" class="btn btn-success"  ng-click="selectItem(form)" ng-show="isShow" data-toggle="modal" data-target="#deleteItem"><i class="far fa-edit"></i> Xóa</button>
+                       
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="stateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="POST" novalidate name="countriesForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông tin quận huyện</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                    
+
+                        <div class="form-group">
+                            <label for="name">Tên quận - huyện</label>
+                            <input type="text" class="form-control" ng-model="formState.name" name="name" id="name" ng-required=true postive minlength="2"
+                                aria-describedby="helpId" placeholder="Tên quận huyện">
+                                <small id="helpId" ng-show="countriesForm.name.$error.required" class="form-text text-muted">Nhập Tên quận, huyện</small>
+                                <small id="helpId" ng-show="countriesForm.name.$error.minlength" class="form-text text-muted">Tên quận/huyện lớn hơn 2 kí tự</small>
+                       
+                        </div>
+                        <div class="form-group">
+                          <label for="country_id">Tên tỉnh thành</label> 
+                          <input type="text"
+                            class="form-control" readonly ng-value="country_name"  aria-describedby="helpId" placeholder="">
+                        </div>
+                        <input type="hidden"  ng-model="formState.country.id"   name="country_id" id="country_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" ng-click="reset()"><i class="fas fa-plus"></i> Làm mới</button>
+                        <button type="button" class="btn btn-success" ng-click="createState()" ng-show="!isShow" ng-disabled="countriesForm.$invalid"><i class="fas fa-plus"></i> Thêm mới</button>
+                        <button type="button" class="btn btn-success" ng-click="updateState()" ng-show="isShow"><i class="far fa-edit"></i> Cập nhập</button>
+                        <button type="button" class="btn btn-success"  ng-click="selectItemState(form)" ng-show="isShow" data-toggle="modal" data-target="#deleteItem"><i class="far fa-edit"></i> Xóa</button>
+                       
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

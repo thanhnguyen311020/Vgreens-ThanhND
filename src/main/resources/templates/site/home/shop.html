@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Shop</title>
+
+
+<body>
+
+    <main ng-controller="shopping-cart-ctrl">
+
+
+
+        <!-- <div class="titlePage">
+            <h1>Sản phẩm</h1>
+            <div class="link">
+                <a href="#">Trang chủ</a> - <a href="#">Sản phẩm</a>
+            </div>
+        </div> -->
+
+        <!-- product section start -->
+
+        <section class="products">
+
+            <div class="siderbar-container">
+
+                <div class="box box-1">
+                    <h1>Bộ lọc</h1>
+                </div>
+
+                <div class="box">
+                    <h1>Tìm kiếm theo giá</h1>
+
+                    <div class="wrapper">
+
+                        <form th:action="@{/vgreens/shop/findbyprice}">
+                            <div class="values">
+                                <input id="range1" name="selling_price1" value="0" class="input-range1" />
+
+
+                                <span> &dash; </span>
+                                <input id="range2" name="selling_price2" value="1000000" class="input-range2" />
+
+
+
+
+                            </div>
+
+
+                            <div class="range-container">
+                                <div class="slider-track"></div>
+                                <input style="color: #28a745" type="range" oninput="slideOne()" min="0" max="1000000" value="0"
+                                    id="slider-range-1">
+                                <input style="color: #28a745" type="range" oninput="slideTwo()" min="0" max="1000000" value="1000000"
+                                    id="slider-range-2">
+
+
+
+
+                            </div>
+    
+    
+                            <button type="submit" class="_btn" style="border-radius: 0; font-size: 1.3rem; width: 100%;" >Lọc sản phẩm</button>
+                        </form>
+
+
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h1>Loại Sản Phẩm</h1>
+                    <div class="category-siderbar">
+
+                        <ul id="autoWidth" class="cs-hidden">
+                            <!-- box-1 -->
+                            <li class="item" th:each=" cates : ${categories}">
+                                <!-- Feature-box -->
+                                <div class="feature-box">
+                                    <a th:href="@{|/vgreens/shop/categories?cid=${cates.id}|}">
+                                        <span>[[${cates.name}]]</span>
+                                    </a>
+                                </div>
+                                <!-- text------ -->
+                                <!-- <span>[[${cates.name}]]</span> -->
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <div class="categories">
+                        <!-- <div class="item">
+                        <input type="radio" name="category" id="category">
+                        <label for="category">Tất cả</label>
+                    </div>
+                    <div class="item">
+                        <input type="radio" name="category" id="category2">
+                        <label for="category2">Hoa quả</label>
+                    </div>
+                    <div class="item">
+                        <input type="radio" name="category" id="category3">
+                        <label for="category3">Râu xanh</label>
+                    </div>
+                    <div class="item">
+                        <input type="radio" name="category" id="category6">
+                        <label for="category6">Thịt cá</label>
+                    </div>
+                    <div class="item">
+                        <input type="radio" name="category" id="category5">
+                        <label for="category5">Củ</label>
+                    </div>
+                    <div class="item">
+                        <input type="radio" name="category" id="category4">
+                        <label for="category4">Các loại hạt</label>
+                    </div> -->
+
+                        
+                        <div style="border-bottom: .1rem solid #ececec; color: #555" class="cate-reps" th:each="cates: ${categories}">
+
+                            <a th:href="@{|/vgreens/shop/categories?cid=${cates.id}|}">
+                                [[${cates.name}]]</a>
+                        </div>
+
+                        <!-- <div class="item cate-reps">
+                            <a href="#">Xem thêm... <i class="fas fa-angle-down"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- <div class="box">
+                    <h1>Lọc theo hãng</h1>
+                    <div class="categories">
+                        <a href="#">Tất cả</a>
+                        <a href="#">Tất cả</a>
+                        <a href="#">Tất cả</a>
+                        <a href="#">Tất cả</a>
+                        <a href="#">Tất cả</a>
+                        <a href="#">Tất cả</a>
+
+                    </div>
+                </div> -->
+
+
+
+            </div>
+
+            <div class="product-container">
+
+                <div class="sort">
+
+
+                    <div class="search-box">
+
+                        <i class='bx bx-search-alt-2'></i>
+                        <form>
+
+                            <input id="name" name="name" th:value=${name} type="search" onchange="this.form.submit()"
+                                placeholder="Tìm kiếm theo tên sản phẩm...">
+
+                        </form>
+
+
+                    </div>
+
+
+                    <div class="filter-box">
+                        <div class="left">
+                            <form th:action="@{/vgreens/shop/filter}" method="get">
+                                <select name="filter" id="filter">
+                                    <option value="">Sắp xếp theo</option>
+                                    <option value="sapxep-tiengiamdan">Giá cao đến thấp</option>
+                                    <option value="sapxep-tientangdan">Giá thấp đến cao</option>
+                                    <option value="sapxep-tenAtoZ">Tên A -> Z</option>
+                                    <option value="sapxep-tenZtoA">Tên Z -> A</option>
+                                    <option value="sapxep-sanphamkhuyenmai">Khuyến mãi</option>
+
+                                </select>
+
+                            </form>
+
+
+
+                        </div>
+                        <div class="right">
+                            <form>
+                                <select name="size" id="size" onchange="this.form.submit()">
+                                    <option value="">Hiển thị sản phẩm</option>
+                                    <option th:selected="${products.size ==10}" value="10">10</option>
+                                    <option th:selected="${products.size ==20}" value="20">20</option>
+                                    <option th:selected="${products.size ==30}" value="30">30</option>
+                                    <option th:selected="${products.size ==100}" value="100">Tất cả</option>
+                                </select>
+                            </form>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="product-box">
+
+                    <div class="box" th:each="p : ${products}">
+
+                        <span th:if="${p.discount!=null && p.discount.percent_discount != 0}"
+                            class="discount">[[${p.discount.percent_discount}]]%</span>
+                        <div class="icons">
+                            <button th:attr="ng-click=@{|wishlist.addtowishlist(${p.id})|}"
+                                class="fas fa-heart"></button>
+                            <!-- <a href="#" class="fas fa-share"></a> -->
+
+
+                            <button th:if="${p.consignment.currentQuantity!=0}"
+                                th:attr="ng-click=@{|cart.addtocart(${p.id})|}" class="fas fa-shopping-cart"></button>
+                        </div>
+                        <a th:href="@{'/vgreens/product/detail/'+${p.id}}">
+                            <div class="img">
+                                <img th:src="@{${p.image}}" alt="">
+                            </div>
+
+                            <div class="text">
+                                <h3><a th:href="@{'/vgreens/product/detail/'+${p.id}}">[[${p.name}]]</a></h3>
+                                <!-- <div class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div> -->
+                                <div th:if="${p.consignment.currentQuantity!=0}">
+                                    <div th:if="${p.discount!=null}" class="price">
+                                        [[${#numbers.formatDecimal(p.consignment.selling_price-p.consignment.selling_price*p.discount.percent_discount/100,
+                                        0, 'COMMA', 0,
+                                        'POINT')}]] .đ <span th:if="${p.discount.percent_discount != 0 }">[[${#numbers.formatDecimal(p.consignment.selling_price, 0,
+                                            'COMMA',
+                                            0,
+                                            'POINT')}]] .đ</span></div>
+                                    <div th:if="${p.discount==null}" class="price">
+                                        [[${#numbers.formatDecimal(p.consignment.selling_price, 0, 'COMMA', 0,
+                                        'POINT')}]] .đ </div>
+                                </div>
+                                <div th:unless="${p.consignment.currentQuantity!=0}">
+                                    <div class="price">
+                                        <span>Hết Hàng</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </a>
+                        <div class="btn-responsive">
+                            <a class="heart" th:attr="ng-click=@{|wishlist.addtowishlist(${p.id})|}"><i
+                                    class="far fa-heart"></i></a>
+                            <a class="cart" th:attr="ng-click=@{|cart.addtocart(${p.id})|}"><i
+                                    class="fas fa-cart-plus"></i> Thêm</a>
+                            <a class="cart1" th:attr="ng-click=@{|cart.addtocart(${p.id})|}"><i
+                                    class="fas fa-cart-plus"></i> </a>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- <a href="#" class="_btn">Show</a> -->
+
+
+                </div>
+                <div th:if="${shop!=null}" class="page">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-lg">
+                            <li>
+
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop(name=${name}, size =${products.size}, page=${totalpage-totalpage+1})}"><i
+                                        class="bi bi-chevron-double-left"></i>
+
+                                </a>
+                                <a th:unless="${totalpage-totalpage+1 == currentPage}" class="page-item"
+                                    aria-current="page"
+                                    th:href="@{/vgreens/shop(name=${name}, size =${products.size}, page=${currentPage-1})}"><i
+                                        class="bi bi-chevron-compact-left"></i>
+
+
+                                </a>
+                                <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop(name=${name}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a>
+                                <a th:unless="${totalpage == currentPage}" class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop(name=${name}, size =${products.size}, page=${currentPage+1})}">
+                                    <i class="bi bi-chevron-right"></i>
+
+                                </a>
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop(name=${name}, size =${products.size}, page=${totalpage})}"><i
+                                        class="bi bi-chevron-double-right"></i>
+
+                                </a>
+
+
+
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
+                <div th:if="${cates!=null}" class="page">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-lg">
+                            <li>
+                                <!-- <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid}, name=${name}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a> -->
+
+
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid},name=${name}, size =${products.size}, page=${totalpage-totalpage+1})}"><i
+                                        class="bi bi-chevron-double-left"></i>
+
+                                </a>
+                                <a th:unless="${totalpage-totalpage+1 == currentPage}" class="page-item"
+                                    aria-current="page"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid},name=${name}, size =${products.size}, page=${currentPage-1})}"><i
+                                        class="bi bi-chevron-compact-left"></i>
+
+
+                                </a>
+                                <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid},name=${name}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a>
+                                <a th:unless="${totalpage == currentPage}" class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid},name=${name}, size =${products.size}, page=${currentPage+1})}">
+                                    <i class="bi bi-chevron-right"></i>
+
+                                </a>
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid},name=${name}, size =${products.size}, page=${totalpage})}"><i
+                                        class="bi bi-chevron-double-right"></i>
+
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <div th:if="${findbyprice!=null}" class="page">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-lg">
+                            <li>
+                                <!-- <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid}, name=${name}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a> -->
+
+
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/findbyprice(name=${name}, size =${products.size}, selling_price1=${price1}, selling_price2=${price2},page=${totalpage-totalpage+1})}"><i
+                                        class="bi bi-chevron-double-left"></i>
+
+                                </a>
+                                <a th:unless="${totalpage-totalpage+1 == currentPage}" class="page-item"
+                                    aria-current="page"
+                                    th:href="@{/vgreens/shop/findbyprice(name=${name}, size =${products.size},selling_price1=${price1}, selling_price2=${price2}, page=${currentPage-1})}"><i
+                                        class="bi bi-chevron-compact-left"></i>
+
+
+                                </a>
+                                <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/findbyprice(name=${name}, size =${products.size},selling_price1=${price1}, selling_price2=${price2}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a>
+                                <a th:unless="${totalpage == currentPage}" class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/findbyprice(name=${name}, size =${products.size},selling_price1=${price1}, selling_price2=${price2}, page=${currentPage+1})}">
+                                    <i class="bi bi-chevron-right"></i>
+
+                                </a>
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/findbyprice(name=${name}, size =${products.size},selling_price1=${price1}, selling_price2=${price2}, page=${totalpage})}"><i
+                                        class="bi bi-chevron-double-right"></i>
+
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <div th:if="${filter!=null}" class="page">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-lg">
+                            <li>
+                                <!-- <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/categories(cid=${cid}, name=${name}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a> -->
+
+
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/filter(filter=${filters}, size =${products.size}, page=${totalpage-totalpage+1})}"><i
+                                        class="bi bi-chevron-double-left"></i>
+
+                                </a>
+                                <a th:unless="${totalpage-totalpage+1 == currentPage}" class="page-item"
+                                    aria-current="page"
+                                    th:href="@{/vgreens/shop/filter(filter=${filters}, size =${products.size}, page=${currentPage-1})}"><i
+                                        class="bi bi-chevron-compact-left"></i>
+
+
+                                </a>
+                                <a th:each=" pageNumber : ${pageNumbers}" th:if="${products.totalPages >1}"
+                                    th:class="${pageNumber == products.number+1} ? 'page-item _active ':'page-item '"
+                                    aria-current="page" class="page-link"
+                                    th:href="@{/vgreens/shop/filter(filter=${filters}, size =${products.size}, page=${pageNumber})}"
+                                    th:text="${pageNumber}">
+
+                                </a>
+                                <a th:unless="${totalpage == currentPage}" class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/filter(filter=${filters}, size =${products.size}, page=${currentPage+1})}">
+                                    <i class="bi bi-chevron-right"></i>
+
+                                </a>
+                                <a class="page-item" aria-current="page"
+                                    th:href="@{/vgreens/shop/filter(filter=${filters}, size =${products.size}, page=${totalpage}}"><i
+                                        class="bi bi-chevron-double-right"></i>
+
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
+
+        </section>
+        <script>
+            $('select').on('change', function (e) {
+                this.form.submit()
+            });
+        </script>
+
+    </main>
+
+
+
+</body>
+
+</html>

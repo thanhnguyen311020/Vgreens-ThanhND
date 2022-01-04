@@ -1,0 +1,86 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Thêm mới Mã giảm giá</h5>
+                <button id="_list" ng-click="initialize()">Danh sách mã giảm giá</button>
+            </div>
+            <form action="" method="POST" name="frmAddCou" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">    
+                                <label for="name">Mã giảm giá</label>
+                                    <input type="hidden" ng-model="form.coupon_id">
+                                <input type="text" class="form-control" ng-model="form.name" minlength="5" required maxlength="50" name="name"
+                                    id="name" aria-describedby="helpId" placeholder="mã giảm giá">
+                                    <span ng-show="frmAddCou.name.$invalid" class="has-error">Phải nhập mã giảm giá
+                                    </span><br>
+                                    <small ng-show="frmAddCou.name.$error.minlength" class="has-error">Mã giảm phải dài hơn 5 kí tự
+                                    </small>
+                                    <span ng-show="frmAddCou.name.$error.maxlength" class="has-error">Mã giảm phải ngắn hơn 50 kí tự
+                                    </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="created_time">Ngày nhập</label>
+                                <input readonly type="datetime-local" class="form-control" ng-model="form.created_time" name="created_time"
+                                    id="created_time" aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="consignmentForm.created_time.$error.required" class="form-text text-muted">Vui chọn ngày khuyễn mãi</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="created_time">Ngày cập nhập</label>
+                                <input readonly type="datetime-local" class="form-control" ng-model="form.updated_time" name="updated_time"
+                                    id="updated_time" aria-describedby="helpId" placeholder=""
+                                    ng-required=true>
+                                    <small id="helpId" ng-show="consignmentForm.updated_time.$error.required" class="form-text text-muted">Vui chọn ngày kết thúc</small>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="updated_time">Ngày cập nhập</label>
+                                <input type="datetime-local" class="form-control" ng-model="form.updated_time" name="updated_time"
+                                    id="updated_time" aria-describedby="helpId" placeholder="">
+         
+                            </div> -->
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-group ml-3"> <label for="">Phần trăm giảm giá</label>
+                                <div class="input-group mb-3">
+                                    
+                                    <input type="number" class="form-control" name="coupon_percent" id="coupon_percent"  aria-label="Amount (to the nearest dollar)" aria-describedby="helpId"  required  
+                                        ng-model="form.coupon_percent" placeholder="giảm giá" min="0">
+                                    <div class="input-group-append">
+                                            <span class="input-group-text">&#37;</span>
+                                    </div>
+                                        <div class="validateMessage">
+                                            <small id="helpId" ng-show="frmAddCou.coupon_percent.$error.required" class="form-text text-muted">Vui lòng nhập % giảm giá</small>
+                                            <small id="helpId" ng-show="!frmAddCou.coupon_percent.$error.required && frmAddCou.coupon_percent.$error.min" class="form-text text-muted">Phải là số dương</small>
+                                        </div>
+                                </div>
+                            </div>
+                                <div class="form-group ml-3">
+                                    <label for="">Ghi chú</label>
+                                    <textarea class="form-control" id="note" name="note" required
+                                    ng-model="form.note" rows="3"></textarea>
+                               
+                                <span ng-show="frmAddCou.note.$invalid" class="has-error font-italic">Vui lòng điền mô tả
+                                    sản phẩm
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" ng-show="!isShow"
+                        ng-disabled="frmAddCou.$invalid" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success" ng-click="reset()">Làm mới</button>
+                    <deleten th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</deleten>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+<div class="row">
+    <div class="col-12 title-control">
+        <h3>Người dùng</h3>
+        <button id="_form">Thêm Mới </button>
+    </div>
+</div>
+
+<div class="row ">
+
+    <div class="col-md-12">
+
+        <div class="control-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tìm kiếm</th>
+
+                        <th>Trạng thái</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="search" name="keyname" id="namec" ng-model="search"
+                                    placeholder="Search...">
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="form-group ">
+                                <select class="form-control" name="" id=""
+                                    onchange="angular.element(this).scope().filterAccountByStatus(this.options[this.selectedIndex].value)">
+                                    <option selected value="">Tất cả</option>
+                                    <option value="1">Đã kích hoạt</option>
+                                    <option value="0">Chưa kích hoạt</option>
+                                </select>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-12 mt-4  ">
+
+
+        <div class="card">
+            <!-- <div class="card-header">
+                <h5>Thông tin sản phẩm</h5>
+
+              
+
+            </div> -->
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <!-- <th><input type="checkbox" name="" id=""></th> -->
+                            <th class="text-center">#.</th>
+                            <th>Tài khoảng</th>
+                            <th ng-click="sort('last_name')">Họ và tên
+                                <i style="display: inline !important;" class="" ng-show="sortKey=='last_name'"
+                                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                            </th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày tạo</th>
+                            <!-- <th>Địa chỉ</th> -->
+                            <th class="text-center">Trạng thái</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+                            <!-- <td scope="row">
+                                <input type="checkbox" name="" ng-attr-id="check-{{item.username}}"
+                                    ng-attr-class="checkAccount">
+                            </td> -->
+                            <td style="text-align: center; min-width: 40px;"><strong>{{$index + 1}}</strong></td>
+                            <td ng-click="edit(item)">{{item.username}}</td>
+                            <td class="td-product" ng-click="edit(item)">
+                                <img style="border-radius: 50%;" ng-show="{{!item.photo.startsWith('https')}}" src="/images/no_image.png" alt="">
+                                <img style="border-radius: 50%;" ng-show="{{item.photo.startsWith('https')}}" ng-src="{{item.photo}}" alt="">
+                                <div class="product-info">
+                                    <div><a href="#">{{item.first_name}} {{item.last_name}}</a></div>
+                                    <!-- <span>11027</span> -->
+                                </div>
+                            </td>
+                            <td ng-click="edit(item)">{{item.email}}</td>
+                            <td ng-click="edit(item)">{{item.phone_number}}</td>
+                            <td>{{item.register_date | date :'dd/MM/yyyy'}}</td>
+                            <!-- <td>{{item.country.name}}</td> -->
+
+                            <td class="switch-container">
+
+                                <div class="switch-button">
+                                    <input type="checkbox" ng-checked="{{item.enable}}" class="toggle1"
+                                        id="rounded{{item.username}}">
+                                    <label ng-click="selectItem(item)" data-toggle="modal" data-target="#updateStatus"
+                                        data-checked="Active" class="rounded" data-unchecked="Inactive"></label>
+                                </div>
+
+                            </td>
+                            <!--   <td class="control-td">
+
+                                                        
+
+                                                        <a class="droplistbtn fas fa-ellipsis-v"> </a>
+                                                        <div id="droptable" class="dropdown-table">
+                                                            <a href="#"><i class="far fa-edit"></i>Cập nhập</a>
+                                                            <a href="#"><i class="far fa-trash-alt"></i>Xóa</a>
+
+                                                        </div> 
+                                                    </td>-->
+
+                            <td style="min-width: 50px; text-align: center;" ng-if="item.username != 'root'">
+                                <div class="btn-group droplistbtn ">
+                                    <a type="button" class="fas fa-cogs " data-toggle="dropdown">
+                                        <!-- <span class="caret"></span> -->
+                                        <!-- <span class="sr-only">Toggle Dropdown</span> -->
+                                    </a>
+                                    <ul style="min-width: 170px !important; transform: translate(-100px, 20px) !IMPORTANT" class="dropdown-menu drop_menu" role="menu">
+                                        <li><a  data-toggle="modal" data-target="#listOrderDetail" ng-click="getOrderDetailByUsername(item)"><i class="fas fa-list-ol"></i>Sản phẩm đã mua</a></li>
+                                        <li><a ng-click="edit(item)"><i class="far fa-edit"></i>Cập nhập</a></li>
+                                      <li th:if="${#request.isUserInRole('DIRE')}"> <a ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i
+                                                class="far fa-trash-alt"></i>Xóa</a> </li> 
+                                       
+
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr ng-show="items.length === 0">
+                            <td class="text-center" colspan="5">Không có dữ liệu</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-header">
+                <h5></h5>
+                <div class="pagination">
+                    <div class="form-group">
+                        <label for="staticEmail" class=" col-form-label">Xem: </label>
+                        <div class="">
+                            <select ng-model="pageSize" ng-options="num for num in [5, 10, 20,100]"></select>
+                        </div>
+                    </div>
+
+                    <div class="page-box">
+                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,236 @@
+
+                        <div class="row">
+                            <div class="col-12 title-control">
+                                <h3>Đánh giá từ khách hàng</h3>
+                            </div>
+                        </div>
+
+                        <div class="row " >
+
+                            <div class="col-md-12">
+
+                                <div class="control-list">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Tìm kiếm</th>
+                                                <th>Loại đánh giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td scope="row">
+                                                    <div class="search-box">
+                                                        <i class="fas fa-search"></i>
+                                                        <input  type="search" name="keyname"
+                                                       id="namec" ng-model="search" placeholder="Search...">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" name="" id="">
+                                                            <option selected>Xếp loại</option>
+                                                            <option>1 Sao</option>
+                                                            <option>2 Sao</option>
+                                                            <option>3 Sao</option>
+                                                            <option>4 Sao</option>
+                                                            <option>5 Sao</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                              
+                                               
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12 mt-4  ">
+
+
+                                <div class="card">
+                                    <div class="card-header header-tab-order">
+                                       
+                                            <!-- <div class="nav nav-tabs header-tab-order"  id="nav-tab" role="tablist">
+                                              <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#reviewByUser" role="tab" aria-controls="reviewByUser" aria-selected="true">Đánh giá từ khách hàng</a>
+                                              <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#reviewAvg" role="tab" aria-controls="reviewAvg" aria-selected="false">Thống kê đánh giá</a>
+                                              
+                                            </div> -->
+                                        
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#reviewByUser"
+                                                    role="tab" aria-controls="home" aria-selected="true">Đánh giá từ khách hàng</a></li>
+                                            <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#reviewAvg"
+                                                    role="tab" aria-controls="profile" aria-selected="false">Thống kê đánh giá</a></li>
+                            
+                                            </ul>
+
+                                        
+
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="reviewByUser" role="tabpanel" aria-labelledby="nav-home-tab">
+
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                           
+                                                            <th class="text-center">STT</th>
+                                                            <th>Sản phẩm</th>
+                                                            <th ng-click="sort('rating')">Sản phẩm
+                                                                <i style="display: inline !important;" class="" ng-show="sortKey=='rating'" ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                                                            </th>
+                                                            <th>Nội dung </th>
+                                                            <th>Khách hàng</th>
+                                                            <th ng-click="sort('createDate')">Ngày đánh giá
+                                                                <i style="display: inline !important;" class="" ng-show="sortKey=='createDate'" ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                                                            </th>
+                                                            <!-- <th>Ngày cập nhập</th> -->
+                                                            <th></th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+                                                            
+                                                            <td class="text-center">{{$index + 1}}</td>
+                                                            <td class="td-product">
+                                                                <!-- <img ng-show="{{item.consignment.product.image == null}}" src="/images/pic-1.png" alt=""> -->
+                                                                <img  ng-src="{{item.product.image}}" alt="">
+                                                                <div class="product-info">
+                                                                    <div><a href="#">{{item.product.name}}</a></div>
+                                                                 
+                                                                </div>
+                                                            </td>
+                                                         
+                                                            <td class="r-{{item.id}}">
+                                                                <div class="stars-outer">
+                                                                    <div class="stars-inner"></div>
+                                                                </div>
+                                                                <span class="number-rating"></span>
+                                                                {{item.rating |  number:1}}
+                                                            </td>
+                                                            <td>{{item.comment}}</td>
+                                                            <td>{{item.username}}</td>
+                                                            <td>{{item.created_time | date:'HH:mm dd/MM/yyyy '}}</td>
+                                                            <!-- <td>{{item.updated_time | date:'HH:mm dd/MM/yyyy '}}</td> -->
+                                 
+                                                            <td><a ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i class="far fa-trash-alt"></i></a></td>
+                                                        </tr>
+                                                      
+                                                        <tr ng-show="items.length === 0">
+                                                            <td class="text-center" colspan="7">Không có dữ liệu</td>
+                                                        </tr>  
+        
+        
+                                                    </tbody>
+                                                </table>
+                                                <div class="pagination mt-2" style="justify-content: space-between;">
+                                                    <div class="form-group">
+                                                        <label for="staticEmail" class=" col-form-label">Show: </label>
+                                                        <div class="">
+                                                            <select  ng-model="pageSize" ng-options="num for num in [10, 20, 55,100]" ></select>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class="page-box">
+                                                        <dir-pagination-controls 
+                                                      max-size="5"
+                                                      direction-links="true"
+                                                      boundary-links="true" >
+                                                  </dir-pagination-controls>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="tab-pane fade " id="reviewAvg" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                           
+                                                            <th class="text-center">Mã</th>
+                                                            <th ng-click="sort('createDate')">Sản phẩm
+                                                                <i style="display: inline !important;" class="" ng-show="sortKey=='name'" ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+                                                            </th>
+                                                            <th>Đánh giá</th>
+                                                           
+                                                            <th></th>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in reviewGroupProduct">
+                                                          
+                                                            <td class="text-center">{{item.product.id}}</td>
+                                                            <td class="td-product">
+                                                                <!-- <img ng-show="{{item.consignment.product.image == null}}" src="/images/pic-1.png" alt=""> -->
+                                                                <img  ng-src="{{item.product.image}}" alt="">
+                                                                <div class="product-info">
+                                                                    <div><a href="#">{{item.product.name}}</a></div>
+                                                                 
+                                                                </div>
+                                                            </td>
+                                                            <td class="p-{{item.product.id}}">
+                                                                <div class="stars-outer">
+                                                                    <div class="stars-inner"></div>
+                                                                </div>
+                                                                <span class="number-rating"></span>
+                                                                {{item.ratingCount |  number:1}}
+                                                            </td>
+                                                            
+                                 
+                                                            <!-- <td><div class="btn-group droplistbtn ">                                                   
+                                                                <a type="button" class="fas fa-ellipsis-v " data-toggle="dropdown">
+                                                                 
+                                                                </a>
+                                                                <ul class="dropdown-menu drop_menu" role="menu">
+                                                                   <a ng-click="edit(item)"><i class="far fa-edit"></i>Cập nhập</a>
+                                                                  <a ng-click="selectItem(item)" data-toggle="modal" data-target="#deleteItem"><i class="far fa-trash-alt"></i>Xóa</a>
+                                                                  
+                                                                </ul>
+                                                              </div></td> -->
+                                                        </tr>
+                                                      
+        
+        
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            
+                                          </div>
+                                        
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        
+                                        <!-- Phân trang kiểu cũ -->
+                                        
+                                        <!-- <nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+
+                                            <dir-pagination-controls 
+                                              max-size="5"
+                                              direction-links="true"
+                                              boundary-links="true" >
+                                          </dir-pagination-controls>
+                                            
+                                              <div style="margin-left: 20px;">
+                                                <label for="search">Xem:</label>
+                                                    <select style="height: 40px;" ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+                                              </div>
+                                            </nav>  -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                      
+                         

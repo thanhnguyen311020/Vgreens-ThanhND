@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-12 title-control">
+        <h3>Quản lý thông tin vận chuyển</h3>
+        <button id="_form">Thêm Mới </button>
+    </div>
+</div>
+
+<div class="row ">
+
+    <div class="col-md-12">
+
+        <div class="control-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tìm kiếm</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="search" name="keyname" id="namec" ng-model="search"
+                                    placeholder="Search...">
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-md-12 mt-4  ">
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5>Thông tin đơn vị</h5>
+
+                <div class="pagination">
+                    <div class="form-group">
+                        <label for="staticEmail" class=" col-form-label">Hiển thị: </label>
+                        <div class="">
+                            <select ng-model="pageSize" ng-options="num for num in [8, 16, 32,50]"></select>
+                        </div>
+                    </div>
+
+                    <div class="page-box">
+                        <dir-pagination-controls max-size="8" direction-links="true" boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" ng-model="item.selected" ng-click="selectAll()"></th>
+                            <th class="text-center">Mã đơn</th>
+                            <th class="text-center"><strong>Tên người nhận</strong>
+                            </th>
+                            <th class="text-center">Địa chỉ</th>
+                            <th class="text-center">Thành tiền</th>
+                            <th class="text-center">Trạng thái</th>
+                            <th style="width: 70px;"></th>
+                            <th style="width: 70px;"></th>
+                            <th style="width: 70px;"></th>
+                            <th style="width: 70px;"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+                            <td scope="row">
+                                <input type="checkbox" ng-model="item.checked" name="all">
+                            </td>
+                            <td ng-click="edit(item)" class="text-center">{{item.id}}</td>
+                            <td ng-click="edit(item)" class="text-center">{{item.first_name +' '+item.last_name }}</td>
+                            <td ng-click="edit(item)" class="text-center">{{item.address_line +', '+item.state +',
+                                '+item.country}}</td>
+                            <td ng-click="edit(item)" class="text-center">{{item.amount|number}} VND</td>
+                            <td ng-click="edit(item)" class="text-center">{{item.payment_status}}</td>
+                            <td>
+
+                                <i ng-if="item.status ==2" style="color: green;" class="fas fa-people-carry fa-2x"></i>
+                                <i ng-if="item.status !=2" class="fas fa-people-carry fa-2x" data-toggle="modal"
+                                    data-target="#updatestatus2" ng-click="selectItem(item)"></i>
+
+
+                            </td>
+                            <td>
+
+                                <i ng-if="item.status ==3" style="color: green;"
+                                    class="fas fa-shipping-fast fa-2x "></i>
+                                <i ng-if="item.status!=3" class="fas fa-shipping-fast fa-2x " data-toggle="modal"
+                                    data-target="#updatestatus3" ng-click="selectItem(item)"></i>
+
+                            </td>
+                            <td>
+
+                                <i ng-if="item.status==4" style="color: green;" class="fas fa-box-open fa-2x "></i></i>
+                                <i ng-if="item.status!=4" class="fas fa-box-open fa-2x " data-toggle="modal"
+                                    data-target="#updatestatus4" ng-click="selectItem(item)"></i></i>
+
+                            </td>
+
+                            <td>
+
+                                <i ng-if="item.status==5" style="color: green;" class="fas fa-undo-alt fa-2x "></i>
+                                <i ng-if="item.status!=5" class="fas fa-undo-alt fa-2x " data-toggle="modal"
+                                    data-target="#updatestatus5" ng-click="selectItem(item)"></i>
+                            </td>
+
+
+                        </tr>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted">
+
+                <!-- Phân trang kiểu cũ -->
+
+                <!-- <nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+
+                                            <dir-pagination-controls 
+                                              max-size="5"
+                                              direction-links="true"
+                                              boundary-links="true" >
+                                          </dir-pagination-controls>
+                                            
+                                              <div style="margin-left: 20px;">
+                                                <label for="search">Xem:</label>
+                                                    <select style="height: 40px;" ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+                                              </div>
+                                            </nav>  -->
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

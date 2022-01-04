@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | [[#{introduce.titleSWeb}]]</title>
+
+
+<body>
+
+    <main>
+        <style>
+            p,
+            li {
+                font-size: initial;
+            }
+
+            ul {
+                list-style: disc !important;
+            }
+        </style>
+        <br>
+        <div class="container">
+            <div class="col-inner">
+                <h2 style="text-align: center;"><strong>______[[#{introduce.titleS}]]______</strong></h2>
+                <p>[[#{introduce.shipping1}]]</p>
+                <ul>
+                    <li>[[#{introduce.shipping2}]]</li>
+                    <li>[[#{introduce.shipping3}]]</li>
+                </ul>
+                <p><u>[[#{introduce.shipping4}]]</u></p>
+                <p><em>[[#{introduce.shipping5}]]</em></p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

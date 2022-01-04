@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/images/icon.png" rel="icon" type="image/x-icon" />
+	<title>Vgreens | Đăng Nhập</title>
+	<link rel="stylesheet" href="/css/siteStyle/login.css">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="img-container">
+
+			<div class="text">
+				<h1>Chào mừng đến với vgreens</h1>
+				<p>Nơi cung cấp các thực phẩm sạch an toàn, đảm bảo sức khỏe cho mọi nhà</p>
+				<a th:href="@{/vgreens/login/register}" class="bnt">Đăng ký</a>
+			</div>
+			<img class="img" src="/images/undraw_shopping_app_flsj.svg" alt="">
+		</div>
+		<div class="form-container">
+			<form th:action="@{/vgreens/login}" method="POST">
+				<a href="/vgreens/index" style="text-align: center;">
+					<img class="avatar" src="/images/icon.png">
+				</a>
+				<h2 class="title">Đăng Nhập</h2>
+				<small>[[${message}]]</small>
+				<div class="input-div one">
+					<div class="i">
+						<i class="fas fa-user"></i>
+					</div>
+					<div class="div">
+						<h5>Tài Khoản</h5>
+						<input type="text" name="username" class="input">
+					</div>
+				</div>
+				<div class="input-div pass">
+					<div class="i">
+						<i class="fas fa-lock"></i>
+					</div>
+					<div class="div">
+						<h5>Mật Khẩu</h5>
+						<input type="password" name="password" class="input">
+					</div>
+				</div>
+				<div class="remeber">
+					<input type="checkbox" id="remember" name="remember" class="">
+					<label for="remember">Ghi nhớ tài khoản</label>
+				</div>
+				<a th:href="@{/vgreens/login/forgotpassword}">Quên mật khẩu?</a>
+				<input type="submit" class="btn" value="Đăng Nhập">
+			</form>
+
+			<div class="sign-in-platforms">
+				<a href="/oauth2/authorization/google" class="login-google">
+					<img src="/images/icon-google.png" alt="">
+					<span>Đăng nhập với Google</span>
+				</a>
+				<a href="/oauth2/authorization/facebook" class="login-google">
+					<img src="/images/icon-facebook.png" alt="">
+					<span>Đăng nhập với Facebook</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script src="/js/login.js"></script>
+</body>
+
+</html>

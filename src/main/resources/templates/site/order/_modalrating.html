@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" ng-controller="review-ctrl">
+        <!-- th:action="@{|/vgreens/product/${detailList.product.id}|}" method="post"
+                th:object="${review}" -->
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm
+                    </h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">-</button>
+                </div>
+                <div class="modal-body rate-container">
+                    <div class="rating-wrap">
+                        <div class="content">
+                            <div>
+                                <input type="hidden" name="">
+                            </div>
+                            <fieldset class="rating">
+                                <input type="radio" ng-model="form.rating" id="star5" name="rating" ng-value="5"><label
+                                    for="star5" class="full"></label>
+                                <input type="radio" ng-model="form.rating" id="star4" name="rating" ng-value="4"><label
+                                    for="star4" class="full"></label>
+                                <input type="radio" ng-model="form.rating" id="star3" name="rating" ng-value="3"><label
+                                    for="star3" class="full"></label>
+                                <input type="radio" ng-model="form.rating" id="star2" name="rating" ng-value="2"><label
+                                    for="star2" class="full"></label>
+                                <input type="radio" ng-model="form.rating" id="star1" name="rating" ng-value="1"><label
+                                    for="star1" class="full"></label>
+                            </fieldset>
+                        </div>
+                     
+                    </div>
+                    <div class="comment">
+                        <textarea name="" id="" ng-model="form.comment" cols="30" rows="3"
+                            placeholder="Đánh giá sản phẩm...."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="reset()">Close</button>
+                    <button type="submit" ng-click="create()" data-dismiss="modal"
+                        class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+
+/* *************** Checkout Page CSS ********************* */
+
+.bill .box-info{
+    padding: 1rem 3rem;
+}
+
+.box-info label{
+    font-size: 1.5rem;
+    padding-top: 1rem ;
+    font-weight: 400    ;
+    padding-bottom: .5rem;
+    color: #333;
+}
+
+
+.bill .box-info small{
+    font-size: 1.5rem;
+    color: red;
+    padding-top: 1rem;
+}
+
+.box-info input,
+.box-info textarea{
+    padding: .8rem 1rem;
+    font-size: 1.5rem;
+    outline: none;
+    border: .1rem solid #ccc;
+}
+
+.box-info select,
+.box-info textarea{
+    /* padding: .8rem 1rem; */
+    font-size: 1.5rem;
+    outline: none;
+    border: .1rem solid #ccc;
+}
+.box-info input:focus{
+    outline: none;
+    box-shadow:none !important;
+    border:.1rem solid #ccc !important;
+}
+
+.bill .box-bill{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   padding: 1rem 2rem;
+}
+
+
+.box-info h3,
+.box-bill h3{
+   font-size: 2rem;
+   font-weight: bolder;
+   padding: 1rem 0;
+   text-transform: uppercase;
+   color: #555;
+   /* border-bottom: .2rem solid #ececec; */
+}
+
+.box-info h3{
+    border-bottom: .3rem solid #ececec;
+}
+
+.box-info h3 a{
+    font-size: 1.2rem;
+    color: var(--main);
+}
+.box-bill table{
+    width: 100%;
+    border-bottom: .2rem solid #ececec;
+}
+.box-bill table tr:first-child{
+    border-bottom: .2rem solid #ececec;
+}
+
+.box-bill table th:last-child,
+.box-bill table td:last-child{
+    text-align: right;
+}
+
+.box-bill table th,
+.box-bill table td{
+    font-size: 1.5rem;
+    padding: .8rem 0;
+   
+}
+
+.box-bill .checkout-payment{
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.box-bill .checkout-payment label{
+    font-size: 1.5rem;
+    color: #222;
+    padding: .5rem 0;
+}
+
+.box-bill .checkout-payment input{
+    padding: .7rem;
+}
+
+.box-bill .checkout-payment .note{
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    color: #444;
+}
+.deliver{
+    color: red;
+}
+.deliver h3{
+    color: red;
+}
+.deliver a h3:hover{
+    color: #28a745;
+}
+.box-bill h4{
+    color: #28a745;
+}
+.deliver2{
+    color: red;
+   margin-bottom: 50px;
+}
+.checkout-payment ._btn{
+    width: 300px;
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | [[#{introduce.titleRWeb}]]</title>
+
+
+<body>
+
+    <main>
+        <style>
+            p,
+            li,
+            tr {
+                font-size: initial;
+            }
+
+            ul {
+                list-style: disc !important;
+            }
+
+            th {
+                background-color: #ffc107;
+                text-transform: uppercase !important;
+                text-align: center;
+                font-weight: bold;
+                color: #e21c13;
+
+            }
+
+            table {}
+
+            td {
+                margin: 5px;
+                border: 5px solid white;
+                background-color: rgb(194, 241, 205);
+            }
+        </style>
+        <br>
+        <div class="container">
+            <h2 style="text-align: center;"><strong>______[[#{introduce.titleR}]]______</strong></h2>
+            <br>
+            <div>
+                <table class="table ">
+                    <tbody>
+                        <tr>
+                            <td scope="row" rowspan="3" class="text-danger text-uppercase font-weight-bold">
+                                [[#{introduce.return1}]]
+                            </td>
+                            <td>[[#{introduce.return1a}]]</td>
+                            <td rowspan="2">[[#{introduce.return1b}]] <strong>[[#{introduce.return1time}]]
+                                </strong>[[#{introduce.return1b1}]]</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">[[#{introduce.return1c}]]</td>
+
+                        </tr>
+                        <tr>
+                            <td scope="row">[[#{introduce.return1d}]]</td>
+                            <td>[[#{introduce.return1b}]]
+                                <strong>[[#{introduce.return2a}]]</strong> [[#{introduce.return1b1}]]</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" colspan="2" class="text-danger text-uppercase font-weight-bold">
+                                [[#{introduce.return2}]]</td>
+                            <td>[[#{introduce.return1b}]]
+                                <strong>[[#{introduce.return2a}]]</strong> [[#{introduce.return1b1}]]</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="font-italic font-weight-light">[[#{introduce.return2b}]]</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="  border: 5px solid white;">[[#{introduce.return3a}]]</th>
+                            <th style="  border: 5px solid white;">[[#{introduce.return3b}]]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">[[#{introduce.return3c}]]</td>
+                            <td>[[#{introduce.return3d}]]</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">[[#{introduce.return3e}]]</td>
+                            <td>[[#{introduce.return3f}]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="  border: 5px solid white;">[[#{introduce.return4}]]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr scope="row">
+                            <td> [[#{introduce.return4a}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return4b}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return4c}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return4d}]]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return4e}]]</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="  border: 5px solid white;">[[#{introduce.return5}]]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[[#{introduce.return5a}]]</td>
+                        </tr>
+                        <tr scope="row">
+                            <td> [[#{introduce.return5b}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return5c}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return5d}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return5e}]]
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return5f}]]</td>
+                        </tr>
+                        <tr>
+                            <td>[[#{introduce.return5g}]]</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th style="  border: 5px solid white;">[[#{introduce.return6}]]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[[#{introduce.return6a}]]</td>
+                        </tr>
+                        <tr scope="row">
+                            <td> [[#{introduce.return6b}]]</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

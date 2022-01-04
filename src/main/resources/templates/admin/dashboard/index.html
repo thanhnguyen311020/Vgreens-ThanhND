@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/admin/index::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Dashboard</title>
+
+
+<body>
+
+	<main ng-controller="dashboard-ctrl">
+		<input type="hidden" value="0" id="checkActive">
+
+		<!-- <header class="nav-main">
+			<h2>Dashboad</h2>
+			<div class="admin_info">
+				<img src="../images/pic-1.png" alt=""> <a
+					onclick="myFunction()" class="dropbtn">ThanhND <i
+					class='bx bx-cog'></i></a>
+				<div id="myDropdown" class="dropdown-content">
+					<a href="#">Profile</a> <a href="#">Đăng xuất</a> <a href="#">Link
+						3</a>
+				</div>
+			</div>
+		</header> -->
+
+		<section class="box-container statistical">
+
+			<div class="box box-1">
+				<div class="text-content">
+					<h4>{{totalProductOrder | number : 0}}</h4>
+					<span>Sản phẩm</span>
+				</div>
+				<a href="/vgreens/admin/product-management"><i class='bx bx-gift' ></i></a>
+			</div>
+			<div class="box box-2">
+
+				<div class="text-content">
+					<h4>{{order | number : 0}}</h4>
+					<span>Đơn hàng</span>
+				</div>
+				<a href="/vgreens/admin/order-management"><i class='bx bxs-cart-add'></i></a>
+			</div>
+			<div class="box box-3">
+
+				<div class="text-content">
+					<h4>{{totalSales | number : 0}}.VND</h4>
+					<span>Doanh thu</span>
+				</div>
+				<i class='bx bx-money'></i>
+			</div>
+			<div class="box box-4">
+
+				<div class="text-content">
+					<h4>{{amountPaypal | number : 0}}.VND</h4>
+					<span>PAYPAL <small style="color: var(--dark-color); font-weight: 750;"> {{amountPaypalUSD}} USD</small></span>
+				</div>
+				<i class='bx bxl-paypal'></i>
+			</div>
+
+		</section>
+
+
+		<section class="box-container content-main">
+
+			<div class="tab-container">
+				<ul class="nav nav-tabs tab-control" id="myTab" role="tablist">
+
+					<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
+							role="tab" aria-controls="profile" aria-selected="false">Lịch sử giao
+							dịch</a></li>
+					<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
+							role="tab" aria-controls="home" aria-selected="true">Biểu đồ </a></li>
+					<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
+							role="tab" aria-controls="contact" aria-selected="false" ng-click="getConsignment();">Thống kê sản
+							phẩm <span class="countProduct ">{{productCount}}</span></a></li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active tab-chart" id="home" role="tabpanel"
+						aria-labelledby="home-tab">
+
+						<th:block th:replace="@{/admin/dashboard/_chart}">
+
+						</th:block>
+
+
+					</div>
+					<div class="tab-pane fade tab-history-order" id="profile" role="tabpanel"
+						aria-labelledby="profile-tab">
+
+						<th:block th:replace="@{/admin/dashboard/_reportOrderDetail}">
+
+						</th:block>
+
+					</div>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+						<!--  tab-product-order-->
+
+						<th:block th:replace="@{/admin/dashboard/_reportConsignmentProduct}">
+
+						</th:block>
+
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</main>
+
+
+
+</body>
+
+</html>

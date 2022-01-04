@@ -1,0 +1,119 @@
+/* ************ Profile Page CSS *************** */
+.capitalize {
+    text-transform: capitalize;
+}
+
+._profile {
+    margin-top: 5rem;
+}
+
+.form-control1 {
+    border: none;
+    border-bottom: 1 px solid #ccc;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.product-container {
+    justify-content: space-between;
+}
+
+.profile-container .box-info {
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    padding: 2rem 1rem;
+}
+
+.profile-container .box-info h1 {
+    padding: 1rem 0;
+    font-weight: 600;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.profile-container .box-info img {
+    border-radius: 50%;
+    width: 60%;
+    max-width: 70rem;
+    margin: 1rem;
+    border: 1rem solid #ececec;
+}
+
+.profile-container .box-info .info {
+    /* margin: 1rem 0; */
+    border-top: .5rem solid #ececec;
+    /* padding: 2rem 1rem; */
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+.profile-container .box-info .info span {
+    font-size: 1.5rem;
+    text-transform: none;
+    color: var(--light-color);
+    padding: .5rem .5rem;
+}
+
+.profile-container .box-info .info span small {
+    color: goldenrod;
+}
+
+.profile-container .box-info .info span i {
+    margin-right: .5rem;
+    font-size: 2rem;
+}
+
+
+.profile-container .box-order {
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    padding: 2rem 1rem;
+    margin-left: 3rem;
+    /* max-height: 70rem; */
+}
+
+.profile-container .box-order table {
+    width: 100%;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+.profile-container .box-order table th {
+    padding: 1rem .5rem;
+    border-bottom: .3rem solid #ececec;
+}
+
+.profile-container .box-order table td {
+    border-bottom: .1rem solid #ececec;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+
+.profile-container .box-order table tr:hover {
+    background-color: #ececec;
+}
+
+.profile-container .box-order table td img {
+    max-width: 5rem;
+}
+
+.profile-container .box-order table td:last-child {
+    color: var(--main);
+    font-weight: 500;
+}
+
+.box-order .navigation {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.box-order .navigation a {
+    border: .1rem solid #ececec;
+    padding: 1rem .8rem;
+}

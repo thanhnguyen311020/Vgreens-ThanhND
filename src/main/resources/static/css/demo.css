@@ -1,0 +1,133 @@
+
+
+.product_container .box_container{
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center; */
+
+    display: grid;
+    grid-template-columns: 25rem 25rem 25rem 25rem;
+    grid-gap: 5rem 2rem;
+    justify-content: center;
+}
+.products .product-container .product-box .box{
+    /* flex: 1 1 25rem; */
+    text-align: center;
+    padding: 2rem;
+    /* border: .1rem solid rgba(0,0,0,.2); */
+    box-shadow: 0 1px 3px -2px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);;
+    border-radius: .7rem;
+    max-width: 25rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.products .product-container .product-box .box  img{
+    height: 20rem;
+}
+
+.products .product-container .product-box .box .discount{
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: rgba(134, 186, 9,.1);
+    color: var(--black);
+    padding: .7rem 1rem;
+    font-size: 2rem;
+}
+
+.products .product-container .product-box .box .icons{
+    position: absolute;
+    top: .5rem; right: -6rem;
+}
+
+
+
+.products .product-container .product-box .box:hover .icons{
+    right: 1rem;
+   
+}
+
+.products .product-container .product-box .box:hover{
+    box-shadow: 0 1px 3px -2px rgb(0 0 0 / 22%), 0 1px 2px rgb(0 0 0 / 40%);
+
+}
+
+.products .product-container .product-box .box .icons a{
+    display: block;
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    font-size: 1.7rem;
+    color: var(--black);
+    background: rgba(231, 231, 231, 0.8);
+    border-radius: 50%;
+    margin-top: .7rem;
+}
+
+/* option 2 */
+.products .product-container .product-box .box .icons2{
+    position: absolute;
+    bottom: 35%;
+    left: -100%;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 100%;
+    height: 8rem;
+    background: rgba(161, 156, 156, 0.5);
+}
+
+
+.products .product-container .product-box .box .icons2 a{
+    padding: 1.3rem;
+    background: var(--green);
+    margin-left: 1rem;
+    color: #fff;
+    font-size: 1.5rem
+}
+.products .product-container .product-box .box .icons2 a:hover{
+    background: #fff;
+    color: var(--green);
+}
+
+.products .product-container .product-box .box:hover .icons2{
+    left: 0;
+}
+
+
+.products .product-container .product-box .box .icons a:hover{
+    background: var(--green);
+    color: #fff;
+}
+
+.products .product-container .product-box .box h3{
+    color: var(--black);
+    font-size: 2.5rem;
+}
+.products .product-container .product-box .box h3 a{
+    color: var(--black);
+    font-size: 2.5rem;
+}
+
+.products .product-container .product-box .box .stars i{
+    padding: 1rem .1rem;
+    font-size: 1.7rem;
+    color: gold;
+   
+}
+
+.products .product-container .product-box .box .price{
+    font-size: 2rem;
+    color: var(--green);
+    padding:.5rem 0;
+    text-transform: none;
+    font-weight: bolder;
+}
+
+.products .product-container .product-box .box .price span{
+    font-size: 1.5rem;
+    color: #999;
+    text-decoration: line-through;
+    text-transform: none;
+}

@@ -1,0 +1,161 @@
+<div class="row mt-2">
+    <div class="col-md-12">
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Thêm mới sản phẩm</h5>
+
+                    <button id="_list" >Danh sách sản phẩm</button>
+                </div>
+                
+        <form action="" method="post" name="frmAddProduct" novalidate>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="hidden"  ng-disabled="isShow" ng-model="form.id" class="form-control" name="id"
+                            id="id" aria-describedby="helpId" placeholder="">
+                            <div class="form-group">
+                                <label for="name">Tên sản phẩm</label>
+                                <input type="text" class="form-control" ng-model="form.name" name="name" id="name" ng-required=true
+                                    aria-describedby="helpId" placeholder="Tên sản phẩm----" ng-minlength="2" ng-maxlength="50">
+                                    <small id="helpId" ng-show="frmAddProduct.name.$error.required" class="form-text text-muted">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+                                        Vui lòng nhập tên sản phẩm</small>
+                                    <small id="helpId" ng-show="frmAddProduct.name.$error.maxlength" class="form-text text-muted">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+                                        Tên sản phẩm tối đa 50 kí tự</small>
+                                    <small id="helpId" ng-show="frmAddProduct.name.$error.minlength" class="form-text text-muted">
+                                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i> 
+                                        Tên sản phẩm tối thiểu 2 kí tự</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Loại hàng</label>
+                                <select ng-model="form.category.id" required id="category" name="category"
+                                    class="form-control">
+                                    <option value="" selected>Chọn lô hàng...</option>
+                                    <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+                                </select>
+                                <small ng-show="frmAddProduct.category.$invalid" class="form-text text-muted">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Chọn danh mục
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="createDate">Ngày thêm</label>
+                                <input type="date" class="form-control" disabled ng-model="form.createDate" name="createDate" id="createDate"
+                                    aria-describedby="helpId" placeholder="" required>
+                                    <!-- <span ng-show="frmAddProduct.createDate.$invalid" class="has-error font-italic">Vui lòng điền ngày
+                                        thêm
+                                    </span> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Đơn vị</label>
+                                <select ng-model="form.unit.id" required  id="unit" name="unit"
+                                    class="form-control">
+                                    <option value="" selected>Chọn đơn vị tính...</option>
+                                    <option ng-repeat="c in units" ng-value="c.id">{{c.name}}</option>
+                                </select>
+                                <small ng-show="frmAddProduct.unit.$invalid" class="form-text text-muted ">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Chọn đơn vị
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Trạng thái<span ng-show="frmAddProduct.available.$invalid" class="has-error font-italic">*
+                                </span></label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" required ng-model="form.available" type="radio"
+                                        name="available" ng-value="true">
+                                    <label class="form-check-label">Hiển thị</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" required ng-model="form.available" type="radio"
+                                        name="available" ng-value="false">
+                                    <label class="form-check-label">Ẩn</label>
+                                </div><br>
+                                <small ng-show="frmAddProduct.available.$invalid" class="form-text text-muted">
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn trạng thái
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group input-image" >
+                                <label for="image" ng-if="!form.image.startsWith('https')">
+                                    <img ng-show="form.img == null" src="/images/no_image.png" alt="">
+                                    <img ng-show="form.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+                                  
+                                </label>
+                                <label for="image"  ng-if="form.image.startsWith('https')">
+                                    <img ng-show="form.img == null" ng-src="{{form.image}}" alt="">
+                                    <img ng-show="form.img != null " ng-src="{{'/upload/imageTemp/' + imageTemp}}" alt="">
+                                </label>
+                                <input type="file" class="form-control-file" name="image" id="image" placeholder=""
+                                onchange="angular.element(this).scope().imageChanged(this.files)">
+                            </div>
+                          
+<!-- 
+                             <div class="form-group">
+                              <label for="">Lô hàng </label>
+                              <select class="form-control" ng-model="form.consignment.id" required name="consignmentId" id="consignmentId">
+                                <option value="" selected>Chọn lô hàng...</option>
+                                <option ng-repeat="item in consignments" required ng-value="item.id">{{item.name}}</option>
+                              </select>
+                              <small ng-show="frmAddProduct.consignmentId.$invalid" class="form-text text-muted ">
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn lô hàng
+                            </small>
+                            </div> -->
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label for=""><strong>Lô hàng:</strong></label>
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="text" readonly id="consignmentName" class="form-control" placeholder="Lô hàng...">
+                                  <input type="hidden" id="consignmentId"   class="form-control" placeholder="Lô hàng...">
+                                </div>
+                                
+                                <div class="col-md-4">
+                                  <button type="button"   data-toggle="modal" data-target="#loadConsignment"
+                                  name="" id="" class="btn btn_" btn-lg btn-block>Chọn lô hàng</button>
+                                </div>
+                                <!-- <small id="consignmentCheck" class="form-text text-muted "> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Vui lòng chọn lô hàng
+                                </small> -->
+                              </div>
+
+                            <div class="form-group mt-2">
+                              <label for="">Giảm giá</label>
+                              <select class="form-control" ng-model="form.discount.id" name="discountID" id="discountID">
+                                <option value="" selected>Chọn khuyến mãi...</option>
+                                <option ng-repeat="item in discounts" ng-value="item.id">{{item.name_discount}}</option>
+                              </select>
+                              
+                            </div>
+
+
+                            
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Mô tả sản phẩm</label>
+                                <div style="height: fit-content; width: 1000px;" text-angular class="form-control" id="description" name="description" required
+                                ng-model="form.description" 
+                                
+                                ta-text-editor-class="clearfix border-around container" ta-html-editor-class="border-around"
+                                ></div>
+                            </div>
+                            <small ng-show="frmAddProduct.description.$invalid" class="form-text text-muted "> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Vui lòng điền mô tả
+                                sản phẩm
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <button type="button" class="btn btn-primary" id="btnCreate" ng-show="!isShow" ng-disabled="frmAddProduct.$invalid" ng-click="create()">Thêm mới</button>
+                    <button type="button" class="btn btn-warning" ng-show="isShow" ng-click="update()">Cập nhập</button>
+                    <button type="button" class="btn btn-success"  ng-click="reset()">Làm mới</button>
+                    <button th:if="${#request.isUserInRole('DIRE')}" type="button" class="btn btn-danger" ng-show="isShow" ng-click="selectItem(form)" data-toggle="modal" data-target="#deleteItem">Xóa</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

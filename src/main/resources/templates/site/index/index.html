@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/dasboard::dynamic(~{::title},~{::main})}">
+
+
+<title>VGreens | Home</title>
+
+<body>
+
+    <main ng-controller="shopping-cart-ctrl">
+        <!-- banner section -->
+        <section class="banner" style="background-image: url({{header.image}});">
+
+            <div class="content">
+                <h3>{{header.title}} <span>{{header.title1}}</span></h3>
+                <p></p>
+                <a href="#" class="_btn">{{header.titleBtn}}</a>
+            </div>
+
+            <div class="image">
+                <img src="/images/home-img.png" alt="">
+            </div>
+
+        </section>
+
+
+        <section class="category">
+
+            <ul id="autoWidth" class="cs-hidden">
+                <!-- box-1 -->
+                <li class="item" th:each=" cates : ${categories}">
+                    <!-- Feature-box -->
+                    <div class="feature-box">
+                        <a th:href="@{|/vgreens/shop/categories?cid=${cates.id}|}">
+                            <img th:src="@{${cates.image}}" alt="">
+                        </a>
+                    </div>
+                    <!-- text------ -->
+                    <span>[[${cates.name}]]</span>
+
+                </li>
+
+            </ul>
+
+
+        </section>
+
+        <!-- section banner_deal starts -->
+
+        <section class="banner_sale_container">
+
+            <!-- <h1 class="heading">Khuyến mãi khủng đến <span>40%</span></h1> -->
+            <th:block th:each="listDiscount : ${listDiscount}">
+                <div class="banner_sale">
+                    <img th:src="@{${listDiscount.discount_image}}" alt="">
+                    <div class="content">
+                        <h3 th:text="${listDiscount.name_discount}"></h3>
+                        <p th:text="${listDiscount.discount_description}"></p>
+                        <a th:href="@{'/vgreens/shop/sale/'+${listDiscount.id}}" class="_btn">Chi Tiết</a>
+                    </div>
+                </div>
+
+            </th:block>
+            
+            <!-- <div class="banner_sale">
+                <img src="/images/banner-2.jpg" alt="">
+                <div class="content">
+                    <h3>Khuyến mãi</h3>
+                    <p>các mặt hàng đến 20%</p>
+                    <a href="#" class="_btn">Chi Tiết</a>
+                </div>
+            </div> -->
+
+        </section>
+
+        <!-- section banner_deal ends -->
+
+        <!-- section product starts-->
+
+        <section class="product_container" >
+
+            <h1 class="heading">[[#{index.products}]]<span> [[#{index.selling}]]</span></h1>
+
+            <div class="box_container" style="text-align: center;">
+                <div class="box" th:each="proSe : ${proSell}">
+
+                    <span class="discount"
+                        th:if="${proSe.discount!=null && proSe.discount.percent_discount != 0}">[[${proSe.discount.percent_discount}]]%</span>
+                    <div class="icons">
+                        <button th:attr="ng-click=@{|wishlist.addtowishlist(${proSe.id})|}"
+                            class="fas fa-heart"></button>
+                        <!-- <a href="#" class="fas fa-share"></a> -->
+                        <button th:attr="ng-click=@{|cart.addtocart(${proSe.id})|}"
+                            class="fas fa-shopping-cart"></button>
+                    </div>
+                    <a th:href="@{'/vgreens/product/detail/'+${proSe.id}}">
+                        <div class="img">
+                            <img th:src="@{${proSe.image}}" alt="">
+                        </div>
+                        <div class="product_name"><a
+                                th:href="@{'/vgreens/product/detail/'+${proSe.id}}">[[${proSe.name}]]</a>
+                        </div>
+
+                        <div class="price" th:if="${proSe.discount!=null} ">
+                            [[${#numbers.formatDecimal(proSe.consignment.selling_price-proSe.consignment.selling_price*proSe.discount.percent_discount/100,
+                                0, 'COMMA', 0,
+                                'POINT')}]] .đ 
+                                <span th:if="${proSe.discount.percent_discount != 0}">[[${#numbers.formatDecimal(proSe.consignment.selling_price, 0, 'COMMA', 0,
+                                    'POINT')}]] .đ</span></div>
+                        </a>
+                         <div class="price" th:if="${proSe.discount}==null">
+                             [[${#numbers.formatDecimal(proSe.consignment.selling_price, 0, 'COMMA', 0,
+                                'POINT')}]] .đ</div>
+                        </a>
+                        <div class="btn-responsive">
+                            <a class="heart" th:attr="ng-click=@{|wishlist.addtowishlist(${proSe.id})|}"><i
+                                    class="far fa-heart"></i></a>
+                            <a class="cart" th:attr="ng-click=@{|cart.addtocart(${proSe.id})|}"><i
+                                    class="fas fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a class="cart1" th:attr="ng-click=@{|cart.addtocart(${proSe.id})|}"><i
+                                    class="fas fa-cart-plus"></i> Thêm </a>
+                        </div>
+                    </div>
+
+               
+                
+                
+                
+
+            
+
+               
+
+            </div>
+
+
+        </section>
+
+        <!-- section product ends  -->
+
+        <!-- section deal starts -->
+
+        <section class="deal " style="background-image: url({{discount.image}});">
+
+            <div class="content text-center">
+
+                <h3 class="title">{{discount.title}}</h3>
+                <p>{{discount.description}}</p>
+
+                <div class="count-down">
+                    <div class="box">
+                        <h3 id="day">00</h3>
+                        <span>Ngày</span>
+                    </div>
+                    <div class="box">
+                        <h3 id="hour">00</h3>
+                        <span>Giờ</span>
+                    </div>
+                    <div class="box">
+                        <h3 id="minute">00</h3>
+                        <span>Phút</span>
+                    </div>
+                    <div class="box">
+                        <h3 id="second">00</h3>
+                        <span>Giây</span>
+                    </div>
+                </div>
+
+                <!-- <a href="#" class="_btn">Check the deal</a> -->
+
+            </div>
+
+        </section>
+
+        <!-- section deal ends -->
+
+        <section class="_product_container" style="position: relative;">
+
+
+
+            <div class="swiper box_container deal_product">
+
+                <div class="swiper-wrapper">
+
+                    <div th:each="pro : ${listproDisNotNull}" class="box swiper-slide" style="background: #fff;">
+                        <span class="discount">[[${pro.discount.percent_discount}]]%</span>
+                        <div class="icons">
+                            <a href="#" class="fas fa-heart"></a>
+                            <!-- <a href="#" class="fas fa-share"></a> -->
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                        </div>
+                        <a th:href="@{'/vgreens/product/detail/'+${pro.id}}">
+                            <div class="img">
+                                <img th:src="@{${pro.image}}" alt="">
+                            </div>
+                            <h3><a th:href="@{'/vgreens/product/detail/'+${pro.id}}">[[${pro.name}]]</a></h3>
+                            <!-- <div class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div> -->
+                            <div class="price"> [[${#numbers.formatDecimal(pro.consignment.selling_price-pro.consignment.selling_price*pro.discount.percent_discount/100,
+                                0, 'COMMA', 0,
+                                'POINT')}]] .đ 
+                                <span>[[${#numbers.formatDecimal(pro.consignment.selling_price, 0, 'COMMA', 0,
+                                    'POINT')}]] .đ</span></div>
+                        </a>
+                        <div class="btn-responsive">
+                            <a class="heart" th:attr="ng-click=@{|wishlist.addtowishlist(${pro.id})|}"><i
+                                    class="far fa-heart"></i></a>
+                            <a class="cart" th:attr="ng-click=@{|cart.addtocart(${pro.id})|}"><i
+                                    class="fas fa-cart-plus"></i> Thêm </a>
+                            <a class="cart1" th:attr="ng-click=@{|cart.addtocart(${pro.id})|}"><i
+                                    class="fas fa-cart-plus"></i> Thêm </a>
+                        </div>
+                    </div>
+                    
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- reivew section starts -->
+
+
+
+
+        <section class="review" id="review">
+
+
+            <h1 class="heading"> [[#{index.rating}]] </h1>
+
+            <div class="swiper review-slider">
+
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide slide">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="user">
+                            <img src="/images/pic-1.png" alt="">
+                            <div class="user-info">
+                                <h3>Vũ Lân</h3>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Tôi rất hài lòng về sản phẩm của cửa hàng mong cửa hàng ngày càng thành công, Thanks.</p>
+                    </div>
+
+                    <div class="swiper-slide slide">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="user">
+                            <img src="/images/pic-3.png" alt="">
+                            <div class="user-info">
+                                <h3>Thanh Nguyen</h3>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Thịt thà gì mà lại vừa rẻ vừa ngon cho 5 sao chất lượng ạ</p>
+                    </div>
+
+                    <div class="swiper-slide slide">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="user">
+                            <img src="/images/pic-2.png" alt="">
+                            <div class="user-info">
+                                <h3>Hieu Cute</h3>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Hải sản và rau củ tươi quá đi .</p>
+                    </div>
+
+              
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+
+/* ********************** Cart Page Css *****************************/
+/* 
+body table{
+    border-collapse: collapse;
+} */
+.cart-container{
+    margin-top: 0rem;
+}
+
+body .cart-container table {
+    padding: 2rem;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+.cart-container .box  th{
+    font-size: 1.6rem;
+    padding: .8rem 1rem;
+    color:#fff;
+    background: var(--main);
+    border-bottom: .3rem solid #ececec;
+}
+
+.cart-container .box  td{
+    font-size: 1.5rem;
+    padding: 1rem 1rem;
+    border-bottom: .1rem solid #ececec;
+    position: relative;
+}
+
+.product-info{
+    display: flex;    
+    align-items: center;
+    flex-wrap: wrap;  
+    text-transform: none;
+}
+
+ .product-info img{
+    max-width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+}
+
+.product-info h3{
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.product-info span{
+    text-transform: none;
+    font-size: 1.4rem;
+}
+
+table ._amount{
+    color: var(--main);
+    font-weight: 550;
+}
+.cart-container .box td:last-child button{
+    font-size: 2rem;
+}
+
+.product-info .product_name{
+    white-space: nowrap; 
+    width: 20rem; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    font-size: 1.5rem;
+    font-weight: 420;
+    text-transform: none;
+}
+.product-info .product_name a{
+    text-transform: none;
+}
+
+.cart-container ._checkout-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.cart-container ._checkout-container .voucher{
+    padding: 2rem 0rem;
+}
+
+._checkout-container .voucher h4{
+    font-size: 2rem;
+    color: var(--black)
+}
+._checkout-container .voucher .box{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+._checkout-container .voucher input{
+    padding: .6rem 1rem ;
+
+    font-size: 1.5rem;
+    text-transform: none;
+    border: .1rem solid rgb(158, 157, 157);
+}
+
+._checkout-container .voucher button{
+    font-size: 1.2rem;
+    vertical-align: middle;
+    border-radius: 0;
+    margin-top: 0;
+}
+
+._checkout-container .checkout-box{
+    width: 40%;
+    padding: 3rem 0;
+}
+
+._checkout-container .checkout-box table{
+    border-top: .5rem solid var(--main);
+    width: 100%;
+  
+}
+
+
+.checkout-box table th{
+    font-size: 1.7rem;
+    padding: 1rem .5rem;
+    /* border-bottom: .1rem solid #ececec; */
+}
+
+.checkout-box table td{
+    font-size: 1.6rem;
+    font-weight: 410;
+    text-align: right;
+    text-transform: none;
+    /* border-bottom: .1rem solid #ececec; */
+}
+
+.checkout-box table .total_price{
+    color: var(--main);
+    font-size: 2rem;
+}
+
+.btn_checkout{
+    display: block;
+    margin-top: 1.5rem;
+    background-color: var(--main);
+    color:#fff;
+    font-size: 2rem;
+    text-align: center;
+    padding: .7rem .5rem;
+}
+
+.btn_checkout:hover{
+    background-color: #1c7731;
+    color:#fff;
+}
+
+.quantity-container input:focus,
+.quantity-container button:focus,
+.quantity-container .form-control{
+    outline: none;
+    box-shadow:none !important;
+    border:.1rem solid #ccc !important;
+}
+
+.quantity-container{
+    display: flex;
+    align-items: center;
+}
+
+.quantity-container .form-control{
+    max-width: 80px;
+    width: 5rem;
+    height: 30px;
+    font-size: 1.5rem;
+    text-align: center;
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+.checkout-box table .form-control{
+    width: auto;
+    display: inline-block;
+
+}
+
+.cart-qty-plus,
+.cart-qty-minus{
+    width: 3rem;
+    height: 30px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 30px;
+    background-color: #4444;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.cart-qty-minus:hover,
+.cart-qty-plus:hover{
+    background-color: var(--main);
+    color: #fff;
+}
+
+
+
+
+/* 
+
+.quantity-container{
+ 
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top:50%;
+    left: 50%;
+    display: flex;
+    box-shadow: var(--box-shadow);
+}
+.quantity-container input[type="number"]{
+    -moz-appearance: textfield;
+    text-align: center;
+    width: 50%;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #ffffff;
+    color: #202030;
+}
+
+.quantity-container input::-webkit-outer-spin-button,
+.quantity-container input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin:0;
+}
+
+
+.quantity-container button{
+    color: var(--main);
+    background-color:#fff ;
+    border: none;
+    cursor: pointer;
+    font-size: 2.2rem;
+}
+
+#decrement{
+    padding:0 .5rem;
+}
+#increment{
+    padding:0 .5rem;
+}
+*/

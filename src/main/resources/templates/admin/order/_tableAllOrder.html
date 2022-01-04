@@ -1,0 +1,115 @@
+<div class="date-box mt-4">
+    <input type="datetime-local" id="txtStartDateTimeOrder">
+    <input type="datetime-local" id="txtEndDateTimeOrder">
+    <button class="bnt_default" ng-click="findAllOrderBetweenDate()"><i class='bx bx-list-minus'></i></button>
+    <button class="bnt_default" ng-click="exportExcel()"><i class="far fa-file-excel"></i> Xuất báo cáo</button>
+</div>
+<table class="table-order mt-3">
+    <thead>
+        <tr>
+           
+            <th class="text-center">Mã đơn</th>
+            <th ng-click="sort('last_name')">Khách hàng
+                <i style="display: inline !important;" class="" ng-show="sortKey=='last_name'"
+                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+            </th>
+            <th>điện thoại</th>
+            <th ng-click="sort('createDate')">Ngày Mua
+                <i style="display: inline !important;" class="" ng-show="sortKey=='createDate'"
+                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+
+            </th>
+            <th class="text-center">Giảm giá</th>
+            <th class="text-center">Tổng tiền</th>
+            <th class="text-center">Thanh toán</th>
+            <th ng-click="sort('status')">Trạng Thái
+                <i style="display: inline !important;" class="" ng-show="sortKey=='status'"
+                    ng-class="{'fas fa-sort-amount-up-alt':reverse,'fas fa-sort-amount-down-alt':!reverse}"></i>
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="item in orderAll | filter : search | orderBy:sortKey:reverse| limitTo: pageSize : begin">
+        <tr data-toggle="collapse" data-target="#info{{item.id}}" class="accordion-toggle">
+            
+            <td class="text-center">{{item.id}}</td>
+            <td class="impotant-td">{{item.first_name }} {{item.last_name}}</td>
+            <td class="impotant-td">{{item.phone_number}}</td>
+            <td class="text-center">{{item.createDate | date : 'HH:ss dd-MM'}}</td>
+            <td class="text-center">{{item.discount != null ? item.discount : 0 | number }}.đ</td>
+            <td class="impotant-td text-center" style="color: var(--main-color); font-weight: 500;">{{item.amount | number}}.đ
+            </td>
+            <td style="width: 150px;" ng-show="!item.payment_method.startsWith('COD')"><span class="status status-4"><i  class="fab fa-paypal"></i> Đã Thanh Toán</span> </td>
+            <td style="width: 150px;" ng-show="item.payment_method.startsWith('COD')" ><span class="status status-0">Thanh toán Khi nhận hàng</span></td>
+            <td>
+                <span class="status status-1" ng-show="{{item.status == 0}}">Chưa xác nhận</span>
+                <span class="status status-2" ng-show="{{item.status == 1}}">Đã xác nhận</span>
+                <span class="status status-2" ng-show="{{item.status == 2}}">Đang lấy hàng</span>
+                <span class="status status-3" ng-show="{{item.status == 3}}">Đang giao hàng</span>
+                <span class="status status-4" ng-show="{{item.status == 4}}">Giao hàng thành công</span>
+                <span class="status status-5" ng-show="{{item.status == 5}}">Đã hủy</span>
+
+            </td>
+            <td class="text-center"><a data-toggle="modal" data-target="#updateStatusModal" ng-click="edit(item)"><i class="fas fa-dolly-flatbed"></i></a></td>
+        </tr>
+
+        <tr>
+            <th style="border: 0px !important; padding: 0px !important" colspan="12" class="hiddenRow">
+                <div class="accordian-body collapse" id="info{{item.id}}">
+                    <table class="table table-striped">
+                       
+
+                        <tbody>
+                             <tr data-toggle="collapse" class="accordion-toggle "
+                                data-target="#demo10">
+                                <td  style="padding: .3rem .5rem !important;" ><span>Địa chỉ:</span> {{item.address_line}}, {{item.country}}, {{item.city}} </td>
+                                <td  class="text-center"  rowspan="2" style="width: 250px;">
+                                    <button class="bnt_default"  data-toggle="modal" data-target="#updateStatusModal" ng-click="edit(item)"></i>Cập nhập</button>
+                                </td>
+                            </tr>
+
+                            <tr data-toggle="collapse" class="accordion-toggle "
+                                data-target="#demo10">
+                                <td  style="padding: .3rem .5rem !important;" ><span>Ghi chú:</span> {{item.description}}</td>
+                                
+                               
+                            </tr>
+                           
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </th>
+        </tr>
+
+
+    </tbody>
+    <tbody ng-show="orderAll.length === 0">
+        <tr>
+            <td colspan="9">
+                Không có dữ liệu
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div  class="pagination-container">
+    <div ng-hide="pageSize >= orderAll.length" class="pages-in">
+        <span>Bạn đang ở trang</span></span> {{page +1}} - {{pageCount}}
+    </div>
+    <div class="pagination-control">
+        <span>Xem</span>
+        <select ng-model="pageSize" name="" id="" ng-change="repaginate()"  convert-to-number>
+            <!-- <option value="" selected>1</option> -->
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <button ng-hide="pageSize >= orderAll.length" ng-click="prev()"><i class='bx bxs-left-arrow-alt'></i></button>
+        <button ng-hide="pageSize >= orderAll.length" ng-click="next()"><i class='bx bxs-right-arrow-alt'></i></button>
+    </div>
+</div>
